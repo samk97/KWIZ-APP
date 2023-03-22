@@ -1,4 +1,4 @@
-function LSform(props) {
+function Lform(props) {
   const action = props.action;
   const buttonAction = props.buttonAction;
   return (
@@ -61,4 +61,4 @@ function LSform(props) {
   );
 }
 
-export default LSform;
+export default Lform;

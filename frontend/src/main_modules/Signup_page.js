@@ -1,7 +1,10 @@
 import Major_side from "../components/Major_side";
 import Minor_side from "../components/Minor_side";
+import Sform from "../components/Sform";
 
 function Signup_page() {
+  const action = "Sign up";
+  const buttonAction = "Sign up";
   return (
     <>
       <div className="flex w-full h-screen">
@@ -11,7 +14,9 @@ function Signup_page() {
           text3="Just select your questions with a click."
           buttonAction="Sign in"
         ></Minor_side>
-        <Major_side action="Sign up" buttonAction="Sign up"></Major_side>
+        <Major_side>
+          <Sform action={action} buttonAction={buttonAction}></Sform>
+        </Major_side>
       </div>
     </>
   );
