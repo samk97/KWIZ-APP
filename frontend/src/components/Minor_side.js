@@ -1,10 +1,11 @@
 import checklist_image from "../images/cheklist-image.png";
+import Button from "./Button";
 
 function Minor_side(props) {
   const text1 = props.text1;
   const text2 = props.text2;
   const text3 = props.text3;
-  const buttonAction = props.buttonAction;
+  const buttonLabel = props.buttonLabel;
 
   return (
     <>
@@ -23,12 +24,11 @@ function Minor_side(props) {
 
           <h3 className="opacity-70 text-white mt-6">{text3}</h3>
 
-          <button
-            type="submit"
-            className="z-10 text-black bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-1/2 px-5 py-2.5 text-center mt-10"
-          >
-            {buttonAction}
-          </button>
+          <Button
+            ButtonType="submit"
+            buttonClassName="z-10 text-black bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-1/2 px-5 py-2.5 text-center mt-10"
+            buttonLabel={buttonLabel}
+          ></Button>
         </div>
       </div>
     </>
