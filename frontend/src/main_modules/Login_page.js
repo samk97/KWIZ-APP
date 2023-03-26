@@ -4,10 +4,45 @@ import Form from "../components/Form";
 import InputField from "../components/InputField";
 import Link from "../components/Link";
 import Button from "../components/Button";
-
+import React,{useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 function Login_page() {
   const formLabel = "Log in";
   const buttonLabel = "Sign in";
+  const navigate=useNavigate();
+  const [email,setEmail]=useState("");
+  const [name,setName]=useState("");
+  const [password,setPassword]=useState("");
+
+  const goToSignUp=()=>
+  {
+    navigate("/signup")
+  }
+
+  const Login = async (e)=>
+  {
+    e.preventDefault();
+    let items={email,name,password}
+
+    const res = await fetch('http://localhost:4000/api/login',{
+      method:'POST',
+      headers: 
+      {
+         "Content-Type": "application/json",
+         "Accept": "application/json",
+         "email":email,
+         "password":password
+      }
+      
+
+    })
+    if(res.status===200)
+    {
+      const data=await res.json()
+      console.log(data)
+      // navigate("/")
+    }
+  }
   return (
     <>
       <div className="flex w-full h-screen">
@@ -16,6 +51,8 @@ function Login_page() {
             {/* ID */}
             <InputField
               labelHtmlFor="email"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="e-mail"
               inputType="text"
@@ -26,6 +63,8 @@ function Login_page() {
             {/* password */}
             <InputField
               labelHtmlFor="password"
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="Password"
               inputType="password"
@@ -39,6 +78,7 @@ function Login_page() {
             {/* submit button */}
             <Button
               ButtonType="submit"
+              onClick={Login}
               buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center w-4/12"
               buttonLabel={buttonLabel}
             ></Button>
@@ -50,6 +90,7 @@ function Login_page() {
           text2="Sign up and take your quizzes here."
           text3="Choose from a variety of questions or add your own."
           buttonLabel="Sign up"
+          onClick={goToSignUp}
         ></Minor_side>
       </div>
     </>

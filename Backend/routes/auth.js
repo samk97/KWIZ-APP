@@ -19,7 +19,7 @@ router.post("/login",loginCheck, login);
 
 
 // Route to create user
-router.get("/signup", authCheck, signup);
+router.post("/signup", authCheck, signup);
 
 // Route to delete account
 router.post("/delete-account",tokenVerifier, deleteAccount);

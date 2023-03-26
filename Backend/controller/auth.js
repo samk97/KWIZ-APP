@@ -49,7 +49,7 @@ exports.signup=(req,res)=>{
 
     User.countDocuments({email}, function (err, count){ 
         if(count>0){
-                res.status(400).json({Error: "Please Login"}); 
+                res.status(403).json({Error: "Please Login"}); 
         }
         else{
           const user = new User({

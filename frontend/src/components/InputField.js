@@ -3,7 +3,8 @@ function InputField(props) {
   const labelHtmlFor = props.labelHtmlFor;
   const labelClassName = props.labelClassName;
   const labelPlaceHolder = props.labelPlaceHolder;
-
+  const inputName = props.name;
+  const onChange = props.onChange;
   // for input field
   const inputType = props.inputType;
   const inputClassName = props.inputClassName;
@@ -17,7 +18,9 @@ function InputField(props) {
         type={inputType}
         id={labelHtmlFor}
         className={inputClassName}
+        onChange={onChange}
         placeholder={inputPlaceholder}
+        name={inputName}
         required
       />
     </div>

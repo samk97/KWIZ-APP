@@ -4,11 +4,54 @@ import Form from "../components/Form";
 import InputField from "../components/InputField";
 import Link from "../components/Link";
 import Button from "../components/Button";
+import React,{useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
-function Signup_page() {
+const Signup_page =  () => 
+{
   const formLabel = "Sign up";
   const buttonLabel = "Sign up";
+  const navigate=useNavigate();
+  const [email,setEmail]=useState("");
+  const [name,setName]=useState("");
+  const [password,setPassword]=useState("");
 
+  const goToLogin=()=>
+  {
+    navigate("/login")
+  }
+
+  const SignUp = async (e)=>
+  {
+    e.preventDefault();
+    let items={email,name,password}
+    console.log(items);
+
+    const res = await fetch('http://localhost:4000/api/signup',{
+      method:'POST',
+      headers: 
+      {
+         "Content-Type": "application/json",
+         "Accept": "application/json",
+         "email":email,
+         "password":password
+      }
+      
+
+    })
+    if(res.status===200)
+    {
+      const data=await res.json()
+      console.log(data)
+      navigate("/login")
+    }
+    if(res.status===403)
+    {
+      alert("already exist please login !!")
+      navigate("/login")
+    }
+    
+  }
   return (
     <>
       <div className="flex w-full h-screen">
@@ -17,6 +60,7 @@ function Signup_page() {
           text2="Start taking your quizzes now."
           text3="Just select your questions with a click."
           buttonLabel="Sign in"
+          onClick={goToLogin}
         ></Minor_side>
 
         <Major_side>
@@ -24,6 +68,8 @@ function Signup_page() {
             {/* ID */}
             <InputField
               labelHtmlFor="email"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="e-mail"
               inputType="text"
@@ -34,6 +80,8 @@ function Signup_page() {
             {/* Name */}
             <InputField
               labelHtmlFor="name"
+              value={name}
+              onChange={(e)=>setName(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="Name"
               inputType="text"
@@ -44,6 +92,8 @@ function Signup_page() {
             {/* password */}
             <InputField
               labelHtmlFor="password"
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="Password"
               inputType="password"
@@ -56,6 +106,7 @@ function Signup_page() {
 
             {/* submit button */}
             <Button
+              onClick={SignUp}
               ButtonType="submit"
               buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center w-4/12"
               buttonLabel={buttonLabel}
