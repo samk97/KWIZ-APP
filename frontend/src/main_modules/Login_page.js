@@ -33,8 +33,6 @@ function Login_page() {
          "email":email,
          "password":password
       }
-      
-
     })
     if(res.status===200)
     {
@@ -96,5 +94,4 @@ function Login_page() {
     </>
   );
 }
-
 export default Login_page;
