@@ -39,3 +39,22 @@ exports.insertQuestion=(req,res)=>{
      });
     
  }
+
+ exports.randomQuizCreation= async (req,res)=>{
+    
+  const {number} = req.headers;
+  console.log(number);
+  console.log("aa");
+
+ //const number = 1;
+
+ try{
+ const result =  await  Question.aggregate( [{ $sample: { size: Number(number) } }]).exec();
+ return res.status(200).json(result);
+ }catch(err){
+  
+ return res.status(400).json(err);
+
+ }
+  
+}

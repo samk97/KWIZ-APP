@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authCheck, profileCheck,loginCheck,tokenVerifier } = require("../middlewares/auth");
 const {
-insertQuestion,fetchQuestion
+insertQuestion,fetchQuestion,randomQuizCreation
 } = require("../controller/question");
 
 
@@ -11,16 +11,15 @@ insertQuestion,fetchQuestion
 router.post("/get-questions",fetchQuestion);
 
 
+//Route to Fetch Questions
+router.post("/create-random-quiz",randomQuizCreation);
+
+
+
 
 
 // Route to create user
 router.post("/upload-question", insertQuestion );
 
-// Route to delete account
-// router.post("/update-question",tokenVerifier, deleteAccount);
-
-
-// // Forgot Password API
-// router.post("/delete-question",authCheck,forgotPassword)
 
 module.exports = router;
