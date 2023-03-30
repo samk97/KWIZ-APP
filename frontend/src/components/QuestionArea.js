@@ -1,5 +1,4 @@
-import { useState } from "react";
-function Question_area(props) {
+function QuestionArea(props) {
   const question = props.question;
   const op_a = props.op_a;
   const op_b = props.op_b;
@@ -10,7 +9,7 @@ function Question_area(props) {
   return (
     <>
       <div class="flex flex-col justify-center items-center bg-green-100 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
-        <div class="text-lg font-bold leading-loose bg-gradient-to- from-indigo-500 rounded-md px-4">
+        <div class="text-lg font-bold leading-loose rounded-md px-4">
           <p>Question</p>
         </div>
 
@@ -60,7 +59,7 @@ function Question_area(props) {
 
         {/* Correct Ans */}
         <div class="flex justify-center w-full h-16 m-2">
-          <div class="bg-blue-700 text-white flex items-center pl-4 border-2 border-gray-700 rounded-lg w-2/6 h-16">
+          <div class="bg-blue-700 text-white flex items-center pl-4 border-2 border-gray-700 rounded-lg min-w-[200px] w-2/6 h-16">
             <div class="flex justify-end  w-3/6 pr-3 font-bold">
               <span>Correct Ans :</span>
             </div>
@@ -72,7 +71,7 @@ function Question_area(props) {
 
         {/* Explaination */}
 
-        <div class="bg-blue-700 text-white flex flex-col items-start p-3 border-2 border-gray-700 rounded-lg w-full h-auto m-2">
+        <div class="bg-blue-700 text-white flex flex-col items-start p-3 border-2 border-gray-700 rounded-lg w-fit h-auto m-2">
           <div class="m-1">
             <span>Explaination :</span>
           </div>
@@ -85,4 +84,4 @@ function Question_area(props) {
   );
 }
 
-export default Question_area;
+export default QuestionArea;

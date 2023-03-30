@@ -1,15 +1,23 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Login_page from "./main_modules/Login_page";
-import Signup_page from "./main_modules/Signup_page";
-import Admin_main from "./main_modules/Admin_main";
+import LoginPage from "./main_modules/LoginPage";
+import SignuPage from "./main_modules/SignupPage";
+import AdminQuestions from "./main_modules/AdminQuestions";
+import AdminCreateQuestions from "./main_modules/AdminCreateQuestions";
+import AdminCreateQuiz from "./main_modules/AdminCreateQuiz";
+import AdminHistory from "./main_modules/AdminHistory";
 
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login_page />}></Route>
-      <Route path="/signup" element={<Signup_page />}></Route>
-      <Route path="/admin_main" element={<Admin_main />}></Route>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignuPage />} />
+      <Route path="/admin">
+        <Route path="questions" element={<AdminQuestions />} />
+        <Route path="create_questions" element={<AdminCreateQuestions />} />
+        <Route path="create_quiz" element={<AdminCreateQuiz />} />
+        <Route path="history" element={<AdminHistory />} />
+      </Route>
     </Routes>
   );
 }

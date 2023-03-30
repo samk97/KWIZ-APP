@@ -1,56 +1,52 @@
-import Major_side from "../components/Major_side";
-import Minor_side from "../components/Minor_side";
+import MajorSide from "../components/MajorSide";
+import MinorSide from "../components/MinorSide";
 import Form from "../components/Form";
 import InputField from "../components/InputField";
 import Link from "../components/Link";
 import Button from "../components/Button";
-import React,{useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-function Login_page() {
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+function LoginPage() {
   const formLabel = "Log in";
   const buttonLabel = "Sign in";
-  const navigate=useNavigate();
-  const [email,setEmail]=useState("");
-  const [name,setName]=useState("");
-  const [password,setPassword]=useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
 
-  const goToSignUp=()=>
-  {
-    navigate("/signup")
-  }
+  const goToSignUp = () => {
+    navigate("/signup");
+  };
 
-  const Login = async (e)=>
-  {
+  const Login = async (e) => {
     e.preventDefault();
-    let items={email,name,password}
+    let items = { email, name, password };
 
-    const res = await fetch('http://localhost:4000/api/login',{
-      method:'POST',
-      headers: 
-      {
-         "Content-Type": "application/json",
-         "Accept": "application/json",
-         "email":email,
-         "password":password
-      }
-    })
-    if(res.status===200)
-    {
-      const data=await res.json()
-      console.log(data)
+    const res = await fetch("http://localhost:4000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        email: email,
+        password: password,
+      },
+    });
+    if (res.status === 200) {
+      const data = await res.json();
+      console.log(data);
       // navigate("/")
     }
-  }
+  };
   return (
     <>
       <div className="flex w-full h-screen">
-        <Major_side>
+        <MajorSide>
           <Form formLabel={formLabel}>
             {/* ID */}
             <InputField
               labelHtmlFor="email"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="e-mail"
               inputType="text"
@@ -62,7 +58,7 @@ function Login_page() {
             <InputField
               labelHtmlFor="password"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="Password"
               inputType="password"
@@ -81,17 +77,17 @@ function Login_page() {
               buttonLabel={buttonLabel}
             ></Button>
           </Form>
-        </Major_side>
+        </MajorSide>
 
-        <Minor_side
+        <MinorSide
           text1="New Here?"
           text2="Sign up and take your quizzes here."
           text3="Choose from a variety of questions or add your own."
           buttonLabel="Sign up"
           onClick={goToSignUp}
-        ></Minor_side>
+        ></MinorSide>
       </div>
     </>
   );
 }
-export default Login_page;
+export default LoginPage;
