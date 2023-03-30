@@ -4,8 +4,7 @@ import { FiChevronLeft } from "react-icons/fi";
 import { BiBookmark } from "react-icons/bi";
 import Button from "./Button";
 
-function Side_nav() {
-  const [open, setOpen] = useState(true);
+function Side_nav(props) {
   return (
     <nav>
       {/* Sidenav wrapper */}
@@ -13,16 +12,16 @@ function Side_nav() {
         {/* Sidenav */}
         <div
           class={`relative flex flex-col justify-start bg-blue-300 h-screen ${
-            open ? "w-72" : "w-16"
+            props.open ? "w-72" : "w-16"
           } duration-200`}
         >
           <div class="relative w-full h-[50px] bg-black">
             {/* SideNav expansion Arrow */}
             <FiChevronLeft
               class={`bg-white rounded-full text-3xl absolute right-2 top-2 cursor-pointer ${
-                !open && "rotate-180"
+                !props.open && "rotate-180"
               } duration-500`}
-              onClick={() => setOpen(!open)}
+              onClick={props.onOpen}
             ></FiChevronLeft>
           </div>
 
@@ -32,7 +31,7 @@ function Side_nav() {
             <div class="flex justify-start items-center w-full h-[60px] bg-green-300">
               <BiBookmark class="bg-white rounded-xl text-5xl cursor-pointer m-2"></BiBookmark>
               <Link to="/admin_main">
-                <span class={`${!open && "hidden"}`}>Questions</span>
+                <span class={`${!props.open && "hidden"}`}>Questions</span>
               </Link>
             </div>
 
@@ -40,7 +39,9 @@ function Side_nav() {
             <div class="flex justify-start items-center w-full h-[60px] bg-green-300">
               <BiBookmark class="bg-white rounded-xl text-5xl cursor-pointer m-2"></BiBookmark>
               <Link to="/create_questions">
-                <span class={`${!open && "hidden"}`}>Create Questions</span>
+                <span class={`${!props.open && "hidden"}`}>
+                  Create Questions
+                </span>
               </Link>
             </div>
 
@@ -48,7 +49,7 @@ function Side_nav() {
             <div class="flex justify-start items-center w-full h-[60px] bg-green-300">
               <BiBookmark class="bg-white rounded-xl text-5xl cursor-pointer m-2"></BiBookmark>
               <Link to="/create_quiz">
-                <span class={`${!open && "hidden"}`}>Create Quiz</span>
+                <span class={`${!props.open && "hidden"}`}>Create Quiz</span>
               </Link>
             </div>
 
@@ -56,14 +57,14 @@ function Side_nav() {
             <div class="flex justify-start items-center w-full h-[60px] bg-green-300">
               <BiBookmark class="bg-white rounded-xl text-5xl cursor-pointer m-2"></BiBookmark>
               <Link to="/history">
-                <span class={`${!open && "hidden"}`}>History</span>
+                <span class={`${!props.open && "hidden"}`}>History</span>
               </Link>
             </div>
           </div>
 
           <div
             class={`bg-red-900 w-full h-[60px] absolute bottom-0 duration-300 ${
-              !open && "scale-0"
+              !props.open && "scale-0"
             }`}
           >
             <div class="w-full h-full relative">
