@@ -4,30 +4,31 @@ function QuestionForm(props) {
     <>
       {/* Questions */}
       <div
-        class={`bg-red-300 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+        class={`bg-extremeBlue w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
           props.open ? "ml-72" : "ml-16"
         } duration-200`}
       >
         <form>
-          <div class="bg-green-100 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
+          <div class="border-x-2 border-t-2 border-gray-500 bg-darkBlue rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
             {/* Question */}
             <div>
               <label
-                class="block text-gray-700 text-sm font-bold mb-2"
+                class="block text-gray-300 text-sm font-bold mb-2"
                 for="question"
               >
                 Question
               </label>
 
               <textarea
-                class="w-full p-3 h-60"
+                class="w-full p-3 h-60 bg-black text-white"
                 id="question"
                 name="question"
                 placeholder="Type your question here"
               ></textarea>
             </div>
           </div>
-          <div class="bg-green-300 rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 p-3">
+          {/* Options div */}
+          <div class="border-x-2 border-b-2 border-gray-500 bg-softBlue rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 p-3">
             <label
               class="block text-gray-700 text-sm font-bold mb-2"
               for="question"
@@ -44,7 +45,7 @@ function QuestionForm(props) {
               {/* Option text */}
               <div class="flex w-[95%]">
                 <textarea
-                  class="w-full p-3"
+                  class="w-full p-3 bg-black text-white"
                   id="question"
                   name="question"
                   placeholder="Type option A here"
@@ -61,7 +62,7 @@ function QuestionForm(props) {
               {/* Option text */}
               <div class="flex w-[95%]">
                 <textarea
-                  class="w-full p-3"
+                  class="w-full p-3 bg-black text-white"
                   id="question"
                   name="question"
                   placeholder="Type option B here"
@@ -78,7 +79,7 @@ function QuestionForm(props) {
               {/* Option text */}
               <div class="flex w-[95%]">
                 <textarea
-                  class="w-full p-3"
+                  class="w-full p-3 bg-black text-white"
                   id="question"
                   name="question"
                   placeholder="Type option C here"
@@ -95,7 +96,7 @@ function QuestionForm(props) {
               {/* Option text */}
               <div class="flex w-[95%]">
                 <textarea
-                  class="w-full p-3"
+                  class="w-full p-3 bg-black text-white"
                   id="question"
                   name="question"
                   placeholder="Type option D here"
@@ -113,7 +114,7 @@ function QuestionForm(props) {
               </label>
 
               <textarea
-                class="w-full p-3 h-60"
+                class="w-full p-3 h-60 bg-black text-white"
                 id="explaination"
                 name="explaination"
                 placeholder="Type your explaination here"

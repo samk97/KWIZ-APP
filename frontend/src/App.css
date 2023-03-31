@@ -38,5 +38,6 @@
 }
 
 .active {
-  color: blue;
+  color: #f84c4c;
+  background-color: #070c18;
 }

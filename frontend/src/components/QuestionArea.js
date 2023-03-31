@@ -8,7 +8,8 @@ function QuestionArea(props) {
   const exp = props.exp;
   return (
     <>
-      <div class="flex flex-col justify-center items-center bg-green-100 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
+      {/* Questions Div */}
+      <div class="flex flex-col justify-center items-center bg-darkBlue text-gray-300 border-x-2 border-t-2 border-gray-500 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
         <div class="text-lg font-bold leading-loose rounded-md px-4">
           <p>Question</p>
         </div>
@@ -16,7 +17,7 @@ function QuestionArea(props) {
         <p>{question}</p>
       </div>
       {/* options div */}
-      <div class="bg-green-300 rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 p-3">
+      <div class="bg-softBlue border-x-2 border-b-2 border-gray-500 rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 p-3">
         {/* Option A */}
         <div class="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
           <div class="flex">
@@ -59,7 +60,7 @@ function QuestionArea(props) {
 
         {/* Correct Ans */}
         <div class="flex justify-center w-full h-16 m-2">
-          <div class="bg-blue-700 text-white flex items-center pl-4 border-2 border-gray-700 rounded-lg min-w-[200px] w-2/6 h-16">
+          <div class="bg-extremeBlue text-red-500 flex items-center pl-4 rounded-lg min-w-[200px] w-2/6 h-16">
             <div class="flex justify-end  w-3/6 pr-3 font-bold">
               <span>Correct Ans :</span>
             </div>
@@ -71,9 +72,9 @@ function QuestionArea(props) {
 
         {/* Explaination */}
 
-        <div class="bg-blue-700 text-white flex flex-col items-start p-3 border-2 border-gray-700 rounded-lg w-fit h-auto m-2">
+        <div class="bg-extremeBlue text-gray-300 flex flex-col items-start p-3 rounded-lg w-fit h-auto m-2">
           <div class="m-1">
-            <span>Explaination :</span>
+            <span class="font-bold text-red-500">Explaination :</span>
           </div>
           <div class="m-1">
             <span class="p-2">{exp}</span>
