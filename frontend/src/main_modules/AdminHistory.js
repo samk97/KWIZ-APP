@@ -1,7 +1,7 @@
 function AdminHistory(props) {
   return (
     <>
-      <div class="flex"></div>
+      <div className="flex"></div>
     </>
   );
 }

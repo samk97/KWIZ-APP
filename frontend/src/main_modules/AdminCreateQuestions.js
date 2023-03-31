@@ -3,7 +3,7 @@ import QuestionForm from "../components/QuestionForm";
 function AdminCreateQuestions(props) {
   return (
     <>
-      <div class="flex">
+      <div className="flex">
         <QuestionForm open={props.open} />
       </div>
     </>

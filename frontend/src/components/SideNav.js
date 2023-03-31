@@ -11,17 +11,17 @@ function SideNav(props) {
     <>
       <nav>
         {/* Sidenav wrapper */}
-        <div class="fixed top-0 left-0">
+        <div className="fixed top-0 left-0">
           {/* Sidenav */}
           <div
-            class={`relative flex flex-col justify-start bg-skyBlue h-screen ${
+            className={`relative flex flex-col justify-start bg-skyBlue h-screen ${
               props.open ? "w-72" : "w-16"
             } duration-200`}
           >
-            <div class="relative w-full h-[50px] bg-neutralBlue">
+            <div className="relative w-full h-[50px] bg-neutralBlue">
               {/* SideNav expansion Arrow */}
               <FiChevronLeft
-                class={`bg-green-400 text-extremeBlue rounded-full text-3xl absolute right-2 top-2 cursor-pointer ${
+                className={`bg-green-400 text-extremeBlue rounded-full text-3xl absolute right-2 top-2 cursor-pointer ${
                   !props.open && "rotate-180"
                 } duration-500`}
                 onClick={props.onOpen}
@@ -29,15 +29,17 @@ function SideNav(props) {
             </div>
 
             {/* SideNav Mid Section */}
-            <div class="relative flex flex-col justify-center w-full">
+            <div className="relative flex flex-col justify-center w-full">
               {/* Sidenav option 1 */}
               <NavLink to="/admin/questions">
-                <div class="flex justify-start items-center w-full h-[60px] border-b border-black hover:font-bold">
-                  <div class="flex justify-center items-center w-16 h-full">
-                    <FaListAlt class="m-[9px] text-[47px] cursor-pointer"></FaListAlt>
+                <div className="flex justify-start items-center w-full h-[60px] border-b border-black hover:font-bold">
+                  <div className="flex justify-center items-center w-16 h-full">
+                    <FaListAlt className="m-[9px] text-[47px] cursor-pointer"></FaListAlt>
                   </div>
 
-                  <span class={`duration-100 ${!props.open && "scale-0 w-0"}`}>
+                  <span
+                    className={`duration-100 ${!props.open && "scale-0 w-0"}`}
+                  >
                     Questions
                   </span>
                 </div>
@@ -45,12 +47,14 @@ function SideNav(props) {
 
               {/* Sidenav Option 2 */}
               <NavLink to="/admin/create_questions">
-                <div class="flex justify-start items-center w-full h-[60px] border-b border-black  hover:font-bold">
-                  <div class="flex justify-center items-center w-16 h-full">
-                    <FaPenSquare class="m-[6px] text-[53px] cursor-pointer"></FaPenSquare>
+                <div className="flex justify-start items-center w-full h-[60px] border-b border-black  hover:font-bold">
+                  <div className="flex justify-center items-center w-16 h-full">
+                    <FaPenSquare className="m-[6px] text-[53px] cursor-pointer"></FaPenSquare>
                   </div>
 
-                  <span class={`duration-100 ${!props.open && "scale-0 w-0"}`}>
+                  <span
+                    className={`duration-100 ${!props.open && "scale-0 w-0"}`}
+                  >
                     Create Questions
                   </span>
                 </div>
@@ -58,12 +62,14 @@ function SideNav(props) {
 
               {/* Sidenav Option 3 */}
               <NavLink to="/admin/create_quiz">
-                <div class="flex justify-start items-center w-full h-[60px] border-b border-black  hover:font-bold">
-                  <div class="flex justify-center items-center w-16 h-full">
-                    <MdQuiz class="m-[5px] rounded-xl text-[60px] cursor-pointer m-2"></MdQuiz>
+                <div className="flex justify-start items-center w-full h-[60px] border-b border-black  hover:font-bold">
+                  <div className="flex justify-center items-center w-16 h-full">
+                    <MdQuiz className="m-[5px] rounded-xl text-[60px] cursor-pointer m-2"></MdQuiz>
                   </div>
 
-                  <span class={`duration-100 ${!props.open && "scale-0 w-0"}`}>
+                  <span
+                    className={`duration-100 ${!props.open && "scale-0 w-0"}`}
+                  >
                     Create Quiz
                   </span>
                 </div>
@@ -71,28 +77,30 @@ function SideNav(props) {
 
               {/* Sidenav Option 4 */}
               <NavLink to="/admin/history">
-                <div class="flex justify-start items-center w-full h-[60px] border-b border-black  hover:font-bold">
-                  <div class="flex justify-center items-center w-16 h-full">
-                    <FaHistory class="m-[15px] text-[40px] cursor-pointer m-2"></FaHistory>
+                <div className="flex justify-start items-center w-full h-[60px] border-b border-black  hover:font-bold">
+                  <div className="flex justify-center items-center w-16 h-full">
+                    <FaHistory className="m-[15px] text-[40px] cursor-pointer m-2"></FaHistory>
                   </div>
 
-                  <span class={`duration-100 ${!props.open && "scale-0 w-0"}`}>
+                  <span
+                    className={`duration-100 ${!props.open && "scale-0 w-0"}`}
+                  >
                     History
                   </span>
                 </div>
               </NavLink>
             </div>
 
-            <div class="border-t border-black w-full h-[60px] absolute bottom-0 duration-300">
-              <div class="w-full h-full relative">
+            <div className="border-t border-black w-full h-[60px] absolute bottom-0 duration-300">
+              <div className="w-full h-full relative">
                 <NavLink to="/admin/history">
-                  <div class="flex justify-start items-center w-full h-[60px]  hover:font-bold">
-                    <div class="flex justify-center items-center w-16 h-full">
-                      <BiLogOut class="m-[15px] text-[40px] cursor-pointer m-2"></BiLogOut>
+                  <div className="flex justify-start items-center w-full h-[60px]  hover:font-bold">
+                    <div className="flex justify-center items-center w-16 h-full">
+                      <BiLogOut className="m-[15px] text-[40px] cursor-pointer m-2"></BiLogOut>
                     </div>
 
                     <span
-                      class={`duration-100 ${!props.open && "scale-0 w-0"}`}
+                      className={`duration-100 ${!props.open && "scale-0 w-0"}`}
                     >
                       Log Out
                     </span>

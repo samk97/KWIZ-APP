@@ -1,9 +1,9 @@
 function AdminCreateQuiz(props) {
   return (
     <>
-      <div class="flex">
+      <div className="flex">
         <div
-          class={`bg-extremeBlue w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+          className={`bg-extremeBlue w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
             props.open ? "ml-72" : "ml-16"
           } duration-200`}
         >

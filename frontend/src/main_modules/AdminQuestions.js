@@ -3,7 +3,7 @@ import QuestionsSection from "../components/QuestionsSection";
 function AdminQuestions(props) {
   return (
     <>
-      <div class="flex">
+      <div className="flex">
         <QuestionsSection open={props.open} />
       </div>
     </>
