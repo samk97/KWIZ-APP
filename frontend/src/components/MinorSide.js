@@ -1,12 +1,12 @@
 import checklist_image from "../images/cheklist-image.png";
 import Button from "./Button";
 
-function Minor_side(props) {
+function MinorSide(props) {
   const text1 = props.text1;
   const text2 = props.text2;
   const text3 = props.text3;
   const buttonLabel = props.buttonLabel;
-  const onClick=props.onClick;
+  const onClick = props.onClick;
   return (
     <>
       <div className="flex justify-center items-center bg-gradient-to-b from-emerald-700 to-green-500 w-4/12 h-full relative">
@@ -36,4 +36,4 @@ function Minor_side(props) {
   );
 }
 
-export default Minor_side;
+export default MinorSide;

@@ -1,7 +1,7 @@
 import gears_image from "../images/gears.png";
 import hexagon_spread from "../images/hexagon_spread.png";
 
-function Major_side(props) {
+function MajorSide(props) {
   return (
     <>
       <div className="relative flex justify-center items-center w-8/12 h-full bg-gradient-to-b from-blue-200 via-fuchsia-200 to-sky-200">
@@ -23,4 +23,4 @@ function Major_side(props) {
   );
 }
 
-export default Major_side;
+export default MajorSide;

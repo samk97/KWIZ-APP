@@ -52,9 +52,7 @@ exports.insertQuestion=(req,res)=>{
  const result =  await  Question.aggregate( [{ $sample: { size: Number(number) } }]).exec();
  return res.status(200).json(result);
  }catch(err){
-  
  return res.status(400).json(err);
-
  }
   
 }

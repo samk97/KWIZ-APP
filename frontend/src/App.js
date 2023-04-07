@@ -1,13 +1,32 @@
-import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Login_page from "./main_modules/Login_page";
-import Signup_page from "./main_modules/Signup_page";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { useState } from "react";
+import LoginPage from "./main_modules/LoginPage";
+import SignuPage from "./main_modules/SignupPage";
+import AdminQuestions from "./main_modules/AdminQuestions";
+import AdminCreateQuestions from "./main_modules/AdminCreateQuestions";
+import AdminCreateQuiz from "./main_modules/AdminCreateQuiz";
+import AdminHistory from "./main_modules/AdminHistory";
+import SideNav from "./components/SideNav";
 
 function App() {
+  const [open, setOpen] = useState(true);
   return (
     <Routes>
-      <Route path="/login" element={<Login_page />}></Route>
-      <Route path="/signup" element={<Signup_page />}></Route>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignuPage />} />
+      <Route
+        path="/admin"
+        element={<SideNav open={open} onOpen={() => setOpen(!open)} />}
+      >
+        <Route path="questions" element={<AdminQuestions open={open} />} />
+        <Route
+          path="create_questions"
+          element={<AdminCreateQuestions open={open} />}
+        />
+        <Route path="create_quiz" element={<AdminCreateQuiz open={open} />} />
+        <Route path="history" element={<AdminHistory open={open} />} />
+      </Route>
     </Routes>
   );
 }

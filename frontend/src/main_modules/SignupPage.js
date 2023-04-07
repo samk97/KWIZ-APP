@@ -1,75 +1,66 @@
-import Major_side from "../components/Major_side";
-import Minor_side from "../components/Minor_side";
+import MajorSide from "../components/MajorSide";
+import MinorSide from "../components/MinorSide";
 import Form from "../components/Form";
 import InputField from "../components/InputField";
 import Link from "../components/Link";
 import Button from "../components/Button";
-import React,{useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Signup_page =  () => 
-{
+const SignupPage = () => {
   const formLabel = "Sign up";
   const buttonLabel = "Sign up";
-  const navigate=useNavigate();
-  const [email,setEmail]=useState("");
-  const [name,setName]=useState("");
-  const [password,setPassword]=useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
 
-  const goToLogin=()=>
-  {
-    navigate("/login")
-  }
+  const goToLogin = () => {
+    navigate("/login");
+  };
 
-  const SignUp = async (e)=>
-  {
+  const SignUp = async (e) => {
     e.preventDefault();
-    let items={email,name,password}
+    let items = { email, name, password };
     console.log(items);
 
-    const res = await fetch('http://localhost:4000/api/signup',{
-      method:'POST',
-      headers: 
-      {
-         "Content-Type": "application/json",
-         "Accept": "application/json",
-         "email":email,
-         "password":password
-      }
-      
-
-    })
-    if(res.status===200)
-    {
-      const data=await res.json()
-      console.log(data)
-      navigate("/login")
+    const res = await fetch("http://localhost:4000/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        email: email,
+        password: password,
+      },
+    });
+    if (res.status === 200) {
+      const data = await res.json();
+      console.log(data);
+      navigate("/login");
     }
-    if(res.status===403)
-    {
-      alert("already exist please login !!")
-      navigate("/login")
+    if (res.status === 403) {
+      alert("already exist please login !!");
+      navigate("/login");
     }
-    
-  }
+  };
   return (
     <>
       <div className="flex w-full h-screen">
-        <Minor_side
+        <MinorSide
           text1="Already Registered?"
           text2="Start taking your quizzes now."
           text3="Just select your questions with a click."
           buttonLabel="Sign in"
           onClick={goToLogin}
-        ></Minor_side>
+        ></MinorSide>
 
-        <Major_side>
+        <MajorSide>
           <Form formLabel={formLabel}>
             {/* ID */}
             <InputField
               labelHtmlFor="email"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="e-mail"
               inputType="text"
@@ -81,7 +72,7 @@ const Signup_page =  () =>
             <InputField
               labelHtmlFor="name"
               value={name}
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="Name"
               inputType="text"
@@ -93,7 +84,7 @@ const Signup_page =  () =>
             <InputField
               labelHtmlFor="password"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
               labelPlaceHolder="Password"
               inputType="password"
@@ -112,10 +103,10 @@ const Signup_page =  () =>
               buttonLabel={buttonLabel}
             ></Button>
           </Form>
-        </Major_side>
+        </MajorSide>
       </div>
     </>
   );
-}
+};
 
-export default Signup_page;
+export default SignupPage;
