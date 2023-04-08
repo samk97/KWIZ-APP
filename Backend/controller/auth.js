@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require("bcrypt");
 // FUNCTION TO LOGIN USER
-exports.login=(req,res)=>{
+exports.login=async(req,res)=>{
     
     const {email,password} = req.credential;
 
