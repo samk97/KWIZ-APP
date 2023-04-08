@@ -1,5 +1,46 @@
 import Button from "./Button";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function QuestionForm(props) {
+
+  const navigate = useNavigate();
+  const [question, setQuestion] = useState("");
+  const [op_a, setOp_a] = useState("");
+  const [op_b, setOp_b] = useState("");
+  const [op_c, setOp_c] = useState("");
+  const [op_d, setOp_d] = useState("");
+  const [ans, setAns] = useState("");
+  const [exp, setExp] = useState("");
+
+  const UploadQuestion = async (e) => {
+    e.preventDefault();
+    let items = { question, op_a, op_b, op_c, op_d, ans, exp};
+    console.log(items);
+
+    const res = await fetch("http://localhost:4000/api/upload-question", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        question: question,
+        op_a: op_a,
+        op_b: op_b,
+        op_c: op_c,
+        op_d: op_d,
+        ans:ans,
+        exp:exp,
+
+      },
+    });
+    if (res.status === 200) {
+      const data = await res.json();
+      console.log(data);
+      alert("Successsfully uploaded !!");
+    }
+    if (res.status === 403) {
+      alert("Question Already Exist");
+    }
+  };
   return (
     <>
       {/* Questions */}
@@ -20,6 +61,8 @@ function QuestionForm(props) {
               </label>
 
               <textarea
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
                 className="w-full p-3 h-28 bg-black text-white"
                 id="question"
                 name="question"
@@ -45,6 +88,8 @@ function QuestionForm(props) {
               {/* Option text */}
               <div className="flex w-[95%]">
                 <textarea
+                  value={op_a}
+                  onChange={(e) => setOp_a(e.target.value)}
                   className="w-full p-3 bg-black text-white"
                   id="question"
                   name="question"
@@ -62,6 +107,8 @@ function QuestionForm(props) {
               {/* Option text */}
               <div className="flex w-[95%]">
                 <textarea
+                  value={op_b}
+                  onChange={(e) => setOp_b(e.target.value)}
                   className="w-full p-3 bg-black text-white"
                   id="question"
                   name="question"
@@ -79,6 +126,8 @@ function QuestionForm(props) {
               {/* Option text */}
               <div className="flex w-[95%]">
                 <textarea
+                  value={op_c}
+                  onChange={(e) => setOp_c(e.target.value)}
                   className="w-full p-3 bg-black text-white"
                   id="question"
                   name="question"
@@ -96,6 +145,8 @@ function QuestionForm(props) {
               {/* Option text */}
               <div className="flex w-[95%]">
                 <textarea
+                  value={op_d}
+                  onChange={(e) => setOp_d(e.target.value)}
                   className="w-full p-3 bg-black text-white"
                   id="question"
                   name="question"
@@ -114,6 +165,8 @@ function QuestionForm(props) {
               </label>
 
               <textarea
+                value={ans}
+                onChange={(e) => setAns(e.target.value)}
                 className="w-full p-3 h-20 bg-black text-white"
                 id="explaination"
                 name="explaination"
@@ -131,6 +184,8 @@ function QuestionForm(props) {
               </label>
 
               <textarea
+                value={exp}
+                onChange={(e) => setExp(e.target.value)}
                 className="w-full p-3 h-28 bg-black text-white"
                 id="explaination"
                 name="explaination"
@@ -140,6 +195,7 @@ function QuestionForm(props) {
 
             <div className="mt-3 flex justify-center gap-5 w-full h-10">
               <Button
+                onClick={UploadQuestion}
                 buttonType="submit"
                 buttonClassName="min-w-[100px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center"
                 buttonLabel="Save"
@@ -154,6 +210,7 @@ function QuestionForm(props) {
           </div>
         </form>
       </div>
+      
     </>
   );
 }
