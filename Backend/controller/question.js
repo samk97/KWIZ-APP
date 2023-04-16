@@ -41,10 +41,9 @@ exports.insertQuestion=(req,res)=>{
  }
 
  exports.randomQuizCreation= async (req,res)=>{
-    
-  const {number} = req.headers;
+    console.log(req.headers)
+  const {number,time} = req.body;
   console.log(number);
-  console.log("aa");
 
  //const number = 1;
 

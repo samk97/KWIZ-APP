@@ -8,6 +8,7 @@ import AdminCreateQuestions from "./main_modules/AdminCreateQuestions";
 import AdminCreateQuiz from "./main_modules/AdminCreateQuiz";
 import AdminHistory from "./main_modules/AdminHistory";
 import SideNav from "./components/SideNav";
+import PreviewPage from "./main_modules/PreviewPage";
 
 function App() {
   const [open, setOpen] = useState(true);
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignuPage />} />
+      <Route path="/preview" element={<PreviewPage />} />
       <Route
         path="/admin"
         element={<SideNav open={open} onOpen={() => setOpen(!open)} />}

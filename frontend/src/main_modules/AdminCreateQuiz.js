@@ -1,6 +1,26 @@
 import Button from "../components/Button";
-
+import { useState } from "react";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 function AdminCreateQuiz(props) {
+
+
+  const [value, setValue] = useState(0);
+  const [time, setTime] = useState(0);
+  const navigate = useNavigate();
+
+  const handleClick = async  (e) =>{
+    e.preventDefault();
+    console.log(value + time);
+    console.log("a");
+    await axios.post('http://localhost:4000/api/create-random-quiz',{ number : value,time : time  }).then(function(res){
+      console.log(res);
+      localStorage.setItem("quiz",res.data);
+      navigate("/preview");
+    })
+  }
+
+
   return (
     <>
       <div className="flex">
@@ -20,19 +40,18 @@ function AdminCreateQuiz(props) {
                 Select Questions
               </label>
               <select
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
                 id="questions"
                 class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               >
                 <option selected>Select one</option>
-                <option value="">5</option>
-                <option value="">10</option>
-                <option value="">15</option>
-                <option value="">25</option>
-                <option value="">30</option>
-                <option value="">35</option>
-                <option value="">40</option>
-                <option value="">45</option>
-                <option value="">50</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+               
               </select>
             </div>
 
@@ -45,21 +64,18 @@ function AdminCreateQuiz(props) {
                 Time
               </label>
               <select
+                value={time}
+                onChange={(e)=>setTime(e.target.value)}
                 id="time"
                 class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               >
                 <option selected>Unlimited</option>
-                <option value="">5 min</option>
-                <option value="">10 min</option>
-                <option value="">15 min</option>
-                <option value="">25 min</option>
-                <option value="">30 min</option>
-                <option value="">35 min</option>
-                <option value="">40 min</option>
-                <option value="">45 min</option>
-                <option value="">50 min</option>
-                <option value="">55 min</option>
-                <option value="">60 min</option>
+                <option value="5">5 min</option>
+                <option value="10">10 min</option>
+                <option value="15">15 min</option>
+                <option value="25">25 min</option>
+                <option value="30">30 min</option>
+
               </select>
             </div>
           </div>
@@ -70,7 +86,7 @@ function AdminCreateQuiz(props) {
               buttonType="submit"
               buttonLabel="Create Quiz"
               buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center p-5 my-3"
-              onClick
+              onClick={handleClick}
             />
           </div>
         </div>
