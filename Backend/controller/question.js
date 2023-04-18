@@ -1,4 +1,5 @@
 const Question = require('../models/question');
+const Quiz = require('../models/quiz');
 exports.insertQuestion=(req,res)=>{
     
     const {question,op_a,op_b,op_c,op_d,ans,exp} = req.headers;
@@ -41,7 +42,7 @@ exports.insertQuestion=(req,res)=>{
  }
 
  exports.randomQuizCreation= async (req,res)=>{
-    console.log(req.headers)
+
   const {number,time} = req.body;
   console.log(number);
 
@@ -54,4 +55,29 @@ exports.insertQuestion=(req,res)=>{
  return res.status(400).json(err);
  }
   
+}
+
+exports.insertQuiz = async (req,res) =>{
+
+
+ console.log(req.body);
+ const {title,startTime,runTime,questions} = req.body;
+
+ try{
+ Quiz.countDocuments({title},function(err,count){
+   if(count == 0){
+     const quiz = new Quiz({title,startTime,runTime,questions});
+     quiz.save(function(err,ress){
+       res.status(200).json("Saved");
+     })
+   }else{
+    res.status(400).json("ALready exists");
+   }
+ })
+}
+catch(err){
+ console.log(err);
+  res.status(400).json("ALready exists");
+}
+
 }

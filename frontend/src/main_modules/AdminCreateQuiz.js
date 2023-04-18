@@ -2,20 +2,28 @@ import Button from "../components/Button";
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import 'react-datetime-picker/dist/DateTimePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import DateTimePicker from 'react-datetime-picker';
 function AdminCreateQuiz(props) {
 
 
   const [value, setValue] = useState(0);
   const [time, setTime] = useState(0);
+  const [startTime,setStartTime] = useState();
   const navigate = useNavigate();
 
   const handleClick = async  (e) =>{
     e.preventDefault();
     console.log(value + time);
-    console.log("a");
-    await axios.post('http://localhost:4000/api/create-random-quiz',{ number : value,time : time  }).then(function(res){
-      console.log(res);
-      localStorage.setItem("quiz",res.data);
+    console.log(startTime);
+    await axios.post('http://localhost:4000/api/create-random-quiz',{ number : value,time : time,startTime : startTime }).then(function(res){
+      console.log(res.data);
+      const x = JSON.stringify(res.data);
+      localStorage.setItem("quiz",x);
+      localStorage.setItem("time",startTime);
+      localStorage.setItem("runTime",time);
       navigate("/preview");
     })
   }
@@ -89,6 +97,7 @@ function AdminCreateQuiz(props) {
               onClick={handleClick}
             />
           </div>
+          <DateTimePicker onChange={setStartTime} value={startTime}/>
         </div>
       </div>
     </>
