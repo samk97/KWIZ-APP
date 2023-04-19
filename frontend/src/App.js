@@ -9,6 +9,9 @@ import AdminCreateQuiz from "./main_modules/AdminCreateQuiz";
 import AdminHistory from "./main_modules/AdminHistory";
 import SideNav from "./components/SideNav";
 import PreviewPage from "./main_modules/PreviewPage";
+import StudentSideNav from "./components/StudentSideNav";
+import StudentAttemptQuiz from "./main_modules/StudentAttemptQuiz";
+import StudentQuiz from "./main_modules/StudentQuiz";
 
 function App() {
   const [open, setOpen] = useState(true);
@@ -29,6 +32,32 @@ function App() {
         <Route path="create_quiz" element={<AdminCreateQuiz open={open} />} />
         <Route path="history" element={<AdminHistory open={open} />} />
       </Route>
+
+      <Route
+        path="/dashboard"
+        element={<StudentSideNav open={open} onOpen={() => setOpen(!open)} />}
+      >
+        <Route
+          path="attempt_quiz"
+          element={<StudentAttemptQuiz open={open} />}
+        />
+
+        {/* Component pending */}
+        <Route
+          path="quizzes_attempted"
+          element={<AdminCreateQuestions open={open} />}
+        />
+
+        {/* Component pending */}
+        <Route
+          path="quizzes_missed"
+          element={<AdminCreateQuiz open={open} />}
+        />
+        {/* Component Pending */}
+        <Route path="history" element={<AdminHistory open={open} />} />
+      </Route>
+
+      <Route path="/quiz" element={<StudentQuiz />}></Route>
     </Routes>
   );
 }

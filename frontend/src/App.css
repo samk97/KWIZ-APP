@@ -39,5 +39,10 @@
 
 .active {
   color: #f84c4c;
-  background-color: #070c18;
+  --tw-border-opacity: 1;
+  border-width: 2px;
+  border-color: rgb(71 85 105);
+  border-radius: 0.5rem /* 8px */;
+  --tw-bg-opacity: 1;
+  margin: 0.25rem /* 4px */;
 }

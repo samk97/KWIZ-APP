@@ -1,39 +1,38 @@
 import Button from "../components/Button";
 import { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import 'react-datetime-picker/dist/DateTimePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import DateTimePicker from 'react-datetime-picker';
+import "react-datetime-picker/dist/DateTimePicker.css";
+import "react-calendar/dist/Calendar.css";
+import "react-clock/dist/Clock.css";
+import DateTimePicker from "react-datetime-picker";
 function AdminCreateQuiz(props) {
-
-
   const [value, setValue] = useState(0);
   const [time, setTime] = useState(0);
-  const [startTime,setStartTime] = useState();
+  const [startTime, setStartTime] = useState();
   const navigate = useNavigate();
 
-  const handleClick = async  (e) =>{
+  const handleClick = async (e) => {
     e.preventDefault();
     console.log(value + time);
-    console.log(startTime);
-    await axios.post('http://localhost:4000/api/create-random-quiz',{ number : value,time : time,startTime : startTime }).then(function(res){
-      console.log(res.data);
-      const x = JSON.stringify(res.data);
-      localStorage.setItem("quiz",x);
-      localStorage.setItem("time",startTime);
-      localStorage.setItem("runTime",time);
-      navigate("/preview");
-    })
-  }
-
+    console.log("a");
+    await axios
+      .post("http://localhost:4000/api/create-random-quiz", {
+        number: value,
+        time: time,
+      })
+      .then(function (res) {
+        console.log(res);
+        localStorage.setItem("quiz", res.data);
+        navigate("/preview");
+      });
+  };
 
   return (
     <>
       <div className="flex">
         <div
-          className={`bg-extremeBlue w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
             props.open ? "ml-72" : "ml-16"
           } duration-200`}
         >
@@ -43,7 +42,7 @@ function AdminCreateQuiz(props) {
             <div class="w-6/12">
               <label
                 for="questions"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-sm font-medium text-gray-900"
               >
                 Select Questions
               </label>
@@ -51,7 +50,7 @@ function AdminCreateQuiz(props) {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 id="questions"
-                class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               >
                 <option selected>Select one</option>
                 <option value="5">5</option>
@@ -59,7 +58,6 @@ function AdminCreateQuiz(props) {
                 <option value="15">15</option>
                 <option value="25">25</option>
                 <option value="30">30</option>
-               
               </select>
             </div>
 
@@ -67,15 +65,15 @@ function AdminCreateQuiz(props) {
             <div class="w-6/12">
               <label
                 for="time"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 text-sm font-medium text-gray-900"
               >
                 Time
               </label>
               <select
                 value={time}
-                onChange={(e)=>setTime(e.target.value)}
+                onChange={(e) => setTime(e.target.value)}
                 id="time"
-                class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               >
                 <option selected>Unlimited</option>
                 <option value="5">5 min</option>
@@ -83,7 +81,6 @@ function AdminCreateQuiz(props) {
                 <option value="15">15 min</option>
                 <option value="25">25 min</option>
                 <option value="30">30 min</option>
-
               </select>
             </div>
           </div>
@@ -97,7 +94,7 @@ function AdminCreateQuiz(props) {
               onClick={handleClick}
             />
           </div>
-          <DateTimePicker onChange={setStartTime} value={startTime}/>
+          <DateTimePicker onChange={setStartTime} value={startTime} />
         </div>
       </div>
     </>

@@ -2,7 +2,6 @@ import Button from "./Button";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 function QuestionForm(props) {
-
   const navigate = useNavigate();
   const [question, setQuestion] = useState("");
   const [op_a, setOp_a] = useState("");
@@ -14,7 +13,7 @@ function QuestionForm(props) {
 
   const UploadQuestion = async (e) => {
     e.preventDefault();
-    let items = { question, op_a, op_b, op_c, op_d, ans, exp};
+    let items = { question, op_a, op_b, op_c, op_d, ans, exp };
     console.log(items);
 
     const res = await fetch("http://localhost:4000/api/upload-question", {
@@ -27,9 +26,8 @@ function QuestionForm(props) {
         op_b: op_b,
         op_c: op_c,
         op_d: op_d,
-        ans:ans,
-        exp:exp,
-
+        ans: ans,
+        exp: exp,
       },
     });
     if (res.status === 200) {
@@ -45,16 +43,16 @@ function QuestionForm(props) {
     <>
       {/* Questions */}
       <div
-        className={`bg-extremeBlue w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+        className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
           props.open ? "ml-72" : "ml-16"
         } duration-200`}
       >
         <form>
-          <div className="border-x-2 border-t-2 border-gray-500 bg-darkBlue rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
+          <div className="border-x-2 border-t-2 border-gray-500 bg-green-200 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
             {/* Question */}
             <div>
               <label
-                className="block text-gray-300 text-sm font-bold mb-2"
+                className="block text-gray-700 text-sm font-bold mb-2"
                 for="question"
               >
                 Question
@@ -63,7 +61,7 @@ function QuestionForm(props) {
               <textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                className="w-full p-3 h-28 bg-black text-white"
+                className="w-full p-3 h-28"
                 id="question"
                 name="question"
                 placeholder="Type your question here"
@@ -71,7 +69,7 @@ function QuestionForm(props) {
             </div>
           </div>
           {/* Options div */}
-          <div className="border-x-2 border-b-2 border-gray-500 bg-softBlue rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 p-3">
+          <div className="border-x-2 border-b-2 border-gray-500 bg-lime-100 rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 p-3">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               for="question"
@@ -90,7 +88,7 @@ function QuestionForm(props) {
                 <textarea
                   value={op_a}
                   onChange={(e) => setOp_a(e.target.value)}
-                  className="w-full p-3 bg-black text-white"
+                  className="w-full p-3"
                   id="question"
                   name="question"
                   placeholder="Type option A here"
@@ -109,7 +107,7 @@ function QuestionForm(props) {
                 <textarea
                   value={op_b}
                   onChange={(e) => setOp_b(e.target.value)}
-                  className="w-full p-3 bg-black text-white"
+                  className="w-full p-3"
                   id="question"
                   name="question"
                   placeholder="Type option B here"
@@ -128,7 +126,7 @@ function QuestionForm(props) {
                 <textarea
                   value={op_c}
                   onChange={(e) => setOp_c(e.target.value)}
-                  className="w-full p-3 bg-black text-white"
+                  className="w-full p-3"
                   id="question"
                   name="question"
                   placeholder="Type option C here"
@@ -147,7 +145,7 @@ function QuestionForm(props) {
                 <textarea
                   value={op_d}
                   onChange={(e) => setOp_d(e.target.value)}
-                  className="w-full p-3 bg-black text-white"
+                  className="w-full p-3"
                   id="question"
                   name="question"
                   placeholder="Type option D here"
@@ -167,7 +165,7 @@ function QuestionForm(props) {
               <textarea
                 value={ans}
                 onChange={(e) => setAns(e.target.value)}
-                className="w-full p-3 h-20 bg-black text-white"
+                className="w-full p-3 h-20"
                 id="explaination"
                 name="explaination"
                 placeholder="Type label of correct option here"
@@ -186,7 +184,7 @@ function QuestionForm(props) {
               <textarea
                 value={exp}
                 onChange={(e) => setExp(e.target.value)}
-                className="w-full p-3 h-28 bg-black text-white"
+                className="w-full p-3 h-28"
                 id="explaination"
                 name="explaination"
                 placeholder="Type your explaination here"
@@ -210,7 +208,6 @@ function QuestionForm(props) {
           </div>
         </form>
       </div>
-      
     </>
   );
 }
