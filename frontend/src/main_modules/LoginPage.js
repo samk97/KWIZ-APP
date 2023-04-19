@@ -22,6 +22,8 @@ function LoginPage() {
     e.preventDefault();
     let items = { email, name, password };
 
+
+
     const res = await fetch("http://localhost:4000/api/login", {
       method: "POST",
       headers: {
@@ -35,6 +37,15 @@ function LoginPage() {
       const data = await res.json();
       console.log(data);
       // navigate("/")
+      if(data.role === "student")
+      {
+        navigate("/dashboard")
+      }
+      else if(data.role === "teacher")
+      {
+        navigate("/admin/questions")
+      }
+      
     }
   };
   return (

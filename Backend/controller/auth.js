@@ -5,7 +5,7 @@ exports.login=async(req,res)=>{
     
     const {email,password} = req.credential;
 
-    console.log(password);
+    console.log(email+password);
 
 
     User.countDocuments({email}, function (err, count){ 
@@ -25,7 +25,7 @@ exports.login=async(req,res)=>{
                     res.status(400).json({Error:"Wrong Password"});
                 }
                 if (result) {
-                    res.status(200).json({id:userFromDB._id,role:userFromDB.role});
+                    res.status(200).json(userFromDB);
                 } else {
                   // response is OutgoingMessage object that server response http request
                   return res.status(400).json({Error: 'passwords do not match'});
