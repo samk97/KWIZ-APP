@@ -162,14 +162,28 @@ function QuestionForm(props) {
                 Correct Option
               </label>
 
-              <textarea
+              {/* <textarea
                 value={ans}
                 onChange={(e) => setAns(e.target.value)}
                 className="w-full p-3 h-20"
                 id="explaination"
                 name="explaination"
                 placeholder="Type label of correct option here"
-              ></textarea>
+              ></textarea> */}
+
+              {/* Above text_area replaced with select */}
+              <select
+                id="explaination"
+                value={ans}
+                onChange={(e) => setAns(e.target.value)}
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              >
+                <option selected>Select correct option</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
             </div>
 
             {/* Explaination */}
