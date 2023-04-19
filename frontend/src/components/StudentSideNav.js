@@ -45,7 +45,7 @@ function StudentSideNav(props) {
             {/* StudentSideNav Mid Section */}
             <div className="relative flex flex-col justify-center w-full">
               {/* StudentSideNav option 1 */}
-              <NavLink to="/student/attempt_quiz">
+              <NavLink to="/dashboard/attempt_quiz">
                 <div className="flex justify-start items-center w-full hover:font-bold">
                   <div className="flex justify-center items-center w-16">
                     <FaListAlt className="text-[46px] cursor-pointer"></FaListAlt>
@@ -60,7 +60,7 @@ function StudentSideNav(props) {
               </NavLink>
 
               {/* StudentSideNav Option 2 */}
-              <NavLink to="/student/">
+              <NavLink to="/dashboard/">
                 <div className="flex justify-start items-center w-full hover:font-bold">
                   <div className="flex justify-center items-center w-16 h-full">
                     <FaPenSquare className="text-[50px] cursor-pointer"></FaPenSquare>
@@ -75,7 +75,7 @@ function StudentSideNav(props) {
               </NavLink>
 
               {/* StudentSideNav Option 3 */}
-              <NavLink to="/student/">
+              <NavLink to="/dashboard/">
                 <div className="flex justify-start items-center w-full hover:font-bold">
                   <div className="flex justify-center items-center w-16 h-full">
                     <MdQuiz className="rounded-xl text-[50px] cursor-pointer"></MdQuiz>

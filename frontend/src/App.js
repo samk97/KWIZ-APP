@@ -34,21 +34,26 @@ function App() {
       </Route>
 
       <Route
-        path="/student"
+        path="/dashboard"
         element={<StudentSideNav open={open} onOpen={() => setOpen(!open)} />}
       >
         <Route
           path="attempt_quiz"
           element={<StudentAttemptQuiz open={open} />}
         />
+
+        {/* Component pending */}
         <Route
           path="quizzes_attempted"
           element={<AdminCreateQuestions open={open} />}
         />
+
+        {/* Component pending */}
         <Route
           path="quizzes_missed"
           element={<AdminCreateQuiz open={open} />}
         />
+        {/* Component Pending */}
         <Route path="history" element={<AdminHistory open={open} />} />
       </Route>
 
