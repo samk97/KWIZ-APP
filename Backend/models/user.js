@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
     login:{
         type:String,
         default:"email",
+    },role:{
+        type:String,
+        require:true,
+        default:"student"
     }}
     ,
     {timestamps:true}

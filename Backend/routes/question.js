@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authCheck, profileCheck,loginCheck,tokenVerifier } = require("../middlewares/auth");
 const {
-insertQuestion,fetchQuestion,randomQuizCreation,insertQuiz
+insertQuestion,fetchQuestion,randomQuizCreation,insertQuiz,getAllQuiz
 } = require("../controller/question");
 
 
@@ -24,6 +24,9 @@ router.post("/upload-question", insertQuestion );
 
 // Route to save quiz
 router.post("/save-quiz", insertQuiz );
+
+// Route to get quiz
+router.post("/get-all-quiz", getAllQuiz );
 
 
 
