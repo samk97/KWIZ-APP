@@ -22,8 +22,11 @@ function AdminCreateQuiz(props) {
         time: time,
       })
       .then(function (res) {
-        console.log(res);
-        localStorage.setItem("quiz", res.data);
+        console.log(res.data);
+        const x = JSON.stringify(res.data);
+        localStorage.setItem("quiz", x);
+        localStorage.setItem("time", startTime);
+        localStorage.setItem("runTime", time);
         navigate("/preview");
       });
   };
