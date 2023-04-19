@@ -31,8 +31,6 @@ exports.login=async(req,res)=>{
                   return res.status(400).json({Error: 'passwords do not match'});
                 }})
 
-               
-
          })}else {
              res.status(400).json({Error:"Wrong Password"});
          }

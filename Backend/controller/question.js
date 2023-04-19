@@ -81,3 +81,21 @@ catch(err){
 }
 
 }
+
+
+
+exports.getAllQuiz = async (req,res) =>{
+
+
+  
+  try{
+     Quiz.find({},function(err,count){
+     res.status(200).json(count);
+  })
+ }
+ catch(err){
+  console.log(err);
+   res.status(400).json("ALready exists");
+ }
+ 
+ }
