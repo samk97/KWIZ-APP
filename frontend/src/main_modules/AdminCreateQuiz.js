@@ -14,15 +14,13 @@ function AdminCreateQuiz(props) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log(value + time);
-    console.log("a");
     await axios
       .post("http://localhost:4000/api/create-random-quiz", {
         number: value,
         time: time,
       })
       .then(function (res) {
-        console.log(res.data);
+        // console.log(res.data);
         const x = JSON.stringify(res.data);
         localStorage.setItem("quiz", x);
         localStorage.setItem("time", startTime);
