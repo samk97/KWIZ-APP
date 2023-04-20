@@ -1,27 +1,45 @@
 import QuestionArea from "./QuestionArea";
-
+import { useEffect, useState } from 'react';
+import axios from "axios";
 function QuestionsSection(props) {
 
+  const [myData,setMyData] = useState([]);
 
+  useEffect(() => {
+    axios.post('http://localhost:4000/api/get-questions', {}).then((res) =>
+      setMyData(res.data));
+  }, [])
   return (
     <>
-      {/* Questions */}
-      <div
-        className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
-          props.open ? "ml-72" : "ml-16"
-        } duration-200`}
-      >
-        {/* Question box */}
-        <QuestionArea
-          question="This is a dummy question 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-          op_a="Lorem A This is a dummy question 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat This is a dummy question 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat "
-          op_b="Lorem B"
-          op_c="Lorem C"
-          op_d="Lorem D"
-          ans="B"
-          exp="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        ></QuestionArea>
-      </div>
+
+            
+
+       {/* Questions */}
+          <div
+          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${props.open ? "ml-72" : "ml-16"
+            } duration-200`}
+        >
+          {/* Question box */}
+
+          {myData.map((post,index)=>{
+          const {question,op_a,op_b,op_c,op_d,ans,exp}=post;
+          return <QuestionArea key={index}
+                    index={index+1}
+                    question={question}
+                    op_a={op_a}
+                    op_b={op_b}
+                    op_c={op_c}
+                    op_d={op_d}
+                    ans={ans}
+                    exp={exp}
+                    ></QuestionArea>
+        })}
+
+          
+        </div>
+
+      
+      
     </>
   );
 }
