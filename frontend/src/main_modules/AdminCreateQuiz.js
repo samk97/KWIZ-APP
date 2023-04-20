@@ -25,7 +25,7 @@ function AdminCreateQuiz(props) {
         localStorage.setItem("quiz", x);
         localStorage.setItem("time", startTime);
         localStorage.setItem("runTime", time);
-        navigate("/preview");
+        navigate("/admin/preview");
       });
   };
 
@@ -37,7 +37,12 @@ function AdminCreateQuiz(props) {
             props.open ? "ml-72" : "ml-16"
           } duration-200`}
         >
-          {/* Select area */}
+          {/* Heading */}
+          <div className="w-full bg-red-200 p-2 mb-3">
+            <h1 className="text-xl font-bold text-gray-800">Create Quiz</h1>
+          </div>
+
+          {/* Selection area */}
           <div class="flex gap-5">
             {/* Select Questions */}
             <div class="w-6/12">
@@ -87,7 +92,7 @@ function AdminCreateQuiz(props) {
           </div>
 
           {/* Button */}
-          <div class="flex justify-start">
+          <div class="flex justify-center">
             <Button
               buttonType="submit"
               buttonLabel="Create Quiz"

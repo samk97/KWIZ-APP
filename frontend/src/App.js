@@ -19,7 +19,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignuPage />} />
-      <Route path="/preview" element={<PreviewPage />} />
+      {/* <Route path="/preview" element={<PreviewPage />} /> */}
       <Route
         path="/admin"
         element={<SideNav open={open} onOpen={() => setOpen(!open)} />}
@@ -31,6 +31,7 @@ function App() {
         />
         <Route path="create_quiz" element={<AdminCreateQuiz open={open} />} />
         <Route path="history" element={<AdminHistory open={open} />} />
+        <Route path="preview" element={<PreviewPage open={open} />} />
       </Route>
 
       <Route
