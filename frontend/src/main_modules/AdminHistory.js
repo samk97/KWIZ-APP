@@ -38,7 +38,7 @@ const AdminHistory = (props) => {
                 details;
               return (
                 <div key={id}>
-                  <Link to="">
+                  <Link to="/admin/quiz_details">
                     <div className="bg-blue-200 w-60 h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400">
                       <div className="mb-2">
                         <p className="text-xl italic">{title}</p>

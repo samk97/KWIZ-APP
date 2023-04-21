@@ -12,7 +12,6 @@ function QuestionsSection() {
   return (
     <>
       {/* Question box */}
-
       {myData.map((post, index) => {
         const { question, op_a, op_b, op_c, op_d, ans, exp } = post;
         return (

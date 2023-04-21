@@ -12,6 +12,7 @@ import PreviewPage from "./main_modules/PreviewPage";
 import StudentSideNav from "./components/StudentSideNav";
 import StudentAttemptQuiz from "./main_modules/StudentAttemptQuiz";
 import StudentQuiz from "./main_modules/StudentQuiz";
+import QuizDetails from "./main_modules/QuizDetails";
 
 function App() {
   const [open, setOpen] = useState(true);
@@ -32,6 +33,10 @@ function App() {
         <Route path="create_quiz" element={<AdminCreateQuiz open={open} />} />
         <Route path="history" element={<AdminHistory open={open} />} />
         <Route path="preview" element={<PreviewPage open={open} />} />
+        <Route
+          path="quiz_details"
+          element={<QuizDetails open={open} />}
+        ></Route>
       </Route>
 
       <Route

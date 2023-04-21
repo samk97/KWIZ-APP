@@ -141,7 +141,8 @@ function PreviewPage(props) {
 
           <div className="w-full">
             <label for="title" class="block m-2 text-slate-700 font-bold">
-              Quiz Title
+              Quiz Title{" "}
+              <span className="text-red-500 text-[0.7rem]">(*required)</span>
             </label>
             <input
               type="text"
