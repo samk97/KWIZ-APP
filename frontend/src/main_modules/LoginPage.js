@@ -2,8 +2,8 @@ import MajorSide from "../components/MajorSide";
 import MinorSide from "../components/MinorSide";
 import Form from "../components/Form";
 import InputField from "../components/InputField";
-import Link from "../components/Link";
 import Button from "../components/Button";
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,21 +16,15 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   let dispatch = useDispatch();
 
-
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
 
-
-  useEffect(()=>{
-    if(state && state.user){
-      if(state.user.role == "student")
-      navigate("/dashboard");
-      else
-      navigate("/admin");
+  useEffect(() => {
+    if (state && state.user) {
+      if (state.user.role == "student") navigate("/dashboard");
+      else navigate("/admin");
     }
-  })
-
-  
+  });
 
   const goToSignUp = () => {
     navigate("/signup");
@@ -39,9 +33,6 @@ function LoginPage() {
   const Login = async (e) => {
     e.preventDefault();
     let items = { email, name, password };
-    
-
-
 
     const res = await fetch("http://localhost:4000/api/login", {
       method: "POST",
@@ -55,28 +46,24 @@ function LoginPage() {
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
-      const payload  =  {
+      const payload = {
         email: email,
-        role : data.role
+        role: data.role,
       };
       // navigate("/")
 
       dispatch({
         type: "LOGGED_IN_USER",
-         payload
+        payload,
       });
-      localStorage.setItem("user",JSON.stringify(payload));
+      localStorage.setItem("user", JSON.stringify(payload));
 
-      if(data.role === "student")
-      {
-        navigate("/dashboard")
+      if (data.role === "student") {
+        navigate("/dashboard");
+      } else if (data.role === "teacher") {
+        navigate("/admin/questions");
       }
-      else if(data.role === "teacher")
-      {
-        navigate("/admin/questions")
-      }
-      
-    }else{
+    } else {
       alert("Wrong Password");
     }
   };
@@ -109,8 +96,14 @@ function LoginPage() {
               inputPlaceholder="•••••••••••••"
             ></InputField>
 
-            {/* forgot password */}
-            <Link linkLabel="Forgot Password?"></Link>
+            {/* Forgot Password */}
+            <div className="px-3">
+              <Link to="/forgot_password">
+                <span className="text-blue-500 cursor-pointer">
+                  Forgot Password ?
+                </span>
+              </Link>
+            </div>
 
             {/* submit button */}
             <Button
