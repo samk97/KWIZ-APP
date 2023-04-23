@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-import {useEffect} from 'react'
-import axios  from 'axios';
-const AdminHistory = (props) =>{ 
-
-  
-  useEffect(()=>{
-     axios.post('http://localhost:4000/api/get-all-quiz',{ }).then(function(res){
-     console.log(res);
-     return ()=>{}
-  }).catch(function(err){
-    console.log(err);
-  })
-  },[])
-
-
-=======
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
@@ -32,7 +15,6 @@ const AdminHistory = (props) => {
         console.log(err);
       });
   }, []);
->>>>>>> fcda820b1cc373b448d84a1f41768b83b4b26999
 
   console.log(data);
   return (

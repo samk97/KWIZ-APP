@@ -5,9 +5,43 @@ import { FaPenSquare } from "react-icons/fa";
 import { MdQuiz } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
+import {useNavigate} from 'react-router-dom';
+import { useDispatch,useSelector } from "react-redux";
+import {useEffect} from 'react'
 
 function StudentSideNav(props) {
   const regNo = "2022ca001.abcdef@mnnit.ac.in";
+  let navigate = useNavigate();
+  
+  let dispatch = useDispatch();
+
+
+  const state = useSelector((state) => ({ ...state }));
+  console.log(state);
+
+  useEffect(()=>{
+    if(state && state.user){
+      if(state.user.role=="teacher")
+      navigate("/admin");
+    }else{
+      navigate("/login");
+    }
+  })
+
+
+  const handleLogOut = (e) =>{
+    e.preventDefault();
+    console.log("aa");
+    localStorage.clear();
+
+    dispatch({
+      type:"LOGOUT",
+      payload:null
+    })
+
+    navigate("/login");
+  }
+
   return (
     <>
       <nav>
@@ -121,7 +155,7 @@ function StudentSideNav(props) {
             </div>
             <div className=" w-full h-[60px] absolute bottom-0 duration-300">
               <div className="w-full h-full relative">
-                <NavLink to="/admin/history">
+                <NavLink to="/login">
                   <div className="flex justify-start items-center w-full h-[60px]  hover:font-bold">
                     <div className="flex justify-center items-center w-16 h-full">
                       <BiLogOut className=" text-[40px] cursor-pointer m-2"></BiLogOut>
@@ -130,7 +164,7 @@ function StudentSideNav(props) {
                     <span
                       className={`duration-100 ${!props.open && "scale-0 w-0"}`}
                     >
-                      Log Out
+                      <button onClick={handleLogOut}> Log Out</button>
                     </span>
                   </div>
                 </NavLink>

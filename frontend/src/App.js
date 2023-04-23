@@ -12,16 +12,31 @@ import PreviewPage from "./main_modules/PreviewPage";
 import StudentSideNav from "./components/StudentSideNav";
 import StudentAttemptQuiz from "./main_modules/StudentAttemptQuiz";
 import StudentQuiz from "./main_modules/StudentQuiz";
+import { useDispatch } from "react-redux";
 import QuizDetails from "./main_modules/QuizDetails";
 
 function App() {
   const [open, setOpen] = useState(true);
+  console.log("Refreshed");
+  let dispatch = useDispatch();
+  const payload= JSON.parse(localStorage.getItem("user"));
+ 
+
+  console.log(payload);
+  
+  dispatch({
+    type: "LOGGED_IN_USER",
+    payload
+  });
+
+
+
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignuPage />} />
       {/* <Route path="/preview" element={<PreviewPage />} /> */}
-      <Route
+     <Route
         path="/admin"
         element={<SideNav open={open} onOpen={() => setOpen(!open)} />}
       >
@@ -38,11 +53,10 @@ function App() {
           element={<QuizDetails open={open} />}
         ></Route>
       </Route>
-
       <Route
         path="/dashboard"
         element={<StudentSideNav open={open} onOpen={() => setOpen(!open)} />}
-      >
+      >{console.log(payload)}
         <Route
           path="attempt_quiz"
           element={<StudentAttemptQuiz open={open} />}

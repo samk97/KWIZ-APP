@@ -4,8 +4,9 @@ import Form from "../components/Form";
 import InputField from "../components/InputField";
 import Link from "../components/Link";
 import Button from "../components/Button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 function LoginPage() {
   const formLabel = "Log in";
   const buttonLabel = "Sign in";
@@ -13,6 +14,23 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  let dispatch = useDispatch();
+
+
+  const state = useSelector((state) => ({ ...state }));
+  console.log(state);
+
+
+  useEffect(()=>{
+    if(state && state.user){
+      if(state.user.role == "student")
+      navigate("/dashboard");
+      else
+      navigate("/admin");
+    }
+  })
+
+  
 
   const goToSignUp = () => {
     navigate("/signup");
@@ -21,6 +39,7 @@ function LoginPage() {
   const Login = async (e) => {
     e.preventDefault();
     let items = { email, name, password };
+    
 
 
 
@@ -36,7 +55,18 @@ function LoginPage() {
     if (res.status === 200) {
       const data = await res.json();
       console.log(data);
+      const payload  =  {
+        email: email,
+        role : data.role
+      };
       // navigate("/")
+
+      dispatch({
+        type: "LOGGED_IN_USER",
+         payload
+      });
+      localStorage.setItem("user",JSON.stringify(payload));
+
       if(data.role === "student")
       {
         navigate("/dashboard")
@@ -46,6 +76,8 @@ function LoginPage() {
         navigate("/admin/questions")
       }
       
+    }else{
+      alert("Wrong Password");
     }
   };
   return (

@@ -6,6 +6,8 @@ import Link from "../components/Link";
 import Button from "../components/Button";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const SignupPage = () => {
   const formLabel = "Sign up";
@@ -14,6 +16,19 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+
+  const state = useSelector((state) => ({ ...state }));
+  console.log(state);
+
+  useEffect(()=>{
+    if(state && state.user){
+      if(state.user.role == "student")
+      navigate("/dashboard");
+      else
+      navigate("/admin");
+    }
+  })
 
   const goToLogin = () => {
     navigate("/login");

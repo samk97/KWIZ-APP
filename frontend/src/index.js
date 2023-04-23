@@ -3,14 +3,19 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {composeWithDevTools} from 'redux-devtools-extension'
+import rootReducer from "./reducers";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const store = createStore(rootReducer,composeWithDevTools());
 root.render(
-  <React.StrictMode>
+  <Provider store = {store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
