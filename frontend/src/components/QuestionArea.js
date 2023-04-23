@@ -76,7 +76,7 @@ function QuestionArea(props) {
 
           {/* Explaination */}
 
-          <div className="shadow-lg shadow-slate-600 border-2 border-slate-600 border-dashed flex flex-col items-start p-3 rounded-lg w-fit h-auto m-2">
+          <div className="shadow-lg shadow-slate-600 border-2 border-slate-600 border-dashed flex flex-col items-start p-3 rounded-lg w-full h-auto m-2">
             <div className="m-1">
               <span className="font-bold">Explaination :</span>
             </div>

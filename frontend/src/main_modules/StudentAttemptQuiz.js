@@ -10,17 +10,23 @@ function StudentAttemptQuiz(props) {
           } duration-200`}
         >
           {/* Heading */}
-          <div className="w-full h-10 bg-red-200">
-            <h1>Quizzes</h1>
+          <div className="w-full bg-red-200 p-2">
+            <h1 className="text-xl font-bold text-gray-800">Quizzes</h1>
           </div>
           {/* Tiles Container */}
-          <div className="flex flex-wrap justify-start my-4 gap-4">
+          <div className="flex flex-wrap justify-start my-4 gap-5">
             {/* tile */}
             <Link to="/quiz">
-              <div className="bg-blue-200 w-60 h-60">
-                <h3 className="">Data Structure & Algorithm</h3>
-                <p>Maximum Marks: 20</p>
-                <p>Time Alloted: 30 min</p>
+              <div className="bg-blue-200 w-60 h-60 p-4">
+                <h3 className="text-xl my-3">Data Structure & Algorithm</h3>
+                <div className="text-sm">
+                  <p>
+                    Maximum Marks: <span>20</span>
+                  </p>
+                  <p>
+                    Time Alloted: <span>30</span> min
+                  </p>
+                </div>
               </div>
             </Link>
 

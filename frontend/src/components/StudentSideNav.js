@@ -59,7 +59,22 @@ function StudentSideNav(props) {
                 </div>
               </NavLink>
 
-              {/* StudentSideNav Option 2 */}
+              {/* StudentSideNav option 2 */}
+              <NavLink to="/dashboard/">
+                <div className="flex justify-start items-center w-full hover:font-bold">
+                  <div className="flex justify-center items-center w-16">
+                    <FaListAlt className="text-[46px] cursor-pointer"></FaListAlt>
+                  </div>
+
+                  <span
+                    className={`duration-100 ${!props.open && "scale-0 w-0"}`}
+                  >
+                    Ongoing Quiz
+                  </span>
+                </div>
+              </NavLink>
+
+              {/* StudentSideNav Option 3 */}
               <NavLink to="/dashboard/">
                 <div className="flex justify-start items-center w-full hover:font-bold">
                   <div className="flex justify-center items-center w-16 h-full">
@@ -74,7 +89,7 @@ function StudentSideNav(props) {
                 </div>
               </NavLink>
 
-              {/* StudentSideNav Option 3 */}
+              {/* StudentSideNav Option 4 */}
               <NavLink to="/dashboard/">
                 <div className="flex justify-start items-center w-full hover:font-bold">
                   <div className="flex justify-center items-center w-16 h-full">
@@ -85,6 +100,21 @@ function StudentSideNav(props) {
                     className={`duration-100 ${!props.open && "scale-0 w-0"}`}
                   >
                     Quizzes Missed
+                  </span>
+                </div>
+              </NavLink>
+
+              {/* StudentSideNav Option 5 */}
+              <NavLink to="/dashboard/">
+                <div className="flex justify-start items-center w-full hover:font-bold">
+                  <div className="flex justify-center items-center w-16 h-full">
+                    <MdQuiz className="rounded-xl text-[50px] cursor-pointer"></MdQuiz>
+                  </div>
+
+                  <span
+                    className={`duration-100 ${!props.open && "scale-0 w-0"}`}
+                  >
+                    Leaderboard
                   </span>
                 </div>
               </NavLink>

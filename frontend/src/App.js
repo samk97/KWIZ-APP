@@ -12,6 +12,7 @@ import PreviewPage from "./main_modules/PreviewPage";
 import StudentSideNav from "./components/StudentSideNav";
 import StudentAttemptQuiz from "./main_modules/StudentAttemptQuiz";
 import StudentQuiz from "./main_modules/StudentQuiz";
+import QuizDetails from "./main_modules/QuizDetails";
 
 function App() {
   const [open, setOpen] = useState(true);
@@ -19,7 +20,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignuPage />} />
-      <Route path="/preview" element={<PreviewPage />} />
+      {/* <Route path="/preview" element={<PreviewPage />} /> */}
       <Route
         path="/admin"
         element={<SideNav open={open} onOpen={() => setOpen(!open)} />}
@@ -31,6 +32,11 @@ function App() {
         />
         <Route path="create_quiz" element={<AdminCreateQuiz open={open} />} />
         <Route path="history" element={<AdminHistory open={open} />} />
+        <Route path="preview" element={<PreviewPage open={open} />} />
+        <Route
+          path="quiz_details"
+          element={<QuizDetails open={open} />}
+        ></Route>
       </Route>
 
       <Route

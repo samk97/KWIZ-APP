@@ -1,7 +1,7 @@
 import Button from "./Button";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-function QuestionForm(props) {
+function QuestionForm() {
   const navigate = useNavigate();
   const [question, setQuestion] = useState("");
   const [op_a, setOp_a] = useState("");
@@ -42,11 +42,7 @@ function QuestionForm(props) {
   return (
     <>
       {/* Questions */}
-      <div
-        className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
-          props.open ? "ml-72" : "ml-16"
-        } duration-200`}
-      >
+      <div>
         <form>
           <div className="border-x-2 border-t-2 border-gray-500 bg-green-200 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
             {/* Question */}
@@ -162,14 +158,28 @@ function QuestionForm(props) {
                 Correct Option
               </label>
 
-              <textarea
+              {/* <textarea
                 value={ans}
                 onChange={(e) => setAns(e.target.value)}
                 className="w-full p-3 h-20"
                 id="explaination"
                 name="explaination"
                 placeholder="Type label of correct option here"
-              ></textarea>
+              ></textarea> */}
+
+              {/* Above text_area replaced with select */}
+              <select
+                id="explaination"
+                value={ans}
+                onChange={(e) => setAns(e.target.value)}
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              >
+                <option selected>Select correct option</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
             </div>
 
             {/* Explaination */}
