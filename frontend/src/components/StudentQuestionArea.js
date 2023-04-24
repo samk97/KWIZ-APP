@@ -1,13 +1,36 @@
-function StudentQuestionArea() {
-  const QuestionDescription =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero fuga ratione incidunt dolorem fugiat numquam alias obcaecati illum blanditiis quam ducimus odio, temporibus nihil, nobis eaque ipsam provident. Placeat, esse laborum repellat quas aliquam in at tempora beatae rem? Vel aperiam odit sapiente et facere unde molestias nemo id praesentium!";
+import {useEffect,useState} from 'react';
+import axios from 'axios';
 
-  const op_1 =
-    "Option 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam consequatur, qui perspiciatis deleniti ducimus inventore amet velit fugit possimus at quae nostrum reprehenderit iste adipisci cumque cupiditate recusandae fugiat beatae natus nam consequuntur earum quaerat molestiae? Dolores, enim cupiditate fugit pariatur quo maiores, recusandae ullam eligendi fugiat corrupti quasi soluta.";
-  const op_2 = "Option 2";
-  const op_3 = "Option 3";
-  const op_4 = "Option 4";
-  const qNo = "1";
+function StudentQuestionArea({id,number}) {
+  
+  console.log(id);
+
+  const [data,setData] = useState([]);
+  
+
+  useEffect(()=>{
+    
+  axios
+  .post("http://localhost:4000/api/get-question-by-id", { id: id })
+  .then(function (res) {
+
+    setData(res.data[0]);
+  })
+  .catch(function (err) {
+    console.log(err);
+   
+
+  });
+
+
+},[]);
+
+console.log(data);
+
+
+
+
+
   return (
     <>
       <div>
@@ -15,10 +38,10 @@ function StudentQuestionArea() {
           <div class="flex flex-col justify-center items-center border-x-2 border-t-2 border-gray-500 bg-green-200 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
             <div class="flex justify-center text-lg font-bold leading-loose  bg-gradient-to-r from-green-200 via-indigo-500 to-green-200 min-w-[8rem] max-w-[20rem] w-[60%] px-4">
               <p>Question</p>
-              <span>{qNo}</span>
+              <span>{number}</span>
             </div>
 
-            <p>{QuestionDescription}</p>
+            <p>{data.question}</p>
           </div>
 
           {/* options div */}
@@ -36,7 +59,7 @@ function StudentQuestionArea() {
                 for="bordered-radio-1"
                 class="w-full py-4 ml-2 text-sm font-medium text-gray-900 p-2"
               >
-                {op_1}
+                {data.op_a}
               </label>
             </div>
 
@@ -52,7 +75,7 @@ function StudentQuestionArea() {
                 for="bordered-radio-2"
                 class="w-full py-4 ml-2 text-sm font-medium text-gray-900 p-2"
               >
-                {op_2}
+                {data.op_b}
               </label>
             </div>
 
@@ -68,7 +91,7 @@ function StudentQuestionArea() {
                 for="bordered-radio-3"
                 class="w-full py-4 ml-2 text-sm font-medium text-gray-900 p-2"
               >
-                {op_3}
+                {data.op_c}
               </label>
             </div>
 
@@ -84,7 +107,7 @@ function StudentQuestionArea() {
                 for="bordered-radio-4"
                 class="w-full py-4 ml-2 text-sm font-medium text-gray-900 p-2"
               >
-                {op_4}
+                {data.op_d}
               </label>
             </div>
           </div>
