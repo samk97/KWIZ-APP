@@ -1,55 +1,89 @@
 const Question = require('../models/question');
 const Quiz = require('../models/quiz');
+const QuizSubmission = require('../models/quizsubmission');
+var mongoose = require('mongoose');
+const check = (title, aa, rt) => {
+  const date = new Date().toLocaleString();
+  const a = new Date(aa).toLocaleString();
+ 
 
-const check = (aa) =>{
-         const date = new Date().toLocaleString();
-         const a = new Date(aa).toLocaleString();
-         console.log(date);
-         console.log(a);
-         const year = date.substring(6,10);
-         const month = date.substring(3,5);
-         const dt = date.substring(0,2);
-         const hour = date.substring(12,14);
-         const minute =date.substring(15,17);
+  console.log(title);
+
+  var year = date.substring(6, 10);
+  var month = date.substring(3, 5);
+  var dt = date.substring(0, 2);
+  var hour = date.substring(12, 14);
+  var minute = date.substring(15, 17);
+
+  var year2 = a.substring(6, 10);
+  var month2 = a.substring(3, 5);
+  var dt2 = a.substring(0, 2);
+  var hour2 = a.substring(12, 14);
+  var minute2 = a.substring(15, 17);
+
+  if (year2 < year) return false;
+  if (year > year2) return true;
+
+  if (year == year2) {
+    if (month2 < month) return false;
+    if (month2 > month) return true;
+    if (month == month2) {
+      if (dt2 < dt) return false;
+      if (dt2 > dt) return true;
+
+      if (hour2 < hour) return false;
+      if (hour2 > hour) return true;
+
+      minute2 = Number(minute2);
+      minute = Number(minute);
+      rt = Number(rt);
+      
+      if(minute2 > minute) return true;
+      console.log(minute2,rt,minute);
+      if(minute2 + rt >= minute) return true;
+    }
+  }
+
+  return false;
+};
+const check2 = (title, aa, rt) => {
+  const date = new Date().toLocaleString();
+  const a = new Date(aa).toLocaleString();
+ 
+
+  console.log(title);
+
+  var year = date.substring(6, 10);
+  var month = date.substring(3, 5);
+  var dt = date.substring(0, 2);
+  var hour = date.substring(12, 14);
+  var minute = date.substring(15, 17);
+
+  var year2 = a.substring(6, 10);
+  var month2 = a.substring(3, 5);
+  var dt2 = a.substring(0, 2);
+  var hour2 = a.substring(12, 14);
+  var minute2 = a.substring(15, 17);
+
+  if(year2 > year) return true;
+
+  if(month2 > month) return true;
+
+  if(dt2 > dt) return true;
+
+  if(hour2 > hour) return true;
+
+  
 
 
-         const year2 = a.substring(6,10);
-         const month2 = a.substring(3,5);
-         const dt2 = a.substring(0,2);
-         const hour2 = a.substring(12,14);
-         const minute2 =a.substring(15,17);
+  minute2 = Number(minute2);
+  minute = Number(minute);
+  rt = Number(rt);
 
+  if(minute < minute2) return true;
 
-
-         console.log(dt,year,month,hour,minute);
-         console.log(dt2,year2,month2,hour2,minute2)
-
-         if(year2 < year) return false;
-         if(year > year2) return true;
-
-         if(year == year2){
-           if(month2 < month) return false;
-           if(month2 > month) return true;
-           if(month == month2){
-             if(dt2 < dt) return false;
-             if(dt2 > dt) return true;
-             
-             if(hour2 < hour) return false;
-             if(hour2 > hour) return true;
-
-             if(minute2 < minute) return false;
-             if(minute2 > minute) return true;
-
-
-           }
-         }
-
-         return true;
-
-
-
-}
-
+  return false;
+};
 
 
 exports.insertQuestion=(req,res)=>{
@@ -92,6 +126,23 @@ exports.insertQuestion=(req,res)=>{
      });
     
  }
+
+ exports.fetchQuestionById=(req,res)=>{
+    
+  const id = req.body.id;
+
+
+
+   Question.find({_id:mongoose.Types.ObjectId(id)},function (err, result){
+       
+      console.log(result);
+      res.status(200).json(result);
+
+      
+   });
+  
+}
+
 
  exports.randomQuizCreation= async (req,res)=>{
 
@@ -153,11 +204,6 @@ exports.getAllQuiz = async (req,res) =>{
     }catch(err){
       console.log(x);
     }
-
-     
-    
-     
-     
      
   })
  }
@@ -165,5 +211,81 @@ exports.getAllQuiz = async (req,res) =>{
   console.log(err);
    res.status(400).json("ALready exists");
  }
+ 
+ }
+
+ exports.getSubmission = async (req,res) =>{
+
+  const {quiz,stresp,title} = req.headers;
+  const st_id = stresp;
+  console.log(stresp);
+  console.log(st_id);
+  const data = {id:st_id};
+
+  try{
+   QuizSubmission.count({id:quiz},function(err,count){
+     if(count == 0){
+       const quizsubmission = new QuizSubmission({title,id:quiz,answer:data});
+       quizsubmission.save(function(err,res){
+         console.log(res);
+       });
+     }else{
+      try{
+        QuizSubmission.find({$and:[{id:quiz},{'answer.id':st_id}]},function(err,count){
+       
+         if(count != 0){
+           console.log("COunt ",count);
+           res.status(200).json(count);
+         }else{
+           QuizSubmission.updateOne({id:quiz},{$push:{answer:data}},function(err,res){
+             console.log("Res",res);
+             
+           });
+           res.status(400).json("ALready exists");
+         }
+        
+     })
+    }
+    catch(err){
+     console.log(err);
+      res.status(400).json("ALready exists");
+    }
+     }
+   })
+  }catch(err){
+
+  }
+
+
+ 
+ 
+ }
+
+
+ exports.getQuiz = async (req,res) =>{
+  const {id} = req.body;
+  console.log(id);
+  try{
+     Quiz.find({_id:mongoose.Types.ObjectId(id)},function(err,count){
+
+      if(count == null){
+        res.status(400).json({message:"Quiz Not Found"});
+      }
+
+      console.log(count);
+      const startTime = count[0].startTime;
+      const runTime = count[0].runTime;
+      if(check(count[0].title,startTime,runTime)  == false){
+        res.status(400).json({message:"Quiz completed"});
+      }else if(check2(count.title,startTime,runTime)){
+        res.status(400).json({message: "Quiz will start Soon"})
+      }else{
+        res.status(200).json(count[0]);
+      }
+     
+    }
+  )}catch(err){
+    console.log(err);
+  }
  
  }

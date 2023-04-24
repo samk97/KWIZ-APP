@@ -83,7 +83,7 @@ function App() {
         <Route path="history" element={<AdminHistory open={open} />} />
       </Route>
 
-      <Route path="/quiz" element={<StudentQuiz />}></Route>
+      <Route path="/quiz/:id" element={<StudentQuiz />}></Route>
       <Route path="/student_profile" element={<StudentProfile />}></Route>
     </Routes>
   );
