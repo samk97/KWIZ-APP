@@ -158,16 +158,6 @@ function QuestionForm() {
                 Correct Option
               </label>
 
-              {/* <textarea
-                value={ans}
-                onChange={(e) => setAns(e.target.value)}
-                className="w-full p-3 h-20"
-                id="explaination"
-                name="explaination"
-                placeholder="Type label of correct option here"
-              ></textarea> */}
-
-              {/* Above text_area replaced with select */}
               <select
                 id="explaination"
                 value={ans}
@@ -214,6 +204,12 @@ function QuestionForm() {
                 buttonClassName="min-w-[100px] text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm py-2.5 text-center"
                 buttonLabel="Reset"
               ></Button>
+
+              <input
+                type="reset"
+                className="min-w-[100px] text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm py-2.5 text-center"
+                value="reset"
+              ></input>
             </div>
           </div>
         </form>
