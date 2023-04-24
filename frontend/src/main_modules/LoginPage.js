@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../firebase-auth/firebase";
+import { signInWithEmailAndPassword, } from "firebase/auth";
 function LoginPage() {
   const formLabel = "Log in";
   const buttonLabel = "Sign in";
@@ -32,40 +34,56 @@ function LoginPage() {
 
   const Login = async (e) => {
     e.preventDefault();
-    let items = { email, name, password };
+    // let items = { email, name, password };
 
-    const res = await fetch("http://localhost:4000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        email: email,
-        password: password,
-      },
-    });
-    if (res.status === 200) {
-      const data = await res.json();
-      console.log(data);
-      const payload = {
-        email: email,
-        role: data.role,
-      };
-      // navigate("/")
+    try{
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log(user.emailVerified);
 
-      dispatch({
-        type: "LOGGED_IN_USER",
-        payload,
+    if (user.emailVerified) {
+      const res = await fetch("http://localhost:4000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          email: email,
+          password: password,
+        },
       });
-      localStorage.setItem("user", JSON.stringify(payload));
+      if (res.status === 200) {
+        const data = await res.json();
+        // console.log(data);
+        const payload = {
+          email: email,
+          role: data.role,
+        };
+        // navigate("/")
 
-      if (data.role === "student") {
-        navigate("/dashboard");
-      } else if (data.role === "teacher") {
-        navigate("/admin/questions");
+        dispatch({
+          type: "LOGGED_IN_USER",
+          payload,
+        });
+        localStorage.setItem("user", JSON.stringify(payload));
+
+        if (data.role === "student") {
+          navigate("/dashboard");
+        } else if (data.role === "teacher") {
+          navigate("/admin/questions");
+        }
+      } else {
+        alert("Wrong Password");
       }
-    } else {
-      alert("Wrong Password");
     }
+    else{
+      alert("verify your email !!");
+    }
+  }
+  catch(error){
+      alert(error.message);
+  }
+
+
   };
   return (
     <>
