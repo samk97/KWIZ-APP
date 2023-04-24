@@ -6,6 +6,7 @@ function PreviewPage(props) {
   const startTime = localStorage.getItem("time");
   const runTime = localStorage.getItem("runTime");
   const [title, setTitle] = useState("");
+  console.log(startTime);
   // console.log(data + runTime + startTime);
   var Qdata = JSON.parse(data);
   console.log(Qdata);

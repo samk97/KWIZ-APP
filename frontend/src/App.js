@@ -53,6 +53,8 @@ function App() {
           element={<QuizDetails open={open} />}
         ></Route>
       </Route>
+
+      
       <Route
         path="/dashboard"
         element={<StudentSideNav open={open} onOpen={() => setOpen(!open)} />}
