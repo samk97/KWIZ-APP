@@ -4,7 +4,7 @@ import hexagon_spread from "../images/hexagon_spread.png";
 function MajorSide(props) {
   return (
     <>
-      <div className="relative flex justify-center items-center w-8/12 h-full bg-gradient-to-b from-blue-200 via-fuchsia-200 to-sky-200">
+      <div className="relative flex justify-center items-center w-full sm:w-8/12 h-full bg-gradient-to-b from-blue-200 via-fuchsia-200 to-sky-200">
         <img
           src={gears_image}
           alt=""

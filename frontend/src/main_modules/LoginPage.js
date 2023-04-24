@@ -99,7 +99,7 @@ function LoginPage() {
             {/* Forgot Password */}
             <div className="px-3">
               <Link to="/forgot_password">
-                <span className="text-blue-500 cursor-pointer">
+                <span className="text-xs sm:text-sm text-blue-500 cursor-pointer">
                   Forgot Password ?
                 </span>
               </Link>
@@ -109,10 +109,21 @@ function LoginPage() {
             <Button
               ButtonType="submit"
               onClick={Login}
-              buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center w-4/12"
+              buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center min-w-[4rem] max-w-[6rem] w-4/12 m-2"
               buttonLabel={buttonLabel}
             ></Button>
           </Form>
+
+          {/* Only For small devices - sign up */}
+          <div className="sm:hidden bg-red-100 absolute right-0 top-0">
+            <span className="text-sm cursor-default">New here?</span>
+            <span
+              className="font-bold m-1 text-sm text-blue-800 cursor-pointer"
+              onClick={goToSignUp}
+            >
+              Sign Up
+            </span>
+          </div>
         </MajorSide>
 
         <MinorSide

@@ -5,42 +5,39 @@ import { FaPenSquare } from "react-icons/fa";
 import { MdQuiz } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
-import {useNavigate} from 'react-router-dom';
-import { useDispatch,useSelector } from "react-redux";
-import {useEffect} from 'react'
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function StudentSideNav(props) {
-  const regNo = "2022ca001.abcdef@mnnit.ac.in";
+  const email = "2022ca001.abcdef@mnnit.ac.in";
   let navigate = useNavigate();
-  
-  let dispatch = useDispatch();
 
+  let dispatch = useDispatch();
 
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
 
-  useEffect(()=>{
-    if(state && state.user){
-      if(state.user.role=="teacher")
-      navigate("/admin");
-    }else{
+  useEffect(() => {
+    if (state && state.user) {
+      if (state.user.role == "teacher") navigate("/admin");
+    } else {
       navigate("/login");
     }
-  })
+  });
 
-
-  const handleLogOut = (e) =>{
+  const handleLogOut = (e) => {
     e.preventDefault();
     console.log("aa");
     localStorage.clear();
 
     dispatch({
-      type:"LOGOUT",
-      payload:null
-    })
+      type: "LOGOUT",
+      payload: null,
+    });
 
     navigate("/login");
-  }
+  };
 
   return (
     <>
@@ -65,7 +62,7 @@ function StudentSideNav(props) {
               >
                 <BsPersonCircle className="rounded-full text-6xl text-blue-300"></BsPersonCircle>
                 <div>
-                  <span className="text-sm text-gray-200">{regNo}</span>
+                  <span className="text-sm text-gray-200">{email}</span>
                 </div>
               </div>
               {/* StudentSideNav expansion Arrow */}
