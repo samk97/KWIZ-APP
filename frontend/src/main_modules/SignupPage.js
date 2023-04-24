@@ -32,33 +32,31 @@ const SignupPage = () => {
     navigate("/login");
   };
 
-
   const SignUp = async (e) => {
     e.preventDefault();
     let items = { email, name, password };
     console.log(items);
-    if (email.indexOf("@mnnit.ac.in")<0)
-    {
+    if (email.indexOf("@mnnit.ac.in") < 0) {
       alert("use only MNNIT Email !!!");
       return;
     }
 
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log(user.email);
-      setUser(user);
-      // ...
-    })
-    .catch((error) => {
-      // const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage);
-      // ..
-    });
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user.email);
+        setUser(user);
+        // ...
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+        // ..
+      });
 
-    if(user){
+    if (user) {
       const res = await fetch("http://localhost:4000/api/signup", {
         method: "POST",
         headers: {
@@ -132,10 +130,21 @@ const SignupPage = () => {
             <Button
               onClick={SignUp}
               ButtonType="submit"
-              buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center w-4/12 my-3"
+              buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center min-w-[4rem] max-w-[6rem] w-4/12 my-3"
               buttonLabel={buttonLabel}
             ></Button>
           </Form>
+
+          {/* Only For small devices - Log in */}
+          <div className="sm:hidden bg-red-100 absolute right-0 top-0">
+            <span className="text-sm cursor-default">Already Registered?</span>
+            <span
+              className="font-bold m-1 text-sm text-blue-800 cursor-pointer"
+              onClick={goToLogin}
+            >
+              Log in
+            </span>
+          </div>
         </MajorSide>
       </div>
     </>
