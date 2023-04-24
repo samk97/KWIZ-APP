@@ -1,5 +1,7 @@
 const Question = require('../models/question');
 const Quiz = require('../models/quiz');
+const QuizSubmission = require('../models/quizsubmission');
+var mongoose = require('mongoose');
 
 const check = (aa) =>{
          const date = new Date().toLocaleString();
@@ -153,11 +155,6 @@ exports.getAllQuiz = async (req,res) =>{
     }catch(err){
       console.log(x);
     }
-
-     
-    
-     
-     
      
   })
  }
@@ -165,5 +162,52 @@ exports.getAllQuiz = async (req,res) =>{
   console.log(err);
    res.status(400).json("ALready exists");
  }
+ 
+ }
+
+ exports.getSubmission = async (req,res) =>{
+
+  const {quiz,stresp,title} = req.headers;
+  const st_id = stresp;
+  console.log(stresp);
+  console.log(st_id);
+  const data = {id:st_id};
+
+  try{
+   QuizSubmission.count({id:quiz},function(err,count){
+     if(count == 0){
+       const quizsubmission = new QuizSubmission({title,id:quiz,answer:data});
+       quizsubmission.save(function(err,res){
+         console.log(res);
+       });
+     }else{
+      try{
+        QuizSubmission.find({$and:[{id:quiz},{'answer.id':st_id}]},function(err,count){
+       
+         if(count != 0){
+           console.log("COunt ",count);
+           res.status(200).json(count);
+         }else{
+           QuizSubmission.updateOne({id:quiz},{$push:{answer:data}},function(err,res){
+             console.log("Res",res);
+             
+           });
+           res.status(400).json("ALready exists");
+         }
+        
+     })
+    }
+    catch(err){
+     console.log(err);
+      res.status(400).json("ALready exists");
+    }
+     }
+   })
+  }catch(err){
+
+  }
+
+
+ 
  
  }

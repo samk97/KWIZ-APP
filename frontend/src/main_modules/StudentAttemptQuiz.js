@@ -45,7 +45,6 @@ const check = (title,aa,rt) =>{
       if(minute2 + rt >= minute) return true;
 
 
-
     }
   }
 
@@ -104,7 +103,7 @@ const StudentAttempQuiz = (props) => {
                 
               return (
                 <div key={id}>
-                  <Link to="/open">
+                  <Link to="/admin/history">
                     <div className="bg-blue-200 w-60 h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400">
                       <div className="mb-2">
                         <p className="text-xl italic">{title}</p>
