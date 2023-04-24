@@ -7,6 +7,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { auth } from "../firebase-auth/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignupPage = () => {
   const formLabel = "Sign up";
@@ -15,13 +17,13 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-
+  const [user, setUser] = useState("");
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
 
   useEffect(() => {
     if (state && state.user) {
-      if (state.user.role == "student") navigate("/dashboard");
+      if (state.user.role === "student") navigate("/dashboard");
       else navigate("/admin");
     }
   });
@@ -30,28 +32,51 @@ const SignupPage = () => {
     navigate("/login");
   };
 
+
   const SignUp = async (e) => {
     e.preventDefault();
     let items = { email, name, password };
     console.log(items);
-
-    const res = await fetch("http://localhost:4000/api/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        email: email,
-        password: password,
-      },
-    });
-    if (res.status === 200) {
-      const data = await res.json();
-      console.log(data);
-      navigate("/login");
+    if (email.indexOf("@mnnit.ac.in")<0)
+    {
+      alert("use only MNNIT Email !!!");
+      return;
     }
-    if (res.status === 403) {
-      alert("already exist please login !!");
-      navigate("/login");
+
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log(user.email);
+      setUser(user);
+      // ...
+    })
+    .catch((error) => {
+      // const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage);
+      // ..
+    });
+
+    if(user){
+      const res = await fetch("http://localhost:4000/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          email: email,
+          password: password,
+        },
+      });
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+        navigate("/login");
+      }
+      if (res.status === 403) {
+        alert("already exist please login !!");
+        navigate("/login");
+      }
     }
   };
   return (
