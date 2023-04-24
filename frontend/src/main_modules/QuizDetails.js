@@ -26,7 +26,41 @@ function QuizDetails(props) {
               </p>
             </div>
             <div className="bg-green-700 w-full h-[0.2rem] m-2"></div>
-            <div className="flex flex-col items-center">
+            {/* Details div */}
+            <div className="flex justify-center">
+              <table className="table-fixed">
+                <tr>
+                  <td className="text-right p-2">Quiz ID:</td>
+                  <td className="text-left p-2">{id}</td>
+                </tr>
+
+                <tr>
+                  <td className="text-right p-2">Created At:</td>
+                  <td className="text-left p-2">{createdAt}</td>
+                </tr>
+
+                <tr>
+                  <td className="text-right p-2">Total questions:</td>
+                  <td className="text-left p-2">{noOfQeustions}</td>
+                </tr>
+
+                <tr>
+                  <td className="text-right p-2">Runtime:</td>
+                  <td className="text-left p-2">{runTime}</td>
+                </tr>
+
+                <tr>
+                  <td className="text-right p-2">Start Time:</td>
+                  <td className="text-left p-2">{startTime}</td>
+                </tr>
+
+                <tr>
+                  <td className="text-right p-2">Updated At:</td>
+                  <td className="text-left p-2">{updatedAt}</td>
+                </tr>
+              </table>
+            </div>
+            {/* <div className="flex flex-col items-center">
               <p>
                 ID: <span>{id}</span>
               </p>
@@ -50,7 +84,7 @@ function QuizDetails(props) {
               <p>
                 Updated At: <span>{updatedAt}</span>
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

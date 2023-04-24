@@ -15,6 +15,8 @@ import StudentQuiz from "./main_modules/StudentQuiz";
 import { useDispatch } from "react-redux";
 import QuizDetails from "./main_modules/QuizDetails";
 import ForgotPassword from "./main_modules/ForgotPassword";
+import AdminProfile from "./main_modules/AdminProfile";
+import StudentProfile from "./main_modules/StudentProfile";
 
 function App() {
   const [open, setOpen] = useState(true);
@@ -34,7 +36,9 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/forgot_password" element={<ForgotPassword />} />
+      <Route path="/profile" element={<AdminProfile />} />
       {/* <Route path="/preview" element={<PreviewPage />} /> */}
+      {/* Admin */}
       <Route
         path="/admin"
         element={<SideNav open={open} onOpen={() => setOpen(!open)} />}
@@ -53,7 +57,7 @@ function App() {
         ></Route>
       </Route>
 
-      
+      {/* Student */}
       <Route
         path="/dashboard"
         element={<StudentSideNav open={open} onOpen={() => setOpen(!open)} />}
@@ -80,6 +84,7 @@ function App() {
       </Route>
 
       <Route path="/quiz" element={<StudentQuiz />}></Route>
+      <Route path="/student_profile" element={<StudentProfile />}></Route>
     </Routes>
   );
 }
