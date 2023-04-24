@@ -137,8 +137,8 @@ function SideNav(props) {
             </div>
 
             <div className=" w-full h-[60px] absolute bottom-0 duration-300">
-              <div className="w-full h-full">
-                <NavLink to="/">
+              <div className="w-full h-full relative">
+                <NavLink to="/login">
                   <div className="flex justify-start items-center w-full h-[60px]  hover:font-bold">
                     <div className="flex justify-center items-center w-16 h-full">
                       <BiLogOut className=" text-[40px] cursor-pointer m-2"></BiLogOut>

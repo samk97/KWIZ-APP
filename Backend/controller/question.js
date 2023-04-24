@@ -1,5 +1,57 @@
 const Question = require('../models/question');
 const Quiz = require('../models/quiz');
+
+const check = (aa) =>{
+         const date = new Date().toLocaleString();
+         const a = new Date(aa).toLocaleString();
+         console.log(date);
+         console.log(a);
+         const year = date.substring(6,10);
+         const month = date.substring(3,5);
+         const dt = date.substring(0,2);
+         const hour = date.substring(12,14);
+         const minute =date.substring(15,17);
+
+
+         const year2 = a.substring(6,10);
+         const month2 = a.substring(3,5);
+         const dt2 = a.substring(0,2);
+         const hour2 = a.substring(12,14);
+         const minute2 =a.substring(15,17);
+
+
+
+         console.log(dt,year,month,hour,minute);
+         console.log(dt2,year2,month2,hour2,minute2)
+
+         if(year2 < year) return false;
+         if(year > year2) return true;
+
+         if(year == year2){
+           if(month2 < month) return false;
+           if(month2 > month) return true;
+           if(month == month2){
+             if(dt2 < dt) return false;
+             if(dt2 > dt) return true;
+             
+             if(hour2 < hour) return false;
+             if(hour2 > hour) return true;
+
+             if(minute2 < minute) return false;
+             if(minute2 > minute) return true;
+
+
+           }
+         }
+
+         return true;
+
+
+
+}
+
+
+
 exports.insertQuestion=(req,res)=>{
     
     const {question,op_a,op_b,op_c,op_d,ans,exp} = req.headers;
@@ -63,10 +115,13 @@ exports.insertQuiz = async (req,res) =>{
  console.log(req.body);
  const {title,startTime,runTime,questions} = req.body;
 
+ const x  = new Date(startTime);
+ console.log(x.toLocaleString());
+
  try{
  Quiz.countDocuments({title},function(err,count){
    if(count == 0){
-     const quiz = new Quiz({title,startTime,runTime,questions});
+     const quiz = new Quiz({title,startTime:x,runTime,questions});
      quiz.save(function(err,ress){
        res.status(200).json("Saved");
      })
@@ -86,11 +141,24 @@ catch(err){
 
 exports.getAllQuiz = async (req,res) =>{
 
-
-  
   try{
      Quiz.find({},function(err,count){
-     res.status(200).json(count);
+    
+     try{ 
+     const x = count.map((obj)=>{
+       obj.flag="ff";
+       return obj;
+     })
+     res.status(200).json(x);
+    }catch(err){
+      console.log(x);
+    }
+
+     
+    
+     
+     
+     
   })
  }
  catch(err){

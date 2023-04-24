@@ -25,6 +25,7 @@ function AdminCreateQuiz(props) {
       .then(function (res) {
         // console.log(res.data);
         const x = JSON.stringify(res.data);
+        console.log(startTime);
         localStorage.setItem("quiz", x);
         localStorage.setItem("time", startTime);
         localStorage.setItem("runTime", time);
@@ -106,6 +107,8 @@ function AdminCreateQuiz(props) {
                   </label>
                   <input
                     type="datetime-local"
+                    onChange={(e)=>setStartTime(e.target.value)}
+                    value={startTime}
                     id="quizDate"
                     name="quizDate"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -114,8 +117,7 @@ function AdminCreateQuiz(props) {
 
                 <div class="w-72">
                   <DateTimePicker
-                    onChange={setStartTime}
-                    value={startTime}
+                   
                     label="Date & time"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 w-full"
                     hourPlaceholder="hh"
