@@ -6,39 +6,36 @@ import { MdQuiz } from "react-icons/md";
 import { FaHistory } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
-import {useNavigate} from 'react-router-dom'
-import {useEffect} from 'react'
-import {useSelector,useDispatch} from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 function SideNav(props) {
   const userName = "M.M. Gore";
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
-
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
 
-  useEffect(()=>{
-    if(state && state.user){
-      if(state.user.role=="student")
-      navigate("/dashboard");
-    }else{
+  useEffect(() => {
+    if (state && state.user) {
+      if (state.user.role == "student") navigate("/dashboard");
+    } else {
       navigate("/login");
     }
-  })
+  });
 
-  const handleLogOut = (e) =>{
+  const handleLogOut = (e) => {
     e.preventDefault();
     localStorage.clear();
     dispatch({
-      type:"LOGOUT",
-      payload:null
-    })
+      type: "LOGOUT",
+      payload: null,
+    });
 
     navigate("/login");
-  }
-
+  };
 
   return (
     <>

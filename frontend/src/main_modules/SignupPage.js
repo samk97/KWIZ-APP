@@ -2,7 +2,6 @@ import MajorSide from "../components/MajorSide";
 import MinorSide from "../components/MinorSide";
 import Form from "../components/Form";
 import InputField from "../components/InputField";
-import Link from "../components/Link";
 import Button from "../components/Button";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,18 +16,15 @@ const SignupPage = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
 
-  useEffect(()=>{
-    if(state && state.user){
-      if(state.user.role == "student")
-      navigate("/dashboard");
-      else
-      navigate("/admin");
+  useEffect(() => {
+    if (state && state.user) {
+      if (state.user.role == "student") navigate("/dashboard");
+      else navigate("/admin");
     }
-  })
+  });
 
   const goToLogin = () => {
     navigate("/login");
@@ -107,14 +103,11 @@ const SignupPage = () => {
               inputPlaceholder="•••••••••••••"
             ></InputField>
 
-            {/* forgot password */}
-            <Link linkLabel="Forgot Password?"></Link>
-
             {/* submit button */}
             <Button
               onClick={SignUp}
               ButtonType="submit"
-              buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center w-4/12"
+              buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center w-4/12 my-3"
               buttonLabel={buttonLabel}
             ></Button>
           </Form>
