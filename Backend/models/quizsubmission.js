@@ -3,12 +3,6 @@ const {ObjectId} = mongoose.Schema;
 
 //SCHEMA FOR QUESTION
 const quizSubmissionSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        require:true,
-        index:true,
-        unique:true,
-    },
     id:{
         type:ObjectId,
         require:true,

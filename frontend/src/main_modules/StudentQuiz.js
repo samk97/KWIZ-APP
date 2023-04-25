@@ -7,18 +7,17 @@ import { useParams, useNavigate } from "react-router-dom";
 function StudentQuiz() {
   const { id } = useParams();
   const [data, setData] = useState([]);
-
-  console.log(id);
+  
   let navigate = useNavigate();
   const state = useSelector((state) => ({ ...state }));
-  console.log(state);
+
   const email = state.user.email;
-  console.log(email);
+  var result = {email:email,answer:[]};
+  
   useEffect(() => {
     axios
       .post("http://localhost:4000/api/get-quiz", { id: id })
       .then(function (res) {
-        console.log(res);
         setData(res.data);
 
         return () => {};
@@ -30,6 +29,39 @@ function StudentQuiz() {
       });
     console.log("ssssssssssssssss");
   }, []);
+
+
+  const callBack = (message) =>{
+    console.log(message);
+    
+    const found = result.answer.some(el => el.q == message.q);
+    if(found){
+    const index = result.answer.findIndex((el => el.q == message.q));
+    result.answer[index].op = message.op;
+    }else{
+      result.answer.push(message);
+    }
+    console.log(result);
+  }
+
+  const handleSubmit = (e) => {
+     e.preventDefault();
+
+     axios
+      .post("http://localhost:4000/api/get-submission", { result ,id:id})
+      .then(function (res) {
+        console.log(res);
+        alert("Submitted Successfully");
+        navigate("/dashboard");
+        
+      })
+      .catch(function (err) {
+        console.log(err);
+        alert("Already Submitted or Some internal failure");
+        navigate("/dashboard");
+      });
+
+  }
 
   console.log(data);
 
@@ -76,6 +108,7 @@ function StudentQuiz() {
                 <StudentQuestionArea
                   id={res}
                   number={num}
+                  handleCallBack={callBack}
                 ></StudentQuestionArea>
               );
             })}
@@ -83,6 +116,7 @@ function StudentQuiz() {
           <div class="flex justify-center items-center my-10 mx-3 h-10">
             <button
               type="submit"
+              onClick={handleSubmit}
               class="mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm min-w-[6rem] max-w-[8rem] w-1/6 px-5 py-2.5 m-3 my-5 text-center"
             >
               Submit

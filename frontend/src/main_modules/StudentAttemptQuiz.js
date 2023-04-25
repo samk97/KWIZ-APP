@@ -89,13 +89,10 @@ const StudentAttempQuiz = (props) => {
     axios
       .post("http://localhost:4000/api/get-all-quiz", {})
       .then(function (res) {
-        setData(res.data);
+       
 
-        const x = res.data.map((obj) => {
-          obj.flag = "ff";
-          return obj;
-        });
-        console.log(x);
+        res.data.sort((a,b) => (new Date(a.startTime).toLocaleString() < new Date(b.startTime).toLocaleString())? 1 : -1);
+        setData(res.data);
 
         return () => {};
       })
@@ -108,11 +105,10 @@ const StudentAttempQuiz = (props) => {
     if (check(title, startTime, runTime) == false) {
       alert("Closed");
       return;
+    }else if(check2(title,startTime,runTime)){
+      alert("Quiz will start at" + new Date(startTime).toLocaleString());
+      return;
     }
-    // }else if(check2(title,startTime,runTime)){
-    //   alert("Quiz will start at" + new Date(startTime).toLocaleString());
-    //   return;
-    // }
     alert("Quiz active");
     navigate("/quiz/" + id);
 
