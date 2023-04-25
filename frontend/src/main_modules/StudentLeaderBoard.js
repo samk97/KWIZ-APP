@@ -56,6 +56,9 @@ function StudentLeaderBoard(props) {
                     <div className="flex justify-start items-center w-full m-2">
                       <p className="text-lg">{e.email}</p>
                     </div>
+                    <div className="flex justify-start items-center w-full m-2">
+                      <p className="text-lg">{"Score : " + e.score}</p>
+                    </div>
                   </div>
                   )
                 })}

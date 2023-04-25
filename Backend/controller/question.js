@@ -198,7 +198,7 @@ exports.getSubmission = async (req, res) => {
   const email = req.body.result.email;
   const answer = req.body.result;
   const quiz = req.body.id;
-  console.log(req.body.result);
+  console.log(req.body);
   console.log(email);
   console.log(answer);
   console.log(quiz);
