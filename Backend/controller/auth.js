@@ -25,6 +25,7 @@ exports.login=async(req,res)=>{
                     res.status(400).json({Error:"Wrong Password"});
                 }
                 if (result) {
+                    
                     res.status(200).json(userFromDB);
                 } else {
                   // response is OutgoingMessage object that server response http request

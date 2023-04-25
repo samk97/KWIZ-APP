@@ -166,10 +166,10 @@ function QuestionForm() {
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               >
                 <option selected>Select correct option</option>
-                <option value="A">{op_a}</option>
-                <option value="B">{op_b}</option>
-                <option value="C">{op_c}</option>
-                <option value="D">{op_d}</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
               </select>
             </div>
 

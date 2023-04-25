@@ -8,7 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { auth } from "../firebase-auth/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 
 const SignupPage = () => {
   const formLabel = "Sign up";
@@ -17,7 +20,6 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
 
@@ -40,41 +42,40 @@ const SignupPage = () => {
       alert("use only MNNIT Email !!!");
       return;
     }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user.email);
-        setUser(user);
-        // ...
-      })
-      .catch((error) => {
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
-        // ..
+      const user = userCredential.user;
+      console.log(user);
+      sendEmailVerification(auth.currentUser).then(() => {
+        alert("Email verification link send !!");
       });
-
-    if (user) {
-      const res = await fetch("http://localhost:4000/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          email: email,
-          password: password,
-        },
-      });
-      if (res.status === 200) {
-        const data = await res.json();
-        console.log(data);
-        navigate("/login");
+      if (user) {
+        const res = await fetch("http://localhost:4000/api/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            email: email,
+            password: password,
+          },
+        });
+        if (res.status === 200) {
+          const data = await res.json();
+          console.log(data);
+          navigate("/login");
+        }
+        if (res.status === 403) {
+          alert("already exist please login !!");
+          navigate("/login");
+        }
       }
-      if (res.status === 403) {
-        alert("already exist please login !!");
-        navigate("/login");
-      }
+    } catch (error) {
+      alert(error.code);
     }
   };
   return (
