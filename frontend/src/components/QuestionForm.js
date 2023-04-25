@@ -61,6 +61,7 @@ function QuestionForm() {
                 id="question"
                 name="question"
                 placeholder="Type your question here"
+                required
               ></textarea>
             </div>
           </div>
@@ -204,12 +205,6 @@ function QuestionForm() {
                 buttonClassName="min-w-[100px] text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm py-2.5 text-center"
                 buttonLabel="Reset"
               ></Button>
-
-              <input
-                type="reset"
-                className="min-w-[100px] text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm py-2.5 text-center"
-                value="reset"
-              ></input>
             </div>
           </div>
         </form>

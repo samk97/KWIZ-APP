@@ -1,14 +1,8 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
 function QuizDetails(props) {
-
-
-
-
-
-
   const title = "Data Structure Quiz 1";
   const createdAt = "00/00/0000";
   const noOfQeustions = "123";
@@ -40,7 +34,7 @@ function QuizDetails(props) {
               <table className="table-fixed">
                 <tr>
                   <td className="text-right p-2">Quiz ID:</td>
-                  <td className="text-left p-2"></td>
+                  <td className="text-left p-2">jsdasashhschs121213</td>
                 </tr>
 
                 <tr>
@@ -69,31 +63,6 @@ function QuizDetails(props) {
                 </tr>
               </table>
             </div>
-            {/* <div className="flex flex-col items-center">
-              <p>
-                ID: <span>{id}</span>
-              </p>
-
-              <p>
-                Created at: <span>{createdAt}</span>
-              </p>
-
-              <p>
-                Total Questions: <span>{noOfQeustions}</span>
-              </p>
-
-              <p>
-                Runtime: <span>{runTime}</span>
-              </p>
-
-              <p>
-                Start Time: <span>{startTime}</span>
-              </p>
-
-              <p>
-                Updated At: <span>{updatedAt}</span>
-              </p>
-            </div> */}
           </div>
         </div>
       </div>

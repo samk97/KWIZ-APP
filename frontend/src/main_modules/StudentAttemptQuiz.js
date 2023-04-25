@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const check = (title, aa, rt) => {
-  const date = new Date().toLocaleString();
-  const a = new Date(aa).toLocaleString();
+  const date = new Date().toLocaleString("en-GB");
+  const a = new Date(aa).toLocaleString("en-GB");
 
-  console.log(title);
+  console.log(title, date, a);
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -37,6 +37,7 @@ const check = (title, aa, rt) => {
       minute2 = Number(minute2);
       minute = Number(minute);
       rt = Number(rt);
+      console.log(minute2, minute);
 
       if (minute2 > minute) return true;
       console.log(minute2, rt, minute);
@@ -152,7 +153,7 @@ const StudentAttempQuiz = (props) => {
                       <p className="text-xl italic">{title}</p>
                     </div>
                     {check(title, startTime, runTime) ? (
-                      <button className="text-blue-600 font-bold">Open</button>
+                      <button className="text-blue-500 font-bold">Open</button>
                     ) : (
                       <button className="text-red-500">Closed</button>
                     )}

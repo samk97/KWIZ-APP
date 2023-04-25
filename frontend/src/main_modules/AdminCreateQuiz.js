@@ -107,25 +107,12 @@ function AdminCreateQuiz(props) {
                   </label>
                   <input
                     type="datetime-local"
-                    onChange={(e)=>setStartTime(e.target.value)}
+                    onChange={(e) => setStartTime(e.target.value)}
                     value={startTime}
                     id="quizDate"
                     name="quizDate"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   ></input>
-                </div>
-
-                <div class="w-72">
-                  <DateTimePicker
-                   
-                    label="Date & time"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 w-full"
-                    hourPlaceholder="hh"
-                    minutePlaceholder="mm"
-                    yearPlaceholder="yyyy"
-                    monthPlaceholder="mm"
-                    dayPlaceholder="dd"
-                  />
                 </div>
               </div>
 

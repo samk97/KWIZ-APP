@@ -1,35 +1,23 @@
-import {useEffect,useState} from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-function StudentQuestionArea({id,number}) {
-  
+function StudentQuestionArea({ id, number }) {
   console.log(id);
 
-  const [data,setData] = useState([]);
-  
+  const [data, setData] = useState([]);
 
-  useEffect(()=>{
-    
-  axios
-  .post("http://localhost:4000/api/get-question-by-id", { id: id })
-  .then(function (res) {
+  useEffect(() => {
+    axios
+      .post("http://localhost:4000/api/get-question-by-id", { id: id })
+      .then(function (res) {
+        setData(res.data[0]);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }, []);
 
-    setData(res.data[0]);
-  })
-  .catch(function (err) {
-    console.log(err);
-   
-
-  });
-
-
-},[]);
-
-console.log(data);
-
-
-
-
+  console.log(data);
 
   return (
     <>
@@ -38,7 +26,7 @@ console.log(data);
           <div class="flex flex-col justify-center items-center border-x-2 border-t-2 border-gray-500 bg-green-200 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
             <div class="flex justify-center text-lg font-bold leading-loose  bg-gradient-to-r from-green-200 via-indigo-500 to-green-200 min-w-[8rem] max-w-[20rem] w-[60%] px-4">
               <p>Question</p>
-              <span>{number}</span>
+              <span className="mx-2">{number}</span>
             </div>
 
             <p>{data.question}</p>
@@ -52,7 +40,7 @@ console.log(data);
                 id="bordered-radio-1"
                 type="radio"
                 value=""
-                name="bordered-radio"
+                name={id}
                 class="w-7 h-7 text-red-600 bg-gray-100 border-gray-300 accent-red-500"
               />
               <label
@@ -68,7 +56,7 @@ console.log(data);
                 id="bordered-radio-2"
                 type="radio"
                 value=""
-                name="bordered-radio"
+                name={id}
                 class="w-7 h-7 text-red-600 bg-gray-100 border-gray-300 accent-red-500"
               />
               <label
@@ -84,7 +72,7 @@ console.log(data);
                 id="bordered-radio-3"
                 type="radio"
                 value=""
-                name="bordered-radio"
+                name={id}
                 class="w-7 h-7 text-red-600 bg-gray-100 border-gray-300 accent-red-500"
               />
               <label
@@ -100,7 +88,7 @@ console.log(data);
                 id="bordered-radio-4"
                 type="radio"
                 value=""
-                name="bordered-radio"
+                name={id}
                 class="w-7 h-7 text-red-600 bg-gray-100 border-gray-300 accent-red-500"
               />
               <label
