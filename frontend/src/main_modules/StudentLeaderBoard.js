@@ -3,8 +3,8 @@ function StudentLeaderBoard(props) {
     <>
       <div className="flex">
         <div
-          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
-            props.open ? "ml-72" : "ml-16"
+          className={`bg-green-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+            props.open ? "ml-48 sm:ml-72" : "ml-[3.7rem] sm:ml-16"
           } duration-200`}
         >
           {/* Heading */}
@@ -18,7 +18,7 @@ function StudentLeaderBoard(props) {
                 <h1>LEADERBOARD</h1>
               </legend>
               {/* Ranking part */}
-              <div className="w-[90%] sm:w-[70%] flex flex-col">
+              <div className="w-full sm:w-[70%] flex flex-col">
                 {/* Single rank + name tab */}
                 <div className="flex items-center bg-gradient-to-r from-green-300 to-emerald-500 shadow-slate-800 shadow-xl border-2 border-gray-700 rounded-3xl p-1 m-2">
                   {/* Ranking position */}

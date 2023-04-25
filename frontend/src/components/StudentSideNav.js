@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
-import { FaListAlt } from "react-icons/fa";
+import { VscListUnordered } from "react-icons/vsc";
 import { GiRank3 } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
@@ -42,26 +42,26 @@ function StudentSideNav(props) {
     <>
       <nav>
         {/* StudentSideNav wrapper */}
-        <div className="fixed top-0 left-0">
+        <div className="fixed top-0 left-0 h-screen">
           {/* StudentSideNav */}
           <div
             className={`border-r border-gray-700 relative flex flex-col justify-start bg-gray-200 h-screen ${
-              props.open ? "w-60 sm:w-72" : "w-14 sm:w-16"
+              props.open ? "w-48 sm:w-72" : "w-[3.7rem] sm:w-16"
             } duration-200`}
           >
             <div
-              className={`relative w-full ${
+              className={`relative w-full p-2 ${
                 props.open ? "h-32" : "h-12"
               } bg-emerald-800 duration-200`}
             >
               <div
-                className={`absolute left-3 top-5 ${
+                className={`absolute left-3 top-5 w-[90%] ${
                   props.open ? "" : "scale-0"
                 } duration-100`}
               >
                 <BsPersonCircle className="rounded-full text-6xl text-blue-300"></BsPersonCircle>
-                <div>
-                  <span className="text-sm text-gray-200">{email}</span>
+                <div className="w-full">
+                  <p className="text-sm text-gray-200 break-words">{email}</p>
                 </div>
               </div>
               {/* StudentSideNav expansion Arrow */}
@@ -76,9 +76,9 @@ function StudentSideNav(props) {
             <div className="relative flex flex-col justify-center w-full">
               {/* StudentSideNav option 1 */}
               <NavLink to="/dashboard/attempt_quiz">
-                <div className="flex justify-start items-center w-full hover:font-bold">
-                  <div className="flex justify-center items-center w-16">
-                    <FaListAlt className="text-[46px] cursor-pointer"></FaListAlt>
+                <div className="flex justify-start items-center w-full hover:font-bold group">
+                  <div className="flex justify-center items-center group-hover:scale-[1.1] duration-200 w-16">
+                    <VscListUnordered className="text-[2.5rem] cursor-pointer"></VscListUnordered>
                   </div>
 
                   <span
@@ -91,9 +91,9 @@ function StudentSideNav(props) {
 
               {/* StudentSideNav option 2 */}
               <NavLink to="/dashboard/leaderboard">
-                <div className="flex justify-start items-center w-full hover:font-bold">
-                  <div className="flex justify-center items-center w-16">
-                    <GiRank3 className="text-[46px] cursor-pointer"></GiRank3>
+                <div className="flex justify-start items-center w-full hover:font-bold group">
+                  <div className="flex justify-center items-center group-hover:scale-[1.1] duration-200 w-16">
+                    <GiRank3 className="text-[3rem]  cursor-pointer"></GiRank3>
                   </div>
 
                   <span
@@ -107,8 +107,8 @@ function StudentSideNav(props) {
             <div className=" w-full h-[60px] absolute bottom-0 duration-300">
               <div className="w-full h-full relative">
                 <NavLink to="/login">
-                  <div className="flex justify-start items-center w-full h-[60px]  hover:font-bold">
-                    <div className="flex justify-center items-center w-16 h-full">
+                  <div className="flex justify-start items-center w-full h-[60px]  hover:font-bold group">
+                    <div className="flex justify-center items-center group-hover:scale-[1.1] duration-200 w-16 h-full">
                       <BiLogOut className=" text-[40px] cursor-pointer m-2"></BiLogOut>
                     </div>
 

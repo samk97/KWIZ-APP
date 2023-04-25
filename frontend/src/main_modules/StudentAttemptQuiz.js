@@ -89,9 +89,12 @@ const StudentAttempQuiz = (props) => {
     axios
       .post("http://localhost:4000/api/get-all-quiz", {})
       .then(function (res) {
-       
-
-        res.data.sort((a,b) => (new Date(a.startTime).toLocaleString() < new Date(b.startTime).toLocaleString())? 1 : -1);
+        res.data.sort((a, b) =>
+          new Date(a.startTime).toLocaleString() <
+          new Date(b.startTime).toLocaleString()
+            ? 1
+            : -1
+        );
         setData(res.data);
 
         return () => {};
@@ -105,7 +108,7 @@ const StudentAttempQuiz = (props) => {
     if (check(title, startTime, runTime) == false) {
       alert("Closed");
       return;
-    }else if(check2(title,startTime,runTime)){
+    } else if (check2(title, startTime, runTime)) {
       alert("Quiz will start at" + new Date(startTime).toLocaleString());
       return;
     }
@@ -120,12 +123,12 @@ const StudentAttempQuiz = (props) => {
       <div className="flex">
         <div
           className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
-            props.open ? "ml-72" : "ml-16"
+            props.open ? "ml-48 sm:ml-72" : "ml-[3.7rem] sm:ml-16"
           } duration-200`}
         >
           {/* Heading */}
           <div className="w-full bg-red-200 p-2">
-            <h1 className="text-xl font-bold text-gray-800">Past Quizzes</h1>
+            <h1 className="text-xl font-bold text-gray-800">Quizzes</h1>
           </div>
           {/* Tiles Container */}
           <div className="flex flex-wrap justify-start my-4 gap-5">
