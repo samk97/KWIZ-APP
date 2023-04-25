@@ -1,11 +1,10 @@
-const Question = require('../models/question');
-const Quiz = require('../models/quiz');
-const QuizSubmission = require('../models/quizsubmission');
-var mongoose = require('mongoose');
+const Question = require("../models/question");
+const Quiz = require("../models/quiz");
+const QuizSubmission = require("../models/quizsubmission");
+var mongoose = require("mongoose");
 const check = (title, aa, rt) => {
-  const date = new Date().toLocaleString();
-  const a = new Date(aa).toLocaleString();
- 
+  const date = new Date().toLocaleString("en-GB");
+  const a = new Date(aa).toLocaleString("en-GB");
 
   console.log(title);
 
@@ -37,19 +36,18 @@ const check = (title, aa, rt) => {
       minute2 = Number(minute2);
       minute = Number(minute);
       rt = Number(rt);
-      
-      if(minute2 > minute) return true;
-      console.log(minute2,rt,minute);
-      if(minute2 + rt >= minute) return true;
+
+      if (minute2 > minute) return true;
+      console.log(minute2, rt, minute);
+      if (minute2 + rt >= minute) return true;
     }
   }
 
   return false;
 };
 const check2 = (title, aa, rt) => {
-  const date = new Date().toLocaleString();
-  const a = new Date(aa).toLocaleString();
- 
+  const date = new Date().toLocaleString("en-GB");
+  const a = new Date(aa).toLocaleString("en-GB");
 
   console.log(title);
 
@@ -65,227 +63,204 @@ const check2 = (title, aa, rt) => {
   var hour2 = a.substring(12, 14);
   var minute2 = a.substring(15, 17);
 
-  if(year2 > year) return true;
+  if (year2 > year) return true;
 
-  if(month2 > month) return true;
+  if (month2 > month) return true;
 
-  if(dt2 > dt) return true;
+  if (dt2 > dt) return true;
 
-  if(hour2 > hour) return true;
-
-  
-
+  if (hour2 > hour) return true;
 
   minute2 = Number(minute2);
   minute = Number(minute);
   rt = Number(rt);
 
-  if(minute < minute2) return true;
+  if (minute < minute2) return true;
 
   return false;
 };
 
+exports.insertQuestion = (req, res) => {
+  const { question, op_a, op_b, op_c, op_d, ans, exp } = req.headers;
 
-exports.insertQuestion=(req,res)=>{
-    
-    const {question,op_a,op_b,op_c,op_d,ans,exp} = req.headers;
+  if (
+    question == null ||
+    op_a == null ||
+    op_b == null ||
+    op_c == null ||
+    op_d == null ||
+    ans == null
+  ) {
+    res.status(400).json({ Error: "All field must be filled" });
+  } else {
+    Question.countDocuments({ question }, function (err, count) {
+      console.log(question, op_a, op_b, op_c, op_d, ans, exp);
+      if (count > 0) {
+        res.status(403).json({ Error: "Question Already Exist" });
+      } else {
+        const questions = new Question({
+          question,
+          op_a,
+          op_b,
+          op_c,
+          op_d,
+          ans,
+          exp,
+        });
+        questions.save(function (err, result) {
+          console.log(result);
+          res.status(200).json({ id: result._id });
+        });
+      }
+    });
+  }
+};
 
+exports.fetchQuestion = (req, res) => {
+  const { question, op_a, op_b, op_c, op_d, ans, exp } = req.headers;
 
-    if(question == null || op_a == null || op_b == null || op_c == null || op_d == null || ans == null) {
-        res.status(400).json({Error: "All field must be filled"});
-    }else{
-     Question.countDocuments({question}, function (err, count){ 
+  Question.find({}, function (err, result) {
+    console.log(result);
+    res.status(200).json(result);
+  });
+};
 
-         console.log(question,op_a,op_b,op_c,op_d,ans,exp);
-         if(count>0){
-                 res.status(403).json({Error: "Question Already Exist"}); 
-         }
-         else{
-           const questions = new Question({question,op_a,op_b,op_c,op_d,ans,exp});
-           questions.save(function(err,result){
-             console.log(result);  
-             res.status(200).json({id : result._id});
-           });
-         }
-     });
-    }
- }
-
- exports.fetchQuestion=(req,res)=>{
-    
-    const {question,op_a,op_b,op_c,op_d,ans,exp} = req.headers;
-
-
-  
-     Question.find({},function (err, result){
-         
-        console.log(result);
-        res.status(200).json(result);
-
-        
-     });
-    
- }
-
- exports.fetchQuestionById=(req,res)=>{
-    
+exports.fetchQuestionById = (req, res) => {
   const id = req.body.id;
 
+  Question.find({ _id: mongoose.Types.ObjectId(id) }, function (err, result) {
+    console.log(result);
+    res.status(200).json(result);
+  });
+};
 
-
-   Question.find({_id:mongoose.Types.ObjectId(id)},function (err, result){
-       
-      console.log(result);
-      res.status(200).json(result);
-
-      
-   });
-  
-}
-
-
- exports.randomQuizCreation= async (req,res)=>{
-
-  const {number,time} = req.body;
+exports.randomQuizCreation = async (req, res) => {
+  const { number, time } = req.body;
   console.log(number);
 
- //const number = 1;
+  //const number = 1;
 
- try{
- const result =  await  Question.aggregate( [{ $sample: { size: Number(number) } }]).exec();
- return res.status(200).json(result);
- }catch(err){
- return res.status(400).json(err);
- }
-  
-}
+  try {
+    const result = await Question.aggregate([
+      { $sample: { size: Number(number) } },
+    ]).exec();
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+};
 
-exports.insertQuiz = async (req,res) =>{
+exports.insertQuiz = async (req, res) => {
+  console.log(req.body);
+  const { title, startTime, runTime, questions } = req.body;
 
+  const x = new Date(startTime);
+  console.log(x.toLocaleString());
 
- console.log(req.body);
- const {title,startTime,runTime,questions} = req.body;
-
- const x  = new Date(startTime);
- console.log(x.toLocaleString());
-
- try{
- Quiz.countDocuments({title},function(err,count){
-   if(count == 0){
-     const quiz = new Quiz({title,startTime:x,runTime,questions});
-     quiz.save(function(err,ress){
-       res.status(200).json("Saved");
-     })
-   }else{
+  try {
+    Quiz.countDocuments({ title }, function (err, count) {
+      if (count == 0) {
+        const quiz = new Quiz({ title, startTime: x, runTime, questions });
+        quiz.save(function (err, ress) {
+          res.status(200).json("Saved");
+        });
+      } else {
+        res.status(400).json("ALready exists");
+      }
+    });
+  } catch (err) {
+    console.log(err);
     res.status(400).json("ALready exists");
-   }
- })
-}
-catch(err){
- console.log(err);
-  res.status(400).json("ALready exists");
-}
+  }
+};
 
-}
+exports.getAllQuiz = async (req, res) => {
+  try {
+    Quiz.find({}, function (err, count) {
+      try {
+        const x = count.map((obj) => {
+          obj.flag = "ff";
+          return obj;
+        });
+        res.status(200).json(x);
+      } catch (err) {
+        console.log(x);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("ALready exists");
+  }
+};
 
-
-
-exports.getAllQuiz = async (req,res) =>{
-
-  try{
-     Quiz.find({},function(err,count){
-    
-     try{ 
-     const x = count.map((obj)=>{
-       obj.flag="ff";
-       return obj;
-     })
-     res.status(200).json(x);
-    }catch(err){
-      console.log(x);
-    }
-     
-  })
- }
- catch(err){
-  console.log(err);
-   res.status(400).json("ALready exists");
- }
- 
- }
-
- exports.getSubmission = async (req,res) =>{
-
-  const {quiz,stresp,title} = req.headers;
+exports.getSubmission = async (req, res) => {
+  const { quiz, stresp, title } = req.headers;
   const st_id = stresp;
   console.log(stresp);
   console.log(st_id);
-  const data = {id:st_id};
+  const data = { id: st_id };
 
-  try{
-   QuizSubmission.count({id:quiz},function(err,count){
-     if(count == 0){
-       const quizsubmission = new QuizSubmission({title,id:quiz,answer:data});
-       quizsubmission.save(function(err,res){
-         console.log(res);
-       });
-     }else{
-      try{
-        QuizSubmission.find({$and:[{id:quiz},{'answer.id':st_id}]},function(err,count){
-       
-         if(count != 0){
-           console.log("COunt ",count);
-           res.status(200).json(count);
-         }else{
-           QuizSubmission.updateOne({id:quiz},{$push:{answer:data}},function(err,res){
-             console.log("Res",res);
-             
-           });
-           res.status(400).json("ALready exists");
-         }
-        
-     })
-    }
-    catch(err){
-     console.log(err);
-      res.status(400).json("ALready exists");
-    }
-     }
-   })
-  }catch(err){
+  try {
+    QuizSubmission.count({ id: quiz }, function (err, count) {
+      if (count == 0) {
+        const quizsubmission = new QuizSubmission({
+          title,
+          id: quiz,
+          answer: data,
+        });
+        quizsubmission.save(function (err, res) {
+          console.log(res);
+        });
+      } else {
+        try {
+          QuizSubmission.find(
+            { $and: [{ id: quiz }, { "answer.id": st_id }] },
+            function (err, count) {
+              if (count != 0) {
+                console.log("COunt ", count);
+                res.status(200).json(count);
+              } else {
+                QuizSubmission.updateOne(
+                  { id: quiz },
+                  { $push: { answer: data } },
+                  function (err, res) {
+                    console.log("Res", res);
+                  }
+                );
+                res.status(400).json("ALready exists");
+              }
+            }
+          );
+        } catch (err) {
+          console.log(err);
+          res.status(400).json("ALready exists");
+        }
+      }
+    });
+  } catch (err) {}
+};
 
-  }
-
-
- 
- 
- }
-
-
- exports.getQuiz = async (req,res) =>{
-  const {id} = req.body;
+exports.getQuiz = async (req, res) => {
+  const { id } = req.body;
   console.log(id);
-  try{
-     Quiz.find({_id:mongoose.Types.ObjectId(id)},function(err,count){
-
-      if(count == null){
-        res.status(400).json({message:"Quiz Not Found"});
+  try {
+    Quiz.find({ _id: mongoose.Types.ObjectId(id) }, function (err, count) {
+      if (count == null) {
+        res.status(400).json({ message: "Quiz Not Found" });
       }
 
       console.log(count);
       const startTime = count[0].startTime;
       const runTime = count[0].runTime;
-      if(check(count[0].title,startTime,runTime)  == false){
-        res.status(400).json({message:"Quiz completed"});
-      }else if(check2(count.title,startTime,runTime)){
-        res.status(400).json({message: "Quiz will start Soon"})
-      }else{
+      if (check(count[0].title, startTime, runTime) == false) {
+        res.status(400).json({ message: "Quiz completed" });
+      } else if (check2(count.title, startTime, runTime)) {
+        res.status(400).json({ message: "Quiz will start Soon" });
+      } else {
         res.status(200).json(count[0]);
       }
-     
-    }
-  )}catch(err){
+    });
+  } catch (err) {
     console.log(err);
   }
- 
- }
+};

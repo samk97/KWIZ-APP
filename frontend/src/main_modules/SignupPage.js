@@ -8,7 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { auth } from "../firebase-auth/firebase";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 
 const SignupPage = () => {
   const formLabel = "Sign up";
@@ -31,25 +34,26 @@ const SignupPage = () => {
     navigate("/login");
   };
 
-
   const SignUp = async (e) => {
     e.preventDefault();
     let items = { email, name, password };
     console.log(items);
-    if (email.indexOf("@mnnit.ac.in")<0)
-    {
+    if (email.indexOf("@mnnit.ac.in") < 0) {
       alert("use only MNNIT Email !!!");
       return;
     }
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
       const user = userCredential.user;
       console.log(user);
-      sendEmailVerification(auth.currentUser)
-        .then(() => {
-          alert("Email verification link send !!")
-        });
+      sendEmailVerification(auth.currentUser).then(() => {
+        alert("Email verification link send !!");
+      });
       if (user) {
         const res = await fetch("http://localhost:4000/api/signup", {
           method: "POST",
@@ -73,7 +77,6 @@ const SignupPage = () => {
     } catch (error) {
       alert(error.code);
     }
-
   };
   return (
     <>
@@ -128,10 +131,21 @@ const SignupPage = () => {
             <Button
               onClick={SignUp}
               ButtonType="submit"
-              buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center w-4/12 my-3"
+              buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center min-w-[4rem] max-w-[6rem] w-4/12 my-3"
               buttonLabel={buttonLabel}
             ></Button>
           </Form>
+
+          {/* Only For small devices - Log in */}
+          <div className="sm:hidden bg-red-100 absolute right-0 top-0">
+            <span className="text-sm cursor-default">Already Registered?</span>
+            <span
+              className="font-bold m-1 text-sm text-blue-800 cursor-pointer"
+              onClick={goToLogin}
+            >
+              Log in
+            </span>
+          </div>
         </MajorSide>
       </div>
     </>

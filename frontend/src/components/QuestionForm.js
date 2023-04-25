@@ -61,6 +61,7 @@ function QuestionForm() {
                 id="question"
                 name="question"
                 placeholder="Type your question here"
+                required
               ></textarea>
             </div>
           </div>
@@ -158,16 +159,6 @@ function QuestionForm() {
                 Correct Option
               </label>
 
-              {/* <textarea
-                value={ans}
-                onChange={(e) => setAns(e.target.value)}
-                className="w-full p-3 h-20"
-                id="explaination"
-                name="explaination"
-                placeholder="Type label of correct option here"
-              ></textarea> */}
-
-              {/* Above text_area replaced with select */}
               <select
                 id="explaination"
                 value={ans}

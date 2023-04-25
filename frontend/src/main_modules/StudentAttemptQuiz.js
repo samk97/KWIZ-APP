@@ -4,11 +4,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const check = (title, aa, rt) => {
-  const date = new Date().toLocaleString();
-  const a = new Date(aa).toLocaleString();
- 
+  const date = new Date().toLocaleString("en-GB");
+  const a = new Date(aa).toLocaleString("en-GB");
 
-  console.log(title);
+  console.log(title, date, a);
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -38,10 +37,11 @@ const check = (title, aa, rt) => {
       minute2 = Number(minute2);
       minute = Number(minute);
       rt = Number(rt);
-      
-      if(minute2 > minute) return true;
-      console.log(minute2,rt,minute);
-      if(minute2 + rt >= minute) return true;
+      console.log(minute2, minute);
+
+      if (minute2 > minute) return true;
+      console.log(minute2, rt, minute);
+      if (minute2 + rt >= minute) return true;
     }
   }
 
@@ -50,7 +50,6 @@ const check = (title, aa, rt) => {
 const check2 = (title, aa, rt) => {
   const date = new Date().toLocaleString();
   const a = new Date(aa).toLocaleString();
- 
 
   console.log(title);
 
@@ -66,22 +65,19 @@ const check2 = (title, aa, rt) => {
   var hour2 = a.substring(12, 14);
   var minute2 = a.substring(15, 17);
 
-  if(year2 > year) return true;
+  if (year2 > year) return true;
 
-  if(month2 > month) return true;
+  if (month2 > month) return true;
 
-  if(dt2 > dt) return true;
+  if (dt2 > dt) return true;
 
-  if(hour2 > hour) return true;
-
-  
-
+  if (hour2 > hour) return true;
 
   minute2 = Number(minute2);
   minute = Number(minute);
   rt = Number(rt);
 
-  if(minute < minute2) return true;
+  if (minute < minute2) return true;
 
   return false;
 };
@@ -105,9 +101,8 @@ const StudentAttempQuiz = (props) => {
       });
   }, []);
 
-  const handleClick = (id,title,startTime,runTime) =>{
-
-    if(check(title,startTime,runTime) == false){
+  const handleClick = (id, title, startTime, runTime) => {
+    if (check(title, startTime, runTime) == false) {
       alert("Closed");
       return;
     }else if(check2(title,startTime,runTime)){
@@ -117,9 +112,14 @@ const StudentAttempQuiz = (props) => {
     alert("Quiz active");
     navigate("/quiz/" + id);
 
+<<<<<<< HEAD
     
     console.log(id,title);
   }
+=======
+    console.log(id, title);
+  };
+>>>>>>> c0556b990c162ecbc2a4dea49a6b217164f2683e
 
   return (
     <>
@@ -144,41 +144,41 @@ const StudentAttempQuiz = (props) => {
               console.log(x);
 
               return (
-                <div key={_id} >
-                  
-                    <div className="bg-blue-200 w-60 h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
-                     onClick={()=>{handleClick(_id,title,startTime,runTime)}}
-                    >
-                      <div className="mb-2" >
-                        <p className="text-xl italic">{title}</p>
-                      </div>
-                      {check(title, startTime, runTime) ? (
-                        <button   >Open</button>
-                      ) : (
-                        <button  >Close</button>
-                      )}
-                      <div className="text-sm">
-                        <p>
-                          Created : <span>{createdAt.substring(0, 10)}</span>{" "}
-                          <span className="italic">
-                            ({createdAt.substring(11, 19)})
-                          </span>
-                        </p>
-                        <p>
-                          Total Questions: <span>{questions.length}</span>
-                        </p>
-                        <p>
-                          Time Alloted: <span>{runTime} min</span>
-                        </p>
-
-                        <p>
-                          Start Time: <span>{x.substring(0, 10)} </span>{" "}
-                          <span className="italic">
-                            ({x.substring(11, 17)}){" "}
-                          </span>
-                        </p>
-                      </div>
+                <div key={_id}>
+                  <div
+                    className="bg-blue-200 w-60 h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
+                    onClick={() => {
+                      handleClick(_id, title, startTime, runTime);
+                    }}
+                  >
+                    <div className="mb-2">
+                      <p className="text-xl italic">{title}</p>
                     </div>
+                    {check(title, startTime, runTime) ? (
+                      <button className="text-blue-500 font-bold">Open</button>
+                    ) : (
+                      <button className="text-red-500">Closed</button>
+                    )}
+                    <div className="text-sm">
+                      <p>
+                        Created : <span>{createdAt.substring(0, 10)}</span>{" "}
+                        <span className="italic">
+                          ({createdAt.substring(11, 19)})
+                        </span>
+                      </p>
+                      <p>
+                        Total Questions: <span>{questions.length}</span>
+                      </p>
+                      <p>
+                        Time Alloted: <span>{runTime} min</span>
+                      </p>
+
+                      <p>
+                        Start Time: <span>{x.substring(0, 10)} </span>{" "}
+                        <span className="italic">({x.substring(11, 17)}) </span>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               );
             })}
