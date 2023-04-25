@@ -45,7 +45,6 @@ exports.signup=(req,res)=>{
 
    console.log(email + password);
 
-
     User.countDocuments({email}, function (err, count){ 
         if(count>0){
                 res.status(403).json({Error: "Please Login"}); 

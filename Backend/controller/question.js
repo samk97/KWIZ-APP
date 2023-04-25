@@ -194,40 +194,50 @@ exports.getAllQuiz = async (req, res) => {
 };
 
 exports.getSubmission = async (req, res) => {
-  const { quiz, stresp, title } = req.headers;
-  const st_id = stresp;
-  console.log(stresp);
-  console.log(st_id);
-  const data = { id: st_id };
+
+  const email = req.body.result.email;
+  const answer = req.body.result;
+  const quiz = req.body.id;
+  console.log(req.body.result);
+  console.log(email);
+  console.log(answer);
+  console.log(quiz);
+
 
   try {
     QuizSubmission.count({ id: quiz }, function (err, count) {
       if (count == 0) {
+        console.log(count);
         const quizsubmission = new QuizSubmission({
-          title,
           id: quiz,
-          answer: data,
+          answer: answer,
         });
-        quizsubmission.save(function (err, res) {
-          console.log(res);
+        quizsubmission.save(function (err, result) {
+          if(err){
+            res.status(400).json(err);
+            console.log(err);
+          }else{
+             res.status(200).json({message:"Saved"});
+          }
+
         });
       } else {
         try {
-          QuizSubmission.find(
-            { $and: [{ id: quiz }, { "answer.id": st_id }] },
+          QuizSubmission.count(
+            { $and: [{ id: quiz }, { "answer.email": email }] },
             function (err, count) {
               if (count != 0) {
-                console.log("COunt ", count);
-                res.status(200).json(count);
+                console.log("Count ", count);
+                res.status(400).json("Already submitted");
               } else {
                 QuizSubmission.updateOne(
                   { id: quiz },
-                  { $push: { answer: data } },
+                  { $push: { answer: answer } },
                   function (err, res) {
                     console.log("Res", res);
                   }
                 );
-                res.status(400).json("ALready exists");
+                res.status(200).json("Submitted");
               }
             }
           );

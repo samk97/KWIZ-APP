@@ -112,14 +112,8 @@ const StudentAttempQuiz = (props) => {
     alert("Quiz active");
     navigate("/quiz/" + id);
 
-<<<<<<< HEAD
-    
-    console.log(id,title);
-  }
-=======
     console.log(id, title);
   };
->>>>>>> c0556b990c162ecbc2a4dea49a6b217164f2683e
 
   return (
     <>

@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function StudentQuestionArea({ id, number }) {
-  console.log(id);
+function StudentQuestionArea(props) {
+
 
   const [data, setData] = useState([]);
+  const [op,setOp] = useState("");
 
   useEffect(() => {
     axios
-      .post("http://localhost:4000/api/get-question-by-id", { id: id })
+      .post("http://localhost:4000/api/get-question-by-id", { id: props.id })
       .then(function (res) {
         setData(res.data[0]);
       })
@@ -17,7 +18,11 @@ function StudentQuestionArea({ id, number }) {
       });
   }, []);
 
-  console.log(data);
+
+  const handleClick = (e)=>{
+    props.handleCallBack({q:data._id,op:e.target.value});
+  }
+
 
   return (
     <>
@@ -26,7 +31,7 @@ function StudentQuestionArea({ id, number }) {
           <div class="flex flex-col justify-center items-center border-x-2 border-t-2 border-gray-500 bg-green-200 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
             <div class="flex justify-center text-lg font-bold leading-loose  bg-gradient-to-r from-green-200 via-indigo-500 to-green-200 min-w-[8rem] max-w-[20rem] w-[60%] px-4">
               <p>Question</p>
-              <span className="mx-2">{number}</span>
+              <span className="mx-2">{props.number}</span>
             </div>
 
             <p>{data.question}</p>
@@ -39,8 +44,9 @@ function StudentQuestionArea({ id, number }) {
               <input
                 id="bordered-radio-1"
                 type="radio"
-                value=""
-                name={id}
+                value="1"
+                onClick={handleClick}
+                name={props.id}
                 class="w-7 h-7 text-red-600 bg-gray-100 border-gray-300 accent-red-500"
               />
               <label
@@ -55,8 +61,10 @@ function StudentQuestionArea({ id, number }) {
               <input
                 id="bordered-radio-2"
                 type="radio"
-                value=""
-                name={id}
+                value="2"
+                
+                onClick={handleClick}
+                name={props.id}
                 class="w-7 h-7 text-red-600 bg-gray-100 border-gray-300 accent-red-500"
               />
               <label
@@ -71,8 +79,10 @@ function StudentQuestionArea({ id, number }) {
               <input
                 id="bordered-radio-3"
                 type="radio"
-                value=""
-                name={id}
+                value="3"
+                name={props.id}
+                
+                onClick={handleClick}
                 class="w-7 h-7 text-red-600 bg-gray-100 border-gray-300 accent-red-500"
               />
               <label
@@ -87,8 +97,9 @@ function StudentQuestionArea({ id, number }) {
               <input
                 id="bordered-radio-4"
                 type="radio"
-                value=""
-                name={id}
+                value="4"
+                name={props.id}
+                onClick={handleClick}
                 class="w-7 h-7 text-red-600 bg-gray-100 border-gray-300 accent-red-500"
               />
               <label
