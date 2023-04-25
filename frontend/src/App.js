@@ -17,6 +17,7 @@ import QuizDetails from "./main_modules/QuizDetails";
 import ForgotPassword from "./main_modules/ForgotPassword";
 import AdminProfile from "./main_modules/AdminProfile";
 import StudentProfile from "./main_modules/StudentProfile";
+import StudentLeaderBoard from "./main_modules/StudentLeaderBoard";
 
 function App() {
   const [open, setOpen] = useState(true);
@@ -68,10 +69,9 @@ function App() {
           element={<StudentAttemptQuiz open={open} />}
         />
 
-        {/* Component pending */}
         <Route
-          path="quizzes_attempted"
-          element={<AdminCreateQuestions open={open} />}
+          path="leaderboard"
+          element={<StudentLeaderBoard open={open} />}
         />
 
         {/* Component pending */}

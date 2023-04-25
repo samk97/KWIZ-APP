@@ -47,7 +47,7 @@ function StudentSideNav(props) {
           {/* StudentSideNav */}
           <div
             className={`border-r border-gray-700 relative flex flex-col justify-start bg-gray-200 h-screen ${
-              props.open ? "w-72" : "w-16"
+              props.open ? "w-60 sm:w-72" : "w-14 sm:w-16"
             } duration-200`}
           >
             <div
@@ -91,7 +91,7 @@ function StudentSideNav(props) {
               </NavLink>
 
               {/* StudentSideNav option 2 */}
-              <NavLink to="/dashboard/">
+              <NavLink to="/dashboard/leaderboard">
                 <div className="flex justify-start items-center w-full hover:font-bold">
                   <div className="flex justify-center items-center w-16">
                     <FaListAlt className="text-[46px] cursor-pointer"></FaListAlt>
@@ -100,52 +100,7 @@ function StudentSideNav(props) {
                   <span
                     className={`duration-100 ${!props.open && "scale-0 w-0"}`}
                   >
-                    Ongoing Quiz
-                  </span>
-                </div>
-              </NavLink>
-
-              {/* StudentSideNav Option 3 */}
-              <NavLink to="/dashboard/">
-                <div className="flex justify-start items-center w-full hover:font-bold">
-                  <div className="flex justify-center items-center w-16 h-full">
-                    <FaPenSquare className="text-[50px] cursor-pointer"></FaPenSquare>
-                  </div>
-
-                  <span
-                    className={`duration-100 ${!props.open && "scale-0 w-0"}`}
-                  >
-                    Quizzes Attempted
-                  </span>
-                </div>
-              </NavLink>
-
-              {/* StudentSideNav Option 4 */}
-              <NavLink to="/dashboard/">
-                <div className="flex justify-start items-center w-full hover:font-bold">
-                  <div className="flex justify-center items-center w-16 h-full">
-                    <MdQuiz className="rounded-xl text-[50px] cursor-pointer"></MdQuiz>
-                  </div>
-
-                  <span
-                    className={`duration-100 ${!props.open && "scale-0 w-0"}`}
-                  >
-                    Quizzes Missed
-                  </span>
-                </div>
-              </NavLink>
-
-              {/* StudentSideNav Option 5 */}
-              <NavLink to="/dashboard/">
-                <div className="flex justify-start items-center w-full hover:font-bold">
-                  <div className="flex justify-center items-center w-16 h-full">
-                    <MdQuiz className="rounded-xl text-[50px] cursor-pointer"></MdQuiz>
-                  </div>
-
-                  <span
-                    className={`duration-100 ${!props.open && "scale-0 w-0"}`}
-                  >
-                    Leaderboard
+                    LeaderBoard
                   </span>
                 </div>
               </NavLink>

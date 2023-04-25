@@ -45,7 +45,7 @@ function SideNav(props) {
           {/* Sidenav */}
           <div
             className={`border-r border-gray-700 relative flex flex-col justify-start bg-gray-200 h-screen ${
-              props.open ? "w-72" : "w-16"
+              props.open ? "w-64 bg-red-400 sm:w-72" : "w-10 sm:w-16"
             } duration-200`}
           >
             <div
