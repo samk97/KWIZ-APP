@@ -1,8 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
 import { FaListAlt } from "react-icons/fa";
-import { FaPenSquare } from "react-icons/fa";
-import { MdQuiz } from "react-icons/md";
+import { GiRank3 } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -94,7 +93,7 @@ function StudentSideNav(props) {
               <NavLink to="/dashboard/leaderboard">
                 <div className="flex justify-start items-center w-full hover:font-bold">
                   <div className="flex justify-center items-center w-16">
-                    <FaListAlt className="text-[46px] cursor-pointer"></FaListAlt>
+                    <GiRank3 className="text-[46px] cursor-pointer"></GiRank3>
                   </div>
 
                   <span
