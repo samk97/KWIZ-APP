@@ -85,9 +85,10 @@ const check2 = (title, aa, rt) => {
 const StudentAttempQuiz = (props) => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
+  const url = process.env.REACT_APP_URL;
   useEffect(() => {
     axios
-      .post("http://localhost:4000/api/get-all-quiz", {})
+      .post(url + "/get-all-quiz", {})
       .then(function (res) {
        
 

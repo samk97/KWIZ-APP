@@ -6,9 +6,10 @@ function StudentLeaderBoard(props) {
 
 
   const [data,setData] = useState([]);
+  const url = process.env.REACT_APP_URL;
   useEffect(() => {
     axios
-      .post("http://localhost:4000/api/get-leaderboard", {})
+      .post(url + "/get-leaderboard", {})
       .then(function (res) {
        
         res.data.sort((a,b) => (Number(a.score) < Number(b.score)? 1 : -1));

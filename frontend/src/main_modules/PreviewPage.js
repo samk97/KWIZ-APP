@@ -13,6 +13,7 @@ function PreviewPage(props) {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    const url = process.env.REACT_APP_URL;
 
     var l = JSON.parse(data);
     var questions = [];
@@ -24,7 +25,7 @@ function PreviewPage(props) {
     console.log(questions);
 
     await axios
-      .post("http://localhost:4000/api/save-quiz", {
+      .post(url + "/save-quiz", {
         questions,
         startTime,
         runTime,
