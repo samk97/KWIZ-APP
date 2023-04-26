@@ -114,8 +114,6 @@ exports.fetchLeaderBoard = async (req, res) => {
       }else{
         leaderboard.push({email:email,score:score});
       }
-
-
     }
   }
 
