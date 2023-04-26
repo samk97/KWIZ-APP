@@ -20,7 +20,7 @@ function StudentQuestionArea(props) {
 
 
   const handleClick = (e)=>{
-    props.handleCallBack({q:data._id,op:e.target.value});
+    props.handleCallBack({q:data._id,op:e.target.value,ans:data.ans});
   }
 
 

@@ -7,6 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 function StudentQuiz() {
   const { id } = useParams();
   const [data, setData] = useState([]);
+  var score = 0;
   
   let navigate = useNavigate();
   const state = useSelector((state) => ({ ...state }));
@@ -40,12 +41,23 @@ function StudentQuiz() {
     result.answer[index].op = message.op;
     }else{
       result.answer.push(message);
+
     }
     console.log(result);
   }
 
   const handleSubmit = (e) => {
      e.preventDefault();
+    
+     console.log(result);
+     console.log(data.questions);
+     var score = 0;
+
+     for(var i = 0;i<result.answer.length;i++){
+       if(result.answer[i].ans == result.answer[i].op)
+       score++;
+     }
+     result["score"] = score;
 
      axios
       .post("http://localhost:4000/api/get-submission", { result ,id:id})

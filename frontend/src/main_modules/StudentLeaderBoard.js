@@ -1,4 +1,24 @@
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
+
 function StudentLeaderBoard(props) {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("http://localhost:4000/api/get-leaderboard", {})
+      .then(function (res) {
+        res.data.sort((a, b) => (Number(a.score) < Number(b.score) ? 1 : -1));
+        console.log(res.data);
+        setData(res.data);
+
+        return () => {};
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <div className="flex">
@@ -20,28 +40,26 @@ function StudentLeaderBoard(props) {
               {/* Ranking part */}
               <div className="w-full sm:w-[70%] flex flex-col">
                 {/* Single rank + name tab */}
-                <div className="flex items-center bg-gradient-to-r from-green-300 to-emerald-500 shadow-slate-800 shadow-xl border-2 border-gray-700 rounded-3xl p-1 m-2">
-                  {/* Ranking position */}
-                  <div className="flex justify-center rounded-full items-center bg-blue-700 w-11 min-w-fit h-10 min-h-fit m-2 p-2">
-                    <p className="text-white text-xl font-bold">1</p>
-                  </div>
-                  {/* Name Section */}
-                  <div className="flex justify-start items-center w-full m-2">
-                    <p className="text-lg">Dummy Name</p>
-                  </div>
-                </div>
-
-                {/* Single rank + name tab */}
-                <div className="flex items-center bg-gradient-to-r from-green-300 to-emerald-500 shadow-slate-800 shadow-xl border-2 border-gray-700 rounded-3xl p-1 m-2">
-                  {/* Ranking position */}
-                  <div className="flex justify-center rounded-full items-center bg-blue-700 w-11 min-w-fit h-10 min-h-fit m-2 p-2">
-                    <p className="text-white text-xl font-bold">2</p>
-                  </div>
-                  {/* Name Section */}
-                  <div className="flex justify-start items-center w-full m-2">
-                    <p className="text-lg">Dummy Name 2</p>
-                  </div>
-                </div>
+                {data &&
+                  data.map((e, id) => {
+                    return (
+                      <div className="flex items-center bg-gradient-to-r from-green-300 to-emerald-500 shadow-slate-800 shadow-xl border-2 border-gray-700 rounded-3xl p-1 m-2">
+                        {/* Ranking position */}
+                        <div className="flex justify-center rounded-full items-center bg-blue-700 w-11 min-w-fit h-10 min-h-fit m-2 p-2">
+                          <p className="text-white text-xl font-bold">
+                            {id + 1}
+                          </p>
+                        </div>
+                        {/* Name Section */}
+                        <div className="flex justify-start items-center w-full m-2">
+                          <p className="text-lg">{e.email}</p>
+                        </div>
+                        <div className="flex justify-start items-center w-full m-2">
+                          <p className="text-lg">{"Score : " + e.score}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
               </div>
             </fieldset>
           </div>

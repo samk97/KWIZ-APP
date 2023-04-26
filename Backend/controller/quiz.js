@@ -2,6 +2,10 @@ const Question = require("../models/question");
 const Quiz = require("../models/quiz");
 const QuizSubmission = require("../models/quizsubmission");
 var mongoose = require("mongoose");
+const Redis = require('redis');
+
+   
+
 const check = (title, aa, rt) => {
   const date = new Date().toLocaleString("en-GB");
   const a = new Date(aa).toLocaleString("en-GB");
@@ -81,6 +85,15 @@ const check2 = (title, aa, rt) => {
 };
 
 exports.fetchLeaderBoard = async (req, res) => {
+
+
+
+  
+  
+
+
+
+
   var leaderboard=[];
   var quiz = [];
 
@@ -93,18 +106,10 @@ exports.fetchLeaderBoard = async (req, res) => {
     for(var j = 0;j<obj.answer.length;j++){
     
       var email = obj.answer[j].email;
-      var score = 0;
-      for(var k = 0;k<obj.answer[j].answer.length;k++){
-        var q = obj.answer[j].answer[k];
-        var ques = await Question.find({_id:q.q}).exec();
-        if(ques.length == 1   && ques[0].ans == q.op)
-        score++;
-      }
-      
+      var score = obj.answer[j].score;
       const isPresent = leaderboard.some(item => item.email === email);
       if(isPresent){
         const obj = leaderboard.findIndex(item => item.email === email);
-        console.log("OBJ",obj);
         leaderboard[obj].score += score;
       }else{
         leaderboard.push({email:email,score:score});
@@ -113,6 +118,8 @@ exports.fetchLeaderBoard = async (req, res) => {
 
     }
   }
+
+  
   
   res.status(200).json(leaderboard);
 };
