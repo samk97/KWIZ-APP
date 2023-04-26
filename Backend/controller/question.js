@@ -3,8 +3,8 @@ const Quiz = require("../models/quiz");
 const QuizSubmission = require("../models/quizsubmission");
 var mongoose = require("mongoose");
 const check = (title, aa, rt) => {
-  const date = new Date().toLocaleString("en-GB");
-  const a = new Date(aa).toLocaleString("en-GB");
+  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+  const a = new Date(aa).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
 
   console.log(title);
 
@@ -46,8 +46,8 @@ const check = (title, aa, rt) => {
   return false;
 };
 const check2 = (title, aa, rt) => {
-  const date = new Date().toLocaleString("en-GB");
-  const a = new Date(aa).toLocaleString("en-GB");
+  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+  const a = new Date(aa).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
 
   console.log(title);
 
@@ -155,7 +155,7 @@ exports.insertQuiz = async (req, res) => {
   const { title, startTime, runTime, questions } = req.body;
 
   const x = new Date(startTime);
-  console.log(x.toLocaleString());
+  console.log(x.toLocaleString("en-GB"));
 
   try {
     Quiz.countDocuments({ title }, function (err, count) {

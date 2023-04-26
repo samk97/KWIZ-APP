@@ -28,7 +28,7 @@ function AdminCreateQuiz(props) {
         const x = JSON.stringify(res.data);
         console.log(startTime);
         localStorage.setItem("quiz", x);
-        localStorage.setItem("time", startTime);
+        localStorage.setItem("time", JSON.stringify(startTime));
         localStorage.setItem("runTime", time);
         navigate("/admin/preview");
       });
