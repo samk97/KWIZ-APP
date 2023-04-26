@@ -23,7 +23,7 @@ function StudentSideNav(props) {
     } else {
       navigate("/login");
     }
-  });
+  },[]);
 
   const handleLogOut = (e) => {
     e.preventDefault();

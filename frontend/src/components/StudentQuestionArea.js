@@ -5,7 +5,7 @@ function StudentQuestionArea(props) {
 
 
   const [data, setData] = useState([]);
-  const [op,setOp] = useState("");
+  
 
   useEffect(() => {
     axios

@@ -20,7 +20,7 @@ function SideNav(props) {
 
   useEffect(() => {
     if (state && state.user) {
-      if (state.user.role == "student") navigate("/dashboard");
+      if (state.user.role === "student") navigate("/dashboard");
     } else {
       navigate("/login");
     }
