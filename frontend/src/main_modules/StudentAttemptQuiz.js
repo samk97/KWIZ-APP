@@ -141,9 +141,9 @@ const StudentAttempQuiz = (props) => {
               console.log(x);
 
               return (
-                <div key={_id}>
+                <div className="w-full sm:w-fit" key={_id}>
                   <div
-                    className="bg-blue-200 w-60 h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
+                    className="bg-blue-200 sm:w-60 sm:h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
                     onClick={() => {
                       handleClick(_id, title, startTime, runTime);
                     }}

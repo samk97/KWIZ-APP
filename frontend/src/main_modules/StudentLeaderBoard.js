@@ -43,12 +43,12 @@ function StudentLeaderBoard(props) {
             {/* Leaderboard div */}
             <div className="flex justify-center w-full bg-gradient-to-r from-cyan-400 to-blue-300 border-2 border-gray-700 rounded-2xl shadow-slate-800 shadow-xl p-3">
               {/* Ranking part */}
-              <div className="w-full sm:w-[70%] flex flex-col">
+              <div className="w-full sm:w-[90%] md:w-[70%] flex flex-col">
                 {/* Single rank + name tab */}
                 {data &&
                   data.map((e, id) => {
                     return (
-                      <div className="flex items-center bg-gradient-to-r from-green-300 to-emerald-500 shadow-slate-800 shadow-xl border-2 border-gray-700 rounded-3xl p-1 m-2">
+                      <div className="flex items-center bg-gradient-to-r from-green-300 to-emerald-500 shadow-slate-800 shadow-xl border-2 border-gray-700 rounded-3xl p-1 my-2 sm:m-2">
                         {/* Ranking position */}
                         <div>
                           <div className="flex justify-center rounded-full items-center bg-blue-700 w-11 min-w-fit h-11 min-h-fit mx-1 my-0 sm:m-2 p-2">
@@ -65,10 +65,13 @@ function StudentLeaderBoard(props) {
                           </p>
                         </div>
                         {/* Score section */}
-                        <div className="flex justify-start items-center w-[50%] sm:w-[40%] md:w-[60%] mx-1 my-0 sm:m-2">
-                          <p className="text-sm sm:text-lg font-bold text-red-700 w-fit break-words">
-                            {"Score : " + e.score}
-                          </p>
+
+                        <div className="flex justify-end items-center w-[50%] sm:w-[40%] md:w-[60%] mx-1 my-0 sm:m-2 md:mr-7 lg:mr-10">
+                          <div>
+                            <p className="text-sm sm:text-lg font-bold text-red-700 w-fit break-words">
+                              {"Score : " + e.score}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     );

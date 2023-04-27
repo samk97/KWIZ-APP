@@ -1,7 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FiChevronLeft } from "react-icons/fi";
-import { FiEdit2 } from "react-icons/fi";
-import { VscListUnordered } from "react-icons/vsc";
+import { FiChevronLeft, FiEdit2 } from "react-icons/fi";
 import { GiRank3 } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
@@ -71,7 +69,8 @@ function StudentSideNav(props) {
           </div>
         </div>
 
-        <div className="sm:hidden flex justify-center items-center fixed top-0 h-10 text-gray-800 font-bold p-1">
+        {/* Student Reg no */}
+        <div className="sm:hidden flex justify-center items-center fixed top-0 h-10 text-gray-800 p-1">
           {regNo}
         </div>
 
@@ -112,7 +111,7 @@ function StudentSideNav(props) {
               <NavLink to="/dashboard/attempt_quiz">
                 <div className="flex justify-start items-center w-full hover:font-bold group">
                   <div className="flex justify-center items-center group-hover:scale-[1.1] duration-200 w-16">
-                    <VscListUnordered className="text-[2.5rem] cursor-pointer" />
+                    <FiEdit2 className="text-[2.5rem] cursor-pointer" />
                   </div>
 
                   <span
