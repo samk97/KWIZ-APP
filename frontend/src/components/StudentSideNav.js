@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
+import { FiEdit2 } from "react-icons/fi";
 import { VscListUnordered } from "react-icons/vsc";
 import { GiRank3 } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
@@ -9,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function StudentSideNav(props) {
-  const email = "2022ca001.abcdef@mnnit.ac.in";
+  const email = "abcdef.2021ca001@mnnit.ac.in";
   let navigate = useNavigate();
 
   let dispatch = useDispatch();
@@ -38,14 +39,47 @@ function StudentSideNav(props) {
     navigate("/login");
   };
 
+  const regNo = email.substring(email.indexOf(".") + 1, email.lastIndexOf("@"));
+  console.log(`reg : ${regNo}`);
+
   return (
     <>
       <nav>
+        {/* Top Nav for mobile devices */}
+        <div className="sm:hidden flex fixed top-0 bg-green-300 w-full h-10">
+          <div className="h-full w-1/6"></div>
+          <div className="flex justify-center h-full w-4/6">
+            <NavLink to="/dashboard/attempt_quiz">
+              <div className="flex justify-center items-center h-full w-10">
+                <FiEdit2 className="text-[1.3rem]" />
+              </div>
+            </NavLink>
+
+            <NavLink to="/dashboard/leaderboard">
+              <div className="flex justify-center items-center h-full w-10">
+                <GiRank3 className="text-[1.3rem]" />
+              </div>
+            </NavLink>
+          </div>
+          <div
+            onClick={handleLogOut}
+            className="flex justify-center items-center h-full w-1/6"
+          >
+            <div className="border-l border-black pl-1">
+              <p className="text-sm font-bold text-blue-700">Log Out</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="sm:hidden flex justify-center items-center fixed top-0 h-10 text-gray-800 font-bold p-1">
+          {regNo}
+        </div>
+
         {/* StudentSideNav wrapper */}
         <div className="fixed top-0 left-0 h-screen">
           {/* StudentSideNav */}
           <div
-            className={`border-r border-gray-700 relative flex flex-col justify-start bg-gray-200 h-screen ${
+            className={`hidden sm:flex  flex-col justify-start relative border-r border-gray-700 bg-gray-200 h-screen ${
               props.open ? "w-48 sm:w-72" : "w-[3.7rem] sm:w-16"
             } duration-200`}
           >
@@ -59,7 +93,7 @@ function StudentSideNav(props) {
                   props.open ? "" : "scale-0"
                 } duration-100`}
               >
-                <BsPersonCircle className="rounded-full text-6xl text-blue-300"></BsPersonCircle>
+                <BsPersonCircle className="rounded-full text-6xl text-blue-300" />
                 <div className="w-full">
                   <p className="text-sm text-gray-200 break-words">{email}</p>
                 </div>
@@ -70,7 +104,7 @@ function StudentSideNav(props) {
                   !props.open && "rotate-180"
                 } duration-500`}
                 onClick={props.onOpen}
-              ></FiChevronLeft>
+              />
             </div>
             {/* StudentSideNav Mid Section */}
             <div className="relative flex flex-col justify-center w-full">
@@ -78,7 +112,7 @@ function StudentSideNav(props) {
               <NavLink to="/dashboard/attempt_quiz">
                 <div className="flex justify-start items-center w-full hover:font-bold group">
                   <div className="flex justify-center items-center group-hover:scale-[1.1] duration-200 w-16">
-                    <VscListUnordered className="text-[2.5rem] cursor-pointer"></VscListUnordered>
+                    <VscListUnordered className="text-[2.5rem] cursor-pointer" />
                   </div>
 
                   <span
@@ -93,7 +127,7 @@ function StudentSideNav(props) {
               <NavLink to="/dashboard/leaderboard">
                 <div className="flex justify-start items-center w-full hover:font-bold group">
                   <div className="flex justify-center items-center group-hover:scale-[1.1] duration-200 w-16">
-                    <GiRank3 className="text-[3rem]  cursor-pointer"></GiRank3>
+                    <GiRank3 className="text-[3rem]  cursor-pointer" />
                   </div>
 
                   <span
@@ -109,7 +143,7 @@ function StudentSideNav(props) {
                 <NavLink to="/login">
                   <div className="flex justify-start items-center w-full h-[60px]  hover:font-bold group">
                     <div className="flex justify-center items-center group-hover:scale-[1.1] duration-200 w-16 h-full">
-                      <BiLogOut className=" text-[40px] cursor-pointer m-2"></BiLogOut>
+                      <BiLogOut className=" text-[40px] cursor-pointer m-2" />
                     </div>
 
                     <span

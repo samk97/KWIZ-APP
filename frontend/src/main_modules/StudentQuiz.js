@@ -8,13 +8,13 @@ function StudentQuiz() {
   const { id } = useParams();
   const [data, setData] = useState([]);
   var score = 0;
-  
+
   let navigate = useNavigate();
   const state = useSelector((state) => ({ ...state }));
 
   const email = state.user.email;
-  var result = {email:email,answer:[]};
-  
+  var result = { email: email, answer: [] };
+
   useEffect(() => {
     axios
       .post("http://localhost:4000/api/get-quiz", { id: id })
@@ -31,49 +31,44 @@ function StudentQuiz() {
     console.log("ssssssssssssssss");
   }, []);
 
-
-  const callBack = (message) =>{
+  const callBack = (message) => {
     console.log(message);
-    
-    const found = result.answer.some(el => el.q == message.q);
-    if(found){
-    const index = result.answer.findIndex((el => el.q == message.q));
-    result.answer[index].op = message.op;
-    }else{
-      result.answer.push(message);
 
+    const found = result.answer.some((el) => el.q == message.q);
+    if (found) {
+      const index = result.answer.findIndex((el) => el.q == message.q);
+      result.answer[index].op = message.op;
+    } else {
+      result.answer.push(message);
     }
     console.log(result);
-  }
+  };
 
   const handleSubmit = (e) => {
-     e.preventDefault();
-    
-     console.log(result);
-     console.log(data.questions);
-     var score = 0;
+    e.preventDefault();
 
-     for(var i = 0;i<result.answer.length;i++){
-       if(result.answer[i].ans == result.answer[i].op)
-       score++;
-     }
-     result["score"] = score;
+    console.log(result);
+    console.log(data.questions);
+    var score = 0;
 
-     axios
-      .post("http://localhost:4000/api/get-submission", { result ,id:id})
+    for (var i = 0; i < result.answer.length; i++) {
+      if (result.answer[i].ans == result.answer[i].op) score++;
+    }
+    result["score"] = score;
+
+    axios
+      .post("http://localhost:4000/api/get-submission", { result, id: id })
       .then(function (res) {
         console.log(res);
         alert("Submitted Successfully");
         navigate("/dashboard");
-        
       })
       .catch(function (err) {
         console.log(err);
         alert("Already Submitted or Some internal failure");
         navigate("/dashboard");
       });
-
-  }
+  };
 
   console.log(data);
 
@@ -84,7 +79,7 @@ function StudentQuiz() {
         {/* left info area */}
         <div class=" hidden md:fixed md:top=0 md:left-0 w-[17rem] md:h-screen md:flex flex-col md:items-center md:bg-gray-200 md:border-r-2 md:border-gray-400">
           <div className="hidden md:flex md:w-full md:h-auto md:bg-emerald-700 p-2">
-            <p class="w-full">{email}</p>
+            <p class="w-full break-words">{email}</p>
           </div>
 
           {/* Timer Area */}
