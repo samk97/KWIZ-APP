@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function StudentSideNav(props) {
-  const email = "abcdef.2021ca001@mnnit.ac.in";
   let navigate = useNavigate();
 
   let dispatch = useDispatch();
 
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
+  const email = state.user.email;
 
   useEffect(() => {
     if (state && state.user) {
@@ -22,7 +22,7 @@ function StudentSideNav(props) {
     } else {
       navigate("/login");
     }
-  });
+  }, []);
 
   const handleLogOut = (e) => {
     e.preventDefault();

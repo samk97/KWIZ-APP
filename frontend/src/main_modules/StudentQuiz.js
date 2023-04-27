@@ -7,6 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 function StudentQuiz() {
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const url = process.env.REACT_APP_URL;
   var score = 0;
 
   let navigate = useNavigate();
@@ -17,7 +18,7 @@ function StudentQuiz() {
 
   useEffect(() => {
     axios
-      .post("http://localhost:4000/api/get-quiz", { id: id })
+      .post(url + "/get-quiz", { id: id })
       .then(function (res) {
         setData(res.data);
 
@@ -57,7 +58,7 @@ function StudentQuiz() {
     result["score"] = score;
 
     axios
-      .post("http://localhost:4000/api/get-submission", { result, id: id })
+      .post(url + "/get-submission", { result, id: id })
       .then(function (res) {
         console.log(res);
         alert("Submitted Successfully");

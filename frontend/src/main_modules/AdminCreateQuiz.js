@@ -14,11 +14,12 @@ function AdminCreateQuiz(props) {
   const [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState();
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_URL;
 
   const handleClick = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:4000/api/create-random-quiz", {
+      .post(url + "/create-random-quiz", {
         number: value,
         time: time,
       })
@@ -27,7 +28,7 @@ function AdminCreateQuiz(props) {
         const x = JSON.stringify(res.data);
         console.log(startTime);
         localStorage.setItem("quiz", x);
-        localStorage.setItem("time", startTime);
+        localStorage.setItem("time", JSON.stringify(startTime));
         localStorage.setItem("runTime", time);
         navigate("/admin/preview");
       });

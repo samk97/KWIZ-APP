@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+
 
 function QuizDetails(props) {
   const title = "Data Structure Quiz 1";

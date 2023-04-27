@@ -17,9 +17,10 @@ function LoginPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   let dispatch = useDispatch();
+  const url = process.env.REACT_APP_URL;
 
   const state = useSelector((state) => ({ ...state }));
-  console.log(state);
+  console.log(process.env.REACT_APP_URL,"URL");
 
   useEffect(() => {
     if (state && state.user) {
@@ -42,7 +43,7 @@ function LoginPage() {
     console.log(user.emailVerified);
 
     if (user.emailVerified) {
-      const res = await fetch("http://localhost:4000/api/login", {
+      const res = await fetch(url + "/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

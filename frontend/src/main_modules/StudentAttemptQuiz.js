@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const check = (title, aa, rt) => {
-  const date = new Date().toLocaleString("en-GB");
-  const a = new Date(aa).toLocaleString("en-GB");
+  const date = new Date().toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });
+  const a = new Date(aa).toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });
 
   console.log(title, date, a);
 
@@ -48,10 +48,10 @@ const check = (title, aa, rt) => {
   return false;
 };
 const check2 = (title, aa, rt) => {
-  const date = new Date().toLocaleString();
-  const a = new Date(aa).toLocaleString();
+  const date = new Date().toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });
+  const a = new Date(aa).toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });
 
-  console.log(title);
+  console.log(title, date, a);
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -85,13 +85,18 @@ const check2 = (title, aa, rt) => {
 const StudentAttempQuiz = (props) => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
+  const url = process.env.REACT_APP_URL;
   useEffect(() => {
     axios
-      .post("http://localhost:4000/api/get-all-quiz", {})
+      .post(url + "/get-all-quiz", {})
       .then(function (res) {
         res.data.sort((a, b) =>
-          new Date(a.startTime).toLocaleString() <
-          new Date(b.startTime).toLocaleString()
+          new Date(a.startTime).toLocaleString("en-GB", {
+            timeZone: "Asia/Kolkata",
+          }) <
+          new Date(b.startTime).toLocaleString("en-GB", {
+            timeZone: "Asia/Kolkata",
+          })
             ? 1
             : -1
         );
@@ -109,7 +114,12 @@ const StudentAttempQuiz = (props) => {
       alert("Closed");
       return;
     } else if (check2(title, startTime, runTime)) {
-      alert("Quiz will start at" + new Date(startTime).toLocaleString());
+      alert(
+        "Quiz will start at" +
+          new Date(startTime).toLocaleString("en-GB", {
+            timeZone: "Asia/Kolkata",
+          })
+      );
       return;
     }
     alert("Quiz active");
@@ -137,7 +147,9 @@ const StudentAttempQuiz = (props) => {
               const { createdAt, questions, runTime, startTime, title, _id } =
                 details;
 
-              const x = new Date(startTime).toLocaleString();
+              const x = new Date(startTime).toLocaleString("en-GB", {
+                timeZone: "Asia/Kolkata",
+              });
               console.log(x);
 
               return (
