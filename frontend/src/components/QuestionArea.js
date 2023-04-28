@@ -1,5 +1,6 @@
 function QuestionArea(props) {
   const question = props.question;
+  const index =props.index;
   const op_a = props.op_a;
   const op_b = props.op_b;
   const op_c = props.op_c;
@@ -12,7 +13,7 @@ function QuestionArea(props) {
         {/* Questions Div */}
         <div className="flex flex-col justify-center items-center bg-green-200 border-x-2 border-t-2 border-gray-500 rounded-tl-xl rounded-tr-xl mx-3 px-7 py-4">
           <div className="text-lg font-bold leading-loose rounded-md px-4">
-            <p>Question</p>
+            <p>Question {index}</p>
           </div>
 
           <p>{question}</p>

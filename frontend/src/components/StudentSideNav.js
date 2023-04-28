@@ -9,14 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function StudentSideNav(props) {
-  const email = "2022ca001.abcdef@mnnit.ac.in";
+  
   let navigate = useNavigate();
 
   let dispatch = useDispatch();
 
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
-
+  const email = state.user.email;
   useEffect(() => {
     if (state && state.user) {
       if (state.user.role == "teacher") navigate("/admin");

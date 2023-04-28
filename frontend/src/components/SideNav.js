@@ -11,12 +11,13 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 function SideNav(props) {
-  const userName = "M.M. Gore";
+  
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
+  const userName = state.user.email;
 
   useEffect(() => {
     if (state && state.user) {
@@ -45,7 +46,7 @@ function SideNav(props) {
           {/* Sidenav */}
           <div
             className={`border-r border-gray-700 relative flex flex-col justify-start bg-gray-200 h-screen ${
-              props.open ? "w-64 bg-red-400 sm:w-72" : "w-10 sm:w-16"
+              props.open ? "w-64  sm:w-72" : "w-10 sm:w-16"
             } duration-200`}
           >
             <div
