@@ -1,6 +1,5 @@
 function Form(props) {
   const formLabel = props.formLabel;
-  const buttonLabel = props.buttonLabel;
 
   return (
     <>

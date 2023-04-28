@@ -4,10 +4,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const check = (title, aa, rt) => {
-  const date = new Date().toLocaleString("en-GB");
-  const a = new Date(aa).toLocaleString("en-GB");
 
-  console.log(title, date, a);
+  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+
+  
+
+
+  const a = aa;
+
+  console.log(date, a);
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -15,11 +20,15 @@ const check = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  var year2 = a.substring(6, 10);
-  var month2 = a.substring(3, 5);
-  var dt2 = a.substring(0, 2);
-  var hour2 = a.substring(12, 14);
-  var minute2 = a.substring(15, 17);
+  console.log(year,month,dt,hour,minute);
+
+  var year2 = a.substring(0, 4);
+  var month2 = a.substring(5, 7);
+  var dt2 = a.substring(8, 10);
+  var hour2 = a.substring(11, 13);
+  var minute2 = a.substring(14, 17);
+
+  console.log(year2,month2,dt2,hour2,minute2);
 
   if (year2 < year) return false;
   if (year > year2) return true;
@@ -48,10 +57,10 @@ const check = (title, aa, rt) => {
   return false;
 };
 const check2 = (title, aa, rt) => {
-  const date = new Date().toLocaleString();
-  const a = new Date(aa).toLocaleString();
+  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+  const a = aa;
 
-  console.log(title);
+  console.log(title,date,a);
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -59,11 +68,13 @@ const check2 = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  var year2 = a.substring(6, 10);
-  var month2 = a.substring(3, 5);
-  var dt2 = a.substring(0, 2);
-  var hour2 = a.substring(12, 14);
-  var minute2 = a.substring(15, 17);
+  console.log(year,month,dt,hour,minute);
+
+  var year2 = a.substring(0, 4);
+  var month2 = a.substring(5, 7);
+  var dt2 = a.substring(8, 10);
+  var hour2 = a.substring(11, 13);
+  var minute2 = a.substring(14, 17);
 
   if (year2 > year) return true;
 
@@ -85,13 +96,14 @@ const check2 = (title, aa, rt) => {
 const StudentAttempQuiz = (props) => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
+  const url = process.env.REACT_APP_URL;
   useEffect(() => {
     axios
-      .post("http://localhost:4000/api/get-all-quiz", {})
+      .post(url + "/get-all-quiz", {})
       .then(function (res) {
        
 
-        res.data.sort((a,b) => (new Date(a.startTime).toLocaleString() < new Date(b.startTime).toLocaleString())? 1 : -1);
+      //  res.data.sort((a,b) => (new Date(a.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}) < new Date(b.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}))? 1 : -1);
         setData(res.data);
 
         return () => {};
@@ -106,7 +118,7 @@ const StudentAttempQuiz = (props) => {
       alert("Closed");
       return;
     }else if(check2(title,startTime,runTime)){
-      alert("Quiz will start at" + new Date(startTime).toLocaleString());
+      alert("Quiz will start at" + startTime);
       return;
     }
     alert("Quiz active");
@@ -134,8 +146,8 @@ const StudentAttempQuiz = (props) => {
               const { createdAt, questions, runTime, startTime, title, _id } =
                 details;
 
-              const x = new Date(startTime).toLocaleString();
-              console.log(x);
+              const x = startTime;
+             
 
               return (
                 <div key={_id}>

@@ -17,13 +17,15 @@ function StudentSideNav(props) {
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
   const email = state.user.email;
+
+
   useEffect(() => {
     if (state && state.user) {
       if (state.user.role == "teacher") navigate("/admin");
     } else {
       navigate("/login");
     }
-  });
+  },[]);
 
   const handleLogOut = (e) => {
     e.preventDefault();

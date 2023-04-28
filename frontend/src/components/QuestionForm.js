@@ -2,7 +2,6 @@ import Button from "./Button";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 function QuestionForm() {
-  const navigate = useNavigate();
   const [question, setQuestion] = useState("");
   const [op_a, setOp_a] = useState("");
   const [op_b, setOp_b] = useState("");
@@ -15,8 +14,9 @@ function QuestionForm() {
     e.preventDefault();
     let items = { question, op_a, op_b, op_c, op_d, ans, exp };
     console.log(items);
+    const url = process.env.REACT_APP_URL;
 
-    const res = await fetch("http://localhost:4000/api/upload-question", {
+    const res = await fetch(url + "/upload-question", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

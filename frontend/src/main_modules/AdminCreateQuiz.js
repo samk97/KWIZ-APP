@@ -14,11 +14,12 @@ function AdminCreateQuiz(props) {
   const [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState();
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_URL;
 
   const handleClick = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:4000/api/create-random-quiz", {
+      .post(url + "/create-random-quiz", {
         number: value,
         time: time,
       })
@@ -107,7 +108,7 @@ function AdminCreateQuiz(props) {
                   </label>
                   <input
                     type="datetime-local"
-                    onChange={(e) => setStartTime(e.target.value)}
+                    onChange={(e) => { setStartTime(e.target.value)}}
                     value={startTime}
                     id="quizDate"
                     name="quizDate"

@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 function QuestionsSection() {
   const [myData, setMyData] = useState([]);
+  const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
     axios
-      .post("http://localhost:4000/api/get-questions", {})
+      .post(url + "/get-questions", {})
       .then((res) => setMyData(res.data));
   }, []);
   return (

@@ -22,6 +22,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
+  const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
     if (state && state.user) {
@@ -55,7 +56,7 @@ const SignupPage = () => {
         alert("Email verification link send !!");
       });
       if (user) {
-        const res = await fetch("http://localhost:4000/api/signup", {
+        const res = await fetch(url + "/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

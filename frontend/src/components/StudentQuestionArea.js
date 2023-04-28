@@ -5,11 +5,12 @@ function StudentQuestionArea(props) {
 
 
   const [data, setData] = useState([]);
-  const [op,setOp] = useState("");
+  const url = process.env.REACT_APP_URL;
+  
 
   useEffect(() => {
     axios
-      .post("http://localhost:4000/api/get-question-by-id", { id: props.id })
+      .post(url + "/get-question-by-id", { id: props.id })
       .then(function (res) {
         setData(res.data[0]);
       })
