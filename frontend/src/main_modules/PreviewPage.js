@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "../components/Button";
 function PreviewPage(props) {
   const data = localStorage.getItem("quiz");
-  const startTime = JSON.parse(localStorage.getItem("time"));
+  const startTime = (localStorage.getItem("time"));
   const runTime = localStorage.getItem("runTime");
   const [title, setTitle] = useState("");
   console.log(startTime);

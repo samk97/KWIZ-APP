@@ -3,10 +3,15 @@ const Quiz = require("../models/quiz");
 const QuizSubmission = require("../models/quizsubmission");
 var mongoose = require("mongoose");
 const check = (title, aa, rt) => {
-  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
-  const a = new Date(aa).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
 
-  console.log(title);
+  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+
+  
+
+
+  const a = aa;
+
+  console.log(date, a);
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -14,11 +19,15 @@ const check = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  var year2 = a.substring(6, 10);
-  var month2 = a.substring(3, 5);
-  var dt2 = a.substring(0, 2);
-  var hour2 = a.substring(12, 14);
-  var minute2 = a.substring(15, 17);
+  console.log(year,month,dt,hour,minute);
+
+  var year2 = a.substring(0, 4);
+  var month2 = a.substring(5, 7);
+  var dt2 = a.substring(8, 10);
+  var hour2 = a.substring(11, 13);
+  var minute2 = a.substring(14, 17);
+
+  console.log(year2,month2,dt2,hour2,minute2);
 
   if (year2 < year) return false;
   if (year > year2) return true;
@@ -36,6 +45,7 @@ const check = (title, aa, rt) => {
       minute2 = Number(minute2);
       minute = Number(minute);
       rt = Number(rt);
+      console.log(minute2, minute);
 
       if (minute2 > minute) return true;
       console.log(minute2, rt, minute);
@@ -47,9 +57,9 @@ const check = (title, aa, rt) => {
 };
 const check2 = (title, aa, rt) => {
   const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
-  const a = new Date(aa).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+  const a = aa;
 
-  console.log(title);
+  console.log(title,date,a);
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -57,11 +67,13 @@ const check2 = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  var year2 = a.substring(6, 10);
-  var month2 = a.substring(3, 5);
-  var dt2 = a.substring(0, 2);
-  var hour2 = a.substring(12, 14);
-  var minute2 = a.substring(15, 17);
+  console.log(year,month,dt,hour,minute);
+
+  var year2 = a.substring(0, 4);
+  var month2 = a.substring(5, 7);
+  var dt2 = a.substring(8, 10);
+  var hour2 = a.substring(11, 13);
+  var minute2 = a.substring(14, 17);
 
   if (year2 > year) return true;
 
@@ -154,13 +166,12 @@ exports.insertQuiz = async (req, res) => {
   console.log(req.body);
   const { title, startTime, runTime, questions } = req.body;
 
-  const x = new Date(startTime);
-  console.log(x.toLocaleString("en-GB"));
+ 
 
   try {
     Quiz.countDocuments({ title }, function (err, count) {
       if (count == 0) {
-        const quiz = new Quiz({ title, startTime: x, runTime, questions });
+        const quiz = new Quiz({ title, startTime, runTime, questions });
         quiz.save(function (err, ress) {
           res.status(200).json("Saved");
         });
