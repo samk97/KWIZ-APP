@@ -10,7 +10,7 @@ const quizSchema = new mongoose.Schema({
         unique:true,
     },
     startTime:{
-        type:Date,
+        type:String,
         require:true,
     },
     runTime:{
