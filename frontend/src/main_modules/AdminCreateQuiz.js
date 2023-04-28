@@ -9,14 +9,18 @@ import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
+
+import ReactLoading from "react-loading";
 function AdminCreateQuiz(props) {
   const [value, setValue] = useState(0);
   const [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState();
+  const [flag,setFlag] = useState(false);
   const navigate = useNavigate();
   const url = process.env.REACT_APP_URL;
 
   const handleClick = async (e) => {
+    setFlag(true);
     e.preventDefault();
     await axios
       .post(url + "/create-random-quiz", {
@@ -31,7 +35,9 @@ function AdminCreateQuiz(props) {
         localStorage.setItem("time", startTime);
         localStorage.setItem("runTime", time);
         navigate("/admin/preview");
+      
       });
+      setFlag(false);
   };
 
   return (
@@ -46,6 +52,9 @@ function AdminCreateQuiz(props) {
           <div className="w-full bg-red-200 p-2 mb-3">
             <h1 className="text-xl font-bold text-gray-800">Create Quiz</h1>
           </div>
+
+          {flag &&  <ReactLoading type="balls" color="#0000FF" 
+        height={100} width={50} />}
 
           <div className="w-full rounded-xl border-2 border-gray-500 p-4">
             <form>

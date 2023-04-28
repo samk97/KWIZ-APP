@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
+
 
 const check = (title, aa, rt) => {
 
@@ -96,6 +98,7 @@ const check2 = (title, aa, rt) => {
 const StudentAttempQuiz = (props) => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [flag,setFlag] = useState(true);
   const url = process.env.REACT_APP_URL;
   useEffect(() => {
     axios
@@ -105,12 +108,15 @@ const StudentAttempQuiz = (props) => {
 
       //  res.data.sort((a,b) => (new Date(a.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}) < new Date(b.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}))? 1 : -1);
         setData(res.data);
+        setFlag(false);
 
         return () => {};
       })
       .catch(function (err) {
         console.log(err);
+        setFlag(false);
       });
+
   }, []);
 
   const handleClick = (id, title, startTime, runTime) => {
@@ -142,6 +148,8 @@ const StudentAttempQuiz = (props) => {
           {/* Tiles Container */}
           <div className="flex flex-wrap justify-start my-4 gap-5">
             {/* tiles */}
+           {flag &&  <ReactLoading type="balls" color="#0000FF" 
+        height={100} width={50} />}
             {data.map((details) => {
               const { createdAt, questions, runTime, startTime, title, _id } =
                 details;

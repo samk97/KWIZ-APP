@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import ReactLoading from "react-loading";
+
 function StudentQuiz() {
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -15,6 +17,7 @@ function StudentQuiz() {
 
   const email = state.user.email;
   var result = { email: email, answer: [] };
+  const [flag,setFlag] = useState(true);
 
   const startTime = localStorage.getItem("quiz-history-start");
   const title = localStorage.getItem("quiz-history-title");
@@ -27,7 +30,7 @@ function StudentQuiz() {
       .then(function (res) {
         setData(res.data);
         console.log(res.data);
-
+        
         return () => { };
       })
       .catch(function (err) {
@@ -35,7 +38,7 @@ function StudentQuiz() {
         alert(err.response.data.message);
         navigate("/dashboard");
       });
-    console.log("ssssssssssssssss");
+      setFlag(false);
   }, []);
 
 
@@ -67,6 +70,8 @@ function StudentQuiz() {
             </p>
           </div>
 
+          {flag &&  <ReactLoading type="balls" color="#0000FF" 
+        height={100} width={50} />}
 
         </div>
 

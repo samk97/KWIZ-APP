@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../firebase-auth/firebase";
 import { signInWithEmailAndPassword, } from "firebase/auth";
+import ReactLoading from "react-loading";
 function LoginPage() {
   const formLabel = "Log in";
   const buttonLabel = "Sign in";
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [flag,setFlag] = useState(false);
   const [password, setPassword] = useState("");
   let dispatch = useDispatch();
   const url = process.env.REACT_APP_URL;
@@ -36,6 +38,7 @@ function LoginPage() {
   const Login = async (e) => {
     e.preventDefault();
     // let items = { email, name, password };
+    setFlag(true);
 
     try{
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -84,13 +87,17 @@ function LoginPage() {
       alert(error.message);
   }
 
+  setFlag(false);
+
 
   };
   return (
     <>
       <div className="flex w-full h-screen">
+      
         <MajorSide>
           <Form formLabel={formLabel}>
+          
             {/* ID */}
             <InputField
               labelHtmlFor="email"
@@ -114,6 +121,7 @@ function LoginPage() {
               inputClassName="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               inputPlaceholder="•••••••••••••"
             ></InputField>
+             
 
             {/* Forgot Password */}
             <div className="px-3">
@@ -121,8 +129,11 @@ function LoginPage() {
                 <span className="text-xs sm:text-sm text-blue-500 cursor-pointer">
                   Forgot Password ?
                 </span>
+                {flag && <ReactLoading type="balls" color="#0000FF" 
+        height={100} width={50} />}
               </Link>
             </div>
+
 
             {/* submit button */}
             <Button
@@ -132,6 +143,7 @@ function LoginPage() {
               buttonLabel={buttonLabel}
             ></Button>
           </Form>
+         
 
           {/* Only For small devices - sign up */}
           <div className="sm:hidden bg-red-100 absolute right-0 top-0">
