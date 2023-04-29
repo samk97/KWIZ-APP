@@ -1,5 +1,6 @@
 import Button from "./Button";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 function QuestionForm() {
   const [question, setQuestion] = useState("");
@@ -40,6 +41,9 @@ function QuestionForm() {
     }
   };
 
+  const form = useForm();
+  const { reset } = form;
+
   return (
     <>
       {/* Questions */}
@@ -50,7 +54,7 @@ function QuestionForm() {
             <div>
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="question"
+                htmlFor="question"
               >
                 Question
               </label>
@@ -70,7 +74,7 @@ function QuestionForm() {
           <div className="border-x-2 border-b-2 border-gray-500 bg-lime-100 rounded-bl-xl rounded-br-xl mb-3 sm:mx-3 p-3">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              for="question"
+              htmlFor="question"
             >
               Options
             </label>
@@ -155,7 +159,7 @@ function QuestionForm() {
             <div>
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="question"
+                htmlFor="question"
               >
                 Correct Option
               </label>
@@ -164,9 +168,10 @@ function QuestionForm() {
                 id="explaination"
                 value={ans}
                 onChange={(e) => setAns(e.target.value)}
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                defaultValue={"default"}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               >
-                <option selected>Select correct option</option>
+                <option value="default">Select correct option</option>
                 <option value="A">A</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
@@ -178,7 +183,7 @@ function QuestionForm() {
             <div>
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="question"
+                htmlFor="question"
               >
                 Explaination
               </label>
@@ -203,6 +208,7 @@ function QuestionForm() {
 
               <Button
                 buttonType="reset"
+                onClick={() => reset()}
                 buttonClassName="min-w-[100px] text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm py-2.5 text-center"
                 buttonLabel="Reset"
               ></Button>

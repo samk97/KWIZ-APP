@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FiChevronLeft, FiEdit2 } from "react-icons/fi";
-import { GiRank3 } from "react-icons/gi";
+import { GiRank3, GiCancel, GiHamburgerMenu } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -59,12 +59,40 @@ function StudentSideNav(props) {
               </div>
             </NavLink>
           </div>
-          <div
-            onClick={handleLogOut}
-            className="flex justify-center items-center h-full w-1/6"
-          >
-            <div className="border-l border-black pl-1">
-              <p className="text-sm font-bold text-blue-700">Log Out</p>
+
+          {/* Hamburger */}
+          <div className="flex justify-end items-center h-full w-1/6 mr-2">
+            <div>
+              <GiHamburgerMenu className="text-[2rem]" onClick={props.onOpen} />
+              <div
+                className={`flex justify-end ${
+                  props.open
+                    ? "hidden"
+                    : "absolute top-0 left-0 w-screen bg-indigo-950 z-20 text-gray-400"
+                }`}
+              >
+                <GiCancel
+                  onClick={props.onOpen}
+                  className="text-[2rem] text-red-700 absolute top-0 right-0 mr-2 mt-2"
+                />
+
+                <div className="flex flex-col w-full mt-[3rem] m-3 p-1">
+                  {/* Username */}
+                  <div className="flex items-center justify-end p-2">
+                    <BsPersonCircle className="text-[2rem] mr-2" />
+                    <span className="break-words"> {email} </span>
+                  </div>
+
+                  {/* Log out */}
+                  <div
+                    onClick={handleLogOut}
+                    className="flex items-center justify-end p-2 border-t border-black"
+                  >
+                    <BiLogOut className="text-[2rem] mr-2" />
+                    <span> Log Out</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

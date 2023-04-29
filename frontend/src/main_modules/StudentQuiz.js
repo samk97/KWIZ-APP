@@ -80,6 +80,27 @@ function StudentQuiz() {
     <>
       {/* Wrapper div */}
       <div class="flex justify-center w-full h-screen">
+        {/* Info area for mobile devices */}
+        <div className="sm:hidden flex flex-col absolute top-0 h-[6rem] bg-yellow-300 w-screen p-2 text-sm">
+          <div>
+            User: <span>{email}</span>
+          </div>
+          <div>
+            <div>
+              Start Time:{" "}
+              <span>{new Date(data.startTime).toLocaleString()}</span>
+            </div>
+            <div>
+              Run Time: <span>{data.runTime + " Minute"}</span>
+            </div>
+          </div>
+
+          <div>
+            Total Questions:{" "}
+            <span>{data && data.questions ? data.questions.length : "0"}</span>
+          </div>
+        </div>
+
         {/* left info area */}
         <div class=" hidden md:fixed md:top=0 md:left-0 w-[17rem] md:h-screen md:flex flex-col md:items-center md:bg-gray-200 md:border-r-2 md:border-gray-400">
           <div className="hidden md:flex md:w-full md:h-auto md:bg-emerald-700 p-2">
@@ -102,16 +123,16 @@ function StudentQuiz() {
 
           <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-200 p-2">
             <p class="w-full">
-              Total:{" "}
+              Total Questions:{" "}
               <span>
-                ={data && data.questions ? data.questions.length : "0"}
+                {data && data.questions ? data.questions.length : "0"}
               </span>
             </p>
           </div>
         </div>
 
         {/* Quiz area */}
-        <div class="md:ml-[17rem] md:w-full h-fit min-h-screen overlflow-y-scroll bg-gray-100 p-3">
+        <div class="md:ml-[17rem] md:w-full h-fit min-h-screen overlflow-y-scroll bg-gray-100 p-3 mt-[6rem] sm:mt-0">
           {data &&
             data.questions &&
             data.questions.map((res, num) => {
