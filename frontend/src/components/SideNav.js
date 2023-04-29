@@ -30,6 +30,7 @@ function SideNav(props) {
   const handleLogOut = (e) => {
     e.preventDefault();
     localStorage.clear();
+    props.onOpen();
     dispatch({
       type: "LOGOUT",
       payload: null,

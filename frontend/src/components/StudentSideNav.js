@@ -28,6 +28,7 @@ function StudentSideNav(props) {
     e.preventDefault();
     console.log("aa");
     localStorage.clear();
+    props.onOpen();
 
     dispatch({
       type: "LOGOUT",
