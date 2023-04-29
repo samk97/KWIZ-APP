@@ -79,7 +79,7 @@ function StudentSideNav(props) {
           {/* StudentSideNav */}
           <div
             className={`hidden sm:flex  flex-col justify-start relative border-r border-gray-700 bg-gray-200 h-screen ${
-              props.open ? "w-48 sm:w-72" : "w-[3.7rem] sm:w-16"
+              props.open ? "w-72" : "w-16"
             } duration-200`}
           >
             <div

@@ -46,6 +46,15 @@ function StudentLeaderBoard(props) {
               {/* Ranking part */}
               <div className="w-full sm:w-[90%] md:w-[70%] flex flex-col">
                 {/* Single rank + name tab */}
+                {data.length === 0 ? (
+                  <div className="w-full flex justify-center h-screen">
+                    <div className="w-fit h-fit opacity-20 text-2xl font-bold mt-10">
+                      <span>Leaderboard Unavailable</span>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
                 {data &&
                   data.map((e, id) => {
                     return (

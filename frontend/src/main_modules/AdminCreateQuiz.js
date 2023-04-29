@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
-import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
@@ -36,10 +35,10 @@ function AdminCreateQuiz(props) {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex mt-10 sm:mt-0">
         <div
           className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
-            props.open ? "ml-72" : "ml-16"
+            props.open ? "sm:ml-72" : "sm:ml-16"
           } duration-200`}
         >
           {/* Heading */}
@@ -108,7 +107,9 @@ function AdminCreateQuiz(props) {
                   </label>
                   <input
                     type="datetime-local"
-                    onChange={(e) => { setStartTime(e.target.value)}}
+                    onChange={(e) => {
+                      setStartTime(e.target.value);
+                    }}
                     value={startTime}
                     id="quizDate"
                     name="quizDate"

@@ -68,10 +68,10 @@ const AdminHistory = (props) => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex mt-10 sm:mt-0">
         <div
-          className={`bg-gray-100 w-full h-fit min-h-screen overlflow-y-scroll p-5 ${
-            props.open ? "ml-72" : "ml-16"
+          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+            props.open ? "sm:ml-72" : "sm:ml-16"
           } duration-200`}
         >
           {/* Heading */}

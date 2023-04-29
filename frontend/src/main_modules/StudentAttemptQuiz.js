@@ -121,6 +121,9 @@ const StudentAttempQuiz = (props) => {
     console.log(id, title);
   };
 
+  console.log(`datatype : ${typeof data}`);
+  console.log(data);
+  console.log(data.length);
   return (
     <>
       <div className="flex mt-10 sm:mt-0">
@@ -133,6 +136,18 @@ const StudentAttempQuiz = (props) => {
           <div className="w-full bg-red-200 p-2">
             <h1 className="text-xl font-bold text-gray-800">Quizzes</h1>
           </div>
+
+          {/* if no tiles to show */}
+          {data.length === 0 ? (
+            <div className="w-full flex justify-center h-screen">
+              <div className="w-fit h-fit opacity-20 text-2xl font-bold mt-10">
+                <span>No Quizzes Available</span>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+
           {/* Tiles Container */}
           <div className="flex flex-wrap justify-start my-4 gap-5">
             {/* tiles */}

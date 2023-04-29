@@ -40,12 +40,55 @@ function SideNav(props) {
   return (
     <>
       <nav>
+        {/* Top Nav for mobile devices */}
+        <div className="sm:hidden flex fixed top-0 bg-green-300 w-full h-10">
+          <div className="border-2 border-black h-full w-1/6"></div>
+          <div className="border-2 border-black flex justify-center h-full w-4/6">
+            {/* option 1 */}
+            <NavLink to="/admin/questions">
+              <div className="flex justify-center items-center h-full w-10">
+                <FaListAlt className="text-[1.3rem]" />
+              </div>
+            </NavLink>
+
+            {/* option 2 */}
+            <NavLink to="/admin/create_questions">
+              <div className="flex justify-center items-center h-full w-10">
+                <FaPenSquare className="text-[1.3rem]" />
+              </div>
+            </NavLink>
+
+            {/* option 3 */}
+            <NavLink to="/admin/create_quiz">
+              <div className="flex justify-center items-center h-full w-10">
+                <MdQuiz className="text-[1.3rem]" />
+              </div>
+            </NavLink>
+
+            {/* option 4 */}
+            <NavLink to="/admin/history">
+              <div className="flex justify-center items-center h-full w-10">
+                <FaHistory className="text-[1.3rem]" />
+              </div>
+            </NavLink>
+          </div>
+          {/* Logout */}
+          <div
+            onClick={handleLogOut}
+            className="border-2 border-black flex justify-center items-center h-full w-1/6"
+          >
+            <div className="border-l border-black pl-1">
+              <p className="text-sm font-bold text-blue-700">Log Out</p>
+            </div>
+          </div>
+        </div>
+
         {/* Sidenav wrapper */}
         <div className="fixed top-0 left-0">
           {/* Sidenav */}
           <div
-            className={`border-r border-gray-700 relative flex flex-col justify-start bg-gray-200 h-screen ${
-              props.open ? "w-64 bg-red-400 sm:w-72" : "w-10 sm:w-16"
+            className={`hidden sm:flex  flex-col justify-start relative border-r border-gray-700 bg-gray-200 h-screen ${
+              props.open ? "w-72" : "w-16"
             } duration-200`}
           >
             <div
@@ -60,7 +103,9 @@ function SideNav(props) {
               >
                 <BsPersonCircle className="rounded-full text-6xl text-blue-300"></BsPersonCircle>
                 <div>
-                  <span className="text-sm text-gray-200">{userName}</span>
+                  <span className="text-sm text-gray-200 break-words">
+                    {userName}
+                  </span>
                 </div>
               </div>
 
