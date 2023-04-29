@@ -9,8 +9,48 @@ import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
-
 import ReactLoading from "react-loading";
+
+const check = (title, aa, rt) => {
+
+  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+
+  const a = aa;
+
+  console.log(date, a);
+
+  var year = date.substring(6, 10);
+  var month = date.substring(3, 5);
+  var dt = date.substring(0, 2);
+  var hour = date.substring(12, 14);
+  var minute = date.substring(15, 17);
+
+  console.log(year,month,dt,hour,minute);
+
+  var year2 = a.substring(0, 4);
+  var month2 = a.substring(5, 7);
+  var dt2 = a.substring(8, 10);
+  var hour2 = a.substring(11, 13);
+  var minute2 = a.substring(14, 17);
+
+  console.log(year2,month2,dt2,hour2,minute2);
+
+  if(year2 < year) return true;
+  if(year2 > year) return false;
+
+  if(month2 < month) return true;
+  if(month2 > month) return false;
+
+
+  if(dt2 < dt) return true;
+  if(dt2 > dt) return false;
+
+  if(hour2 < hour) return true;
+  if(hour2 > hour) return false;
+
+  if(minute2 < minute) return true;
+  return false;
+};
 function AdminCreateQuiz(props) {
   const [value, setValue] = useState(0);
   const [time, setTime] = useState(0);
@@ -22,6 +62,22 @@ function AdminCreateQuiz(props) {
   const handleClick = async (e) => {
     setFlag(true);
     e.preventDefault();
+
+    if(value == 0 || time == 0){
+      alert("Select all options");
+      setFlag(false);
+      return;
+    }
+
+
+    if(startTime == null || check("",startTime,2)) {
+      alert("Quiz time must be in future");
+      setFlag(false);
+      return;
+    }
+
+
+
     await axios
       .post(url + "/create-random-quiz", {
         number: value,
@@ -37,7 +93,7 @@ function AdminCreateQuiz(props) {
         navigate("/admin/preview");
       
       });
-      setFlag(false);
+      
   };
 
   return (

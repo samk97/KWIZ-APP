@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
 
+
 const check = (title, aa, rt) => {
 
   const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
@@ -105,7 +106,7 @@ const AdminHistory = (props) => {
       .then(function (res) {
        
 
-      //  res.data.sort((a,b) => (new Date(a.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}) < new Date(b.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}))? 1 : -1);
+        res.data.sort((a,b) => (new Date(a.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}) < new Date(b.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}))? 1 : -1);
         setData(res.data);
         setFlag(false);
 
@@ -114,7 +115,7 @@ const AdminHistory = (props) => {
       .catch(function (err) {
         console.log(err);
       });
-      setFlag(false);
+      
   }, []);
 
   const handleClick = (id,title,startTime,runTime) => {
@@ -127,6 +128,21 @@ const AdminHistory = (props) => {
     console.log(id);
   };
 
+  const handleDownload = (id,title) => {
+   
+
+    axios
+    .post(url + "/get-quiz-by-id", {id})
+    .then(function (res) {
+      localStorage.setItem("preview",JSON.stringify(res.data));
+      navigate("/preview-quiz");
+      return () => {};
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+    
+  }
   return (
     <>
       <div className="flex">
@@ -169,6 +185,7 @@ const AdminHistory = (props) => {
                     ) : (
                       <button className="text-red-500">Closed</button>
                     )}
+                    
                     <div className="text-sm">
                       <p>
                         Created : <span>{createdAt.substring(0, 10)}</span>{" "}
@@ -187,8 +204,10 @@ const AdminHistory = (props) => {
                         Start Time: <span>{x.substring(0, 10)} </span>{" "}
                         <span className="italic">({x.substring(11, 17)}) </span>
                       </p>
+                      
                     </div>
                   </div>
+                  <button onClick = {(e)=>handleDownload(_id,title)}> Download</button>
                 </div>
               );
             })}

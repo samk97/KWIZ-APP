@@ -16,7 +16,9 @@ function StudentSideNav(props) {
 
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
-  const email = state.user.email;
+  var email = "";
+  if(state &&  state.user )
+  email = state.user.email;
 
 
   useEffect(() => {
