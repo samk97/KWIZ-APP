@@ -17,7 +17,9 @@ function SideNav(props) {
 
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
-  const userName = state.user.email;
+  var userName = "";
+  if(state &&  state.user )
+  userName = state.user.email;
 
   useEffect(() => {
     if (state && state.user) {
@@ -209,7 +211,7 @@ function SideNav(props) {
               </NavLink>
             </div>
 
-            <div className=" w-full h-[60px] absolute bottom-0 duration-300">
+            <div className=" w-full h-[60px] absolute bottom-0 duration-300"   onClick={handleLogOut}>
               <div className="w-full h-full relative">
                 <NavLink to="/login">
                   <div
@@ -222,6 +224,7 @@ function SideNav(props) {
 
                     <span
                       className={`duration-100 ${!props.open && "scale-0 w-0"}`}
+                    
                     >
                       <button> Log Out</button>
                     </span>

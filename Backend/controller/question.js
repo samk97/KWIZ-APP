@@ -4,9 +4,9 @@ const QuizSubmission = require("../models/quizsubmission");
 var mongoose = require("mongoose");
 const check = (title, aa, rt) => {
 
-  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+  const date = new Date().toLocaleString("en-GB", { timeZone: 'Asia/Kolkata' });
 
-  
+
 
 
   const a = aa;
@@ -19,7 +19,7 @@ const check = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  console.log(year,month,dt,hour,minute);
+  console.log(year, month, dt, hour, minute);
 
   var year2 = a.substring(0, 4);
   var month2 = a.substring(5, 7);
@@ -27,7 +27,7 @@ const check = (title, aa, rt) => {
   var hour2 = a.substring(11, 13);
   var minute2 = a.substring(14, 17);
 
-  console.log(year2,month2,dt2,hour2,minute2);
+  console.log(year2, month2, dt2, hour2, minute2);
 
   if (year2 < year) return false;
   if (year > year2) return true;
@@ -56,10 +56,10 @@ const check = (title, aa, rt) => {
   return false;
 };
 const check2 = (title, aa, rt) => {
-  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+  const date = new Date().toLocaleString("en-GB", { timeZone: 'Asia/Kolkata' });
   const a = aa;
 
-  console.log(title,date,a);
+  console.log(title, date, a);
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -67,7 +67,7 @@ const check2 = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  console.log(year,month,dt,hour,minute);
+  console.log(year, month, dt, hour, minute);
 
   var year2 = a.substring(0, 4);
   var month2 = a.substring(5, 7);
@@ -166,7 +166,7 @@ exports.insertQuiz = async (req, res) => {
   console.log(req.body);
   const { title, startTime, runTime, questions } = req.body;
 
- 
+
 
   try {
     Quiz.countDocuments({ title }, function (err, count) {
@@ -176,7 +176,7 @@ exports.insertQuiz = async (req, res) => {
           res.status(200).json("Saved");
         });
       } else {
-        res.status(400).json("ALready exists");
+        res.status(400).json("Title Already Exist, Use another Name");
       }
     });
   } catch (err) {
@@ -222,14 +222,14 @@ exports.getSubmission = async (req, res) => {
         const quizsubmission = new QuizSubmission({
           id: quiz,
           answer: answer,
-          title : quiz,
+          title: quiz,
         });
         quizsubmission.save(function (err, result) {
-          if(err){
+          if (err) {
             res.status(400).json(err);
             console.log(err);
-          }else{
-             res.status(200).json({message:"Saved"});
+          } else {
+            res.status(200).json({ message: "Saved" });
           }
 
         });
@@ -259,7 +259,7 @@ exports.getSubmission = async (req, res) => {
         }
       }
     });
-  } catch (err) {}
+  } catch (err) { }
 };
 
 exports.getQuiz = async (req, res) => {
@@ -285,4 +285,31 @@ exports.getQuiz = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+
+exports.getQuizById = async (req, res) => {
+  const id = req.body.id;
+  var data = {question:[]};
+  try {
+    const count = await Quiz.find({ _id: id }).exec();
+      
+        data.startTime = count[0].startTime;
+        data.runTime = count[0].runTime;
+        data.title = count[0].title;
+
+        for (var i = 0; i < count[0].questions.length; i++) {
+          console.log(count[0].questions[i]);
+          const result = await  Question.find({ _id: mongoose.Types.ObjectId(count[0].questions[i]) }).exec();
+          data.question.push(result[0]);
+           
+        }
+
+        res.status(200).json(data);
+      
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("Not Found");
+  }
+
 };

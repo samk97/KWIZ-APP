@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { authCheck, profileCheck,loginCheck,tokenVerifier } = require("../middlewares/auth");
 const {
-insertQuestion,fetchQuestion,randomQuizCreation,insertQuiz,getAllQuiz,getSubmission,getQuiz,fetchQuestionById
+insertQuestion,fetchQuestion,randomQuizCreation,insertQuiz,getAllQuiz,getSubmission,getQuiz,fetchQuestionById,
+getQuizById
 } = require("../controller/question");
 
 
@@ -34,6 +35,7 @@ router.post("/get-quiz", getQuiz );
 
 router.post("/get-question-by-id", fetchQuestionById);
 
+router.post("/get-quiz-by-id", getQuizById );
 
 
 

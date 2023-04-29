@@ -2,7 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import Button from "../components/Button";
 import ReactLoading from "react-loading";
+import { useNavigate } from "react-router-dom";
 function PreviewPage(props) {
+  const navigate = useNavigate();
   const data = localStorage.getItem("quiz");
   const startTime = localStorage.getItem("time");
   const runTime = localStorage.getItem("runTime");
@@ -15,6 +17,13 @@ function PreviewPage(props) {
 
   const handleClick = async (e) => {
     setFlag(true);
+
+    if (title.length == 0) {
+      setFlag(false);
+      alert("Please Enter Title");
+      return;
+    }
+
     e.preventDefault();
     const url = process.env.REACT_APP_URL;
 
@@ -39,11 +48,14 @@ function PreviewPage(props) {
         localStorage.removeItem("time");
         localStorage.removeItem("runTime");
         alert("saved");
+        navigate("/admin");
+        setFlag(false);
       })
       .catch(function (err) {
-        alert("Error");
+        alert(err.response.data);
+        setFlag(false);
+        return;
       });
-    setFlag(false);
   };
 
   return (

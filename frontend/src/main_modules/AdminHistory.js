@@ -99,7 +99,16 @@ const AdminHistory = (props) => {
     axios
       .post(url + "/get-all-quiz", {})
       .then(function (res) {
-        //  res.data.sort((a,b) => (new Date(a.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}) < new Date(b.startTime).toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'}))? 1 : -1);
+        res.data.sort((a, b) =>
+          new Date(a.startTime).toLocaleString("en-GB", {
+            timeZone: "Asia/Kolkata",
+          }) <
+          new Date(b.startTime).toLocaleString("en-GB", {
+            timeZone: "Asia/Kolkata",
+          })
+            ? 1
+            : -1
+        );
         setData(res.data);
         setFlag(false);
 
@@ -108,7 +117,6 @@ const AdminHistory = (props) => {
       .catch(function (err) {
         console.log(err);
       });
-    setFlag(false);
   }, []);
 
   const handleClick = (id, title, startTime, runTime) => {
@@ -121,6 +129,18 @@ const AdminHistory = (props) => {
     console.log(id);
   };
 
+  const handleDownload = (id, title) => {
+    axios
+      .post(url + "/get-quiz-by-id", { id })
+      .then(function (res) {
+        localStorage.setItem("preview", JSON.stringify(res.data));
+        navigate("/preview-quiz");
+        return () => {};
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div className="flex mt-10 sm:mt-0">
@@ -168,6 +188,7 @@ const AdminHistory = (props) => {
                     ) : (
                       <button className="text-red-500">Closed</button>
                     )}
+
                     <div className="text-sm">
                       <p>
                         Created : <span>{createdAt.substring(0, 10)}</span>{" "}
@@ -188,6 +209,10 @@ const AdminHistory = (props) => {
                       </p>
                     </div>
                   </div>
+                  <button onClick={(e) => handleDownload(_id, title)}>
+                    {" "}
+                    Download
+                  </button>
                 </div>
               );
             })}

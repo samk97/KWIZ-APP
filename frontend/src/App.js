@@ -9,6 +9,7 @@ import AdminCreateQuiz from "./main_modules/AdminCreateQuiz";
 import AdminHistory from "./main_modules/AdminHistory";
 import SideNav from "./components/SideNav";
 import PreviewPage from "./main_modules/PreviewPage";
+import PreviewPage2 from "./main_modules/PreviewPage2";
 import StudentSideNav from "./components/StudentSideNav";
 import StudentAttemptQuiz from "./main_modules/StudentAttemptQuiz";
 import StudentQuiz from "./main_modules/StudentQuiz";
@@ -53,7 +54,7 @@ function App() {
         <Route path="create_quiz" element={<AdminCreateQuiz open={open} />} />
         <Route path="history" element={<AdminHistory open={open} />} />
         <Route path="preview" element={<PreviewPage open={open} />} />
-        
+      
         
       </Route>
 
@@ -88,6 +89,8 @@ function App() {
         ></Route>
       
       <Route path="/student_profile" element={<StudentProfile />}></Route>
+      <Route path="preview-quiz" element={<PreviewPage2/>} />
+        
     </Routes>
   );
 }
