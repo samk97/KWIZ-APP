@@ -3,10 +3,12 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
 
 function StudentQuiz() {
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const [flag, setFlag] = useState(true);
   const url = process.env.REACT_APP_URL;
   var score = 0;
 
@@ -21,7 +23,7 @@ function StudentQuiz() {
       .post(url + "/get-quiz", { id: id })
       .then(function (res) {
         setData(res.data);
-
+        setFlag(false);
         return () => {};
       })
       .catch(function (err) {
@@ -29,7 +31,6 @@ function StudentQuiz() {
         alert(err.response.data.message);
         navigate("/dashboard");
       });
-    console.log("ssssssssssssssss");
   }, []);
 
   const callBack = (message) => {
@@ -46,6 +47,7 @@ function StudentQuiz() {
   };
 
   const handleSubmit = (e) => {
+    setFlag(true);
     e.preventDefault();
 
     console.log(result);
@@ -62,6 +64,7 @@ function StudentQuiz() {
       .then(function (res) {
         console.log(res);
         alert("Submitted Successfully");
+        setFlag(false);
         navigate("/dashboard");
       })
       .catch(function (err) {
@@ -120,6 +123,15 @@ function StudentQuiz() {
                 ></StudentQuestionArea>
               );
             })}
+
+          {flag && (
+            <ReactLoading
+              type="balls"
+              color="#0000FF"
+              height={100}
+              width={50}
+            />
+          )}
 
           <div class="flex justify-center items-center my-10 mx-3 h-10">
             <button

@@ -53,10 +53,8 @@ function App() {
         <Route path="create_quiz" element={<AdminCreateQuiz open={open} />} />
         <Route path="history" element={<AdminHistory open={open} />} />
         <Route path="preview" element={<PreviewPage open={open} />} />
-        <Route
-          path="quiz_details"
-          element={<QuizDetails open={open} />}
-        ></Route>
+        
+        
       </Route>
 
       {/* Student */}
@@ -85,6 +83,10 @@ function App() {
       </Route>
 
       <Route path="/quiz/:id" element={<StudentQuiz />}></Route>
+      <Route   path="quiz-detail/:id"
+          element={<QuizDetails open={open} />}
+        ></Route>
+      
       <Route path="/student_profile" element={<StudentProfile />}></Route>
     </Routes>
   );

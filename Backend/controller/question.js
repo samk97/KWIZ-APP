@@ -222,6 +222,7 @@ exports.getSubmission = async (req, res) => {
         const quizsubmission = new QuizSubmission({
           id: quiz,
           answer: answer,
+          title : quiz,
         });
         quizsubmission.save(function (err, result) {
           if(err){

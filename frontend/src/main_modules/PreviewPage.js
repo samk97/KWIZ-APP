@@ -1,17 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
 import Button from "../components/Button";
+import ReactLoading from "react-loading";
 function PreviewPage(props) {
   const data = localStorage.getItem("quiz");
   const startTime = (localStorage.getItem("time"));
   const runTime = localStorage.getItem("runTime");
   const [title, setTitle] = useState("");
+  const [flag,setFlag] = useState(false);
   console.log(startTime);
   // console.log(data + runTime + startTime);
   var Qdata = JSON.parse(data);
   console.log(Qdata);
 
   const handleClick = async (e) => {
+    setFlag(true);
     e.preventDefault();
     const url = process.env.REACT_APP_URL;
 
@@ -40,6 +43,7 @@ function PreviewPage(props) {
       .catch(function (err) {
         alert("Error");
       });
+      setFlag(false);
   };
 
   return (
@@ -54,8 +58,11 @@ function PreviewPage(props) {
           <div className="w-full bg-red-200 p-2 mb-3">
             <h1 className="text-xl font-bold text-gray-800">Preview</h1>
           </div>
+          {flag &&  <ReactLoading type="balls" color="#0000FF" 
+        height={100} width={50} />}
 
-          {Qdata.map((post, index) => {
+
+          {Qdata  &&  Qdata.map((post, index) => {
             const { question, op_a, op_b, op_c, op_d, ans, exp } = post;
             return (
               <>

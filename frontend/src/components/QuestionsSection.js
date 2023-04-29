@@ -1,17 +1,25 @@
 import QuestionArea from "./QuestionArea";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+import ReactLoading from "react-loading";
 function QuestionsSection() {
   const [myData, setMyData] = useState([]);
+  const [flag,setFlag] = useState(true);
   const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
     axios
       .post(url + "/get-questions", {})
       .then((res) => setMyData(res.data));
+      setFlag(false);
   }, []);
   return (
     <>
+
+{flag &&  <ReactLoading type="balls" color="#0000FF" 
+        height={100} width={50} />}
+
       {/* Question box */}
       {myData.map((post, index) => {
         const { question, op_a, op_b, op_c, op_d, ans, exp } = post;

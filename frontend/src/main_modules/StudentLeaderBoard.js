@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import ReactLoading from "react-loading";
 
 function StudentLeaderBoard(props) {
   const [data, setData] = useState([]);
+  const [flag, setFlag] = useState(true);
   const url = process.env.REACT_APP_URL;
   useEffect(() => {
     axios
@@ -12,11 +14,13 @@ function StudentLeaderBoard(props) {
         res.data.sort((a, b) => (Number(a.score) < Number(b.score) ? 1 : -1));
         console.log(res.data);
         setData(res.data);
+        setFlag(false);
 
         return () => {};
       })
       .catch(function (err) {
         console.log(err);
+        setFlag(false);
       });
   }, []);
 
@@ -32,6 +36,14 @@ function StudentLeaderBoard(props) {
           <div className="bg-red-200 p-2">
             <h1 className="text-xl font-bold text-gray-800">Rankings</h1>
           </div>
+          {flag && (
+            <ReactLoading
+              type="balls"
+              color="#0000FF"
+              height={100}
+              width={50}
+            />
+          )}
 
           {/* Leaderboard heading div */}
           <div className="w-full my-3">

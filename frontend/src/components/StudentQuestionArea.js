@@ -32,7 +32,7 @@ function StudentQuestionArea(props) {
           <div class="flex flex-col justify-center items-center border-x-2 border-t-2 border-gray-500 bg-green-200 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
             <div class="flex justify-center text-lg font-bold leading-loose  bg-gradient-to-r from-green-200 via-indigo-500 to-green-200 min-w-[8rem] max-w-[20rem] w-[60%] px-4">
               <p>Question</p>
-              <span className="mx-2">{props.number}</span>
+              <span className="mx-2">{props.number+1}</span>
             </div>
 
             <p>{data.question}</p>

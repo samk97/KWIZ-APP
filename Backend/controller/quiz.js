@@ -121,3 +121,42 @@ exports.fetchLeaderBoard = async (req, res) => {
   
   res.status(200).json(leaderboard);
 };
+
+exports.fetchLeaderBoardById = async (req, res) => {
+
+
+
+  
+  
+
+
+
+
+  var leaderboard=[];
+  var quiz = [];
+  const {id} = req.body;
+
+
+  quiz = await QuizSubmission.find({id}).exec();
+
+  for(var i = 0;i<quiz.length;i++)
+  {
+    var obj = quiz[i];
+    for(var j = 0;j<obj.answer.length;j++){
+    
+      var email = obj.answer[j].email;
+      var score = obj.answer[j].score;
+      const isPresent = leaderboard.some(item => item.email === email);
+      if(isPresent){
+        const obj = leaderboard.findIndex(item => item.email === email);
+        leaderboard[obj].score += score;
+      }else{
+        leaderboard.push({email:email,score:score});
+      }
+    }
+  }
+
+  
+  
+  res.status(200).json(leaderboard);
+};

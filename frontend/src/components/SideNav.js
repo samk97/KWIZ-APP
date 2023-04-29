@@ -11,12 +11,12 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 function SideNav(props) {
-  const userName = "M.M. Gore";
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
+  const userName = state.user.email;
 
   useEffect(() => {
     if (state && state.user) {
