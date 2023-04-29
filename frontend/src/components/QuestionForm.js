@@ -39,12 +39,13 @@ function QuestionForm() {
       alert("Question Already Exist");
     }
   };
+
   return (
     <>
       {/* Questions */}
       <div>
         <form>
-          <div className="border-x-2 border-t-2 border-gray-500 bg-green-200 rounded-tl-xl rounded-tr-xl mt-3 mr-3 ml-3 p-3">
+          <div className="border-x-2 border-t-2 border-gray-500 bg-green-200 rounded-tl-xl rounded-tr-xl mt-3 sm:mx-3 p-3">
             {/* Question */}
             <div>
               <label
@@ -66,7 +67,7 @@ function QuestionForm() {
             </div>
           </div>
           {/* Options div */}
-          <div className="border-x-2 border-b-2 border-gray-500 bg-lime-100 rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 p-3">
+          <div className="border-x-2 border-b-2 border-gray-500 bg-lime-100 rounded-bl-xl rounded-br-xl mb-3 sm:mx-3 p-3">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               for="question"

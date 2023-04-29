@@ -44,7 +44,7 @@ function StudentSideNav(props) {
     <>
       <nav>
         {/* Top Nav for mobile devices */}
-        <div className="sm:hidden flex fixed top-0 bg-green-300 w-full h-10">
+        <div className="sm:hidden z-10 flex fixed top-0 bg-green-300 w-full h-10">
           <div className="h-full w-1/6"></div>
           <div className="flex justify-center h-full w-4/6">
             <NavLink to="/dashboard/attempt_quiz">
@@ -70,7 +70,7 @@ function StudentSideNav(props) {
         </div>
 
         {/* Student Reg no */}
-        <div className="sm:hidden flex justify-center items-center fixed top-0 h-10 text-gray-800 p-1">
+        <div className="sm:hidden z-10 flex justify-center items-center fixed top-0 h-10 text-gray-800 p-1">
           {regNo}
         </div>
 

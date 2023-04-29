@@ -7,6 +7,7 @@ import { FaHistory } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -41,9 +42,8 @@ function SideNav(props) {
     <>
       <nav>
         {/* Top Nav for mobile devices */}
-        <div className="sm:hidden flex fixed top-0 bg-green-300 w-full h-10">
-          <div className="border-2 border-black h-full w-1/6"></div>
-          <div className="border-2 border-black flex justify-center h-full w-4/6">
+        <div className="sm:hidden z-10 flex fixed top-0 bg-green-300 w-full h-10">
+          <div className="flex h-full w-5/6">
             {/* option 1 */}
             <NavLink to="/admin/questions">
               <div className="flex justify-center items-center h-full w-10">
@@ -72,13 +72,40 @@ function SideNav(props) {
               </div>
             </NavLink>
           </div>
-          {/* Logout */}
-          <div
-            onClick={handleLogOut}
-            className="border-2 border-black flex justify-center items-center h-full w-1/6"
-          >
-            <div className="border-l border-black pl-1">
-              <p className="text-sm font-bold text-blue-700">Log Out</p>
+
+          {/* Hamburger */}
+          <div className="flex justify-end items-center h-full w-1/6 mr-2">
+            <div>
+              <GiHamburgerMenu className="text-[2rem]" onClick={props.onOpen} />
+              <div
+                className={`flex justify-end ${
+                  props.open
+                    ? "hidden"
+                    : "absolute top-0 left-0 w-screen bg-indigo-950 z-20 text-gray-400"
+                }`}
+              >
+                <GiCancel
+                  onClick={props.onOpen}
+                  className="text-[2rem] text-red-700 absolute top-0 right-0 mr-2 mt-2"
+                />
+
+                <div className="flex flex-col w-full mt-[3rem] m-3 p-1">
+                  {/* Username */}
+                  <div className="flex items-center justify-end p-2">
+                    <BsPersonCircle className="text-[2rem] mr-2" />
+                    <span className="break-words"> {userName} </span>
+                  </div>
+
+                  {/* Log out */}
+                  <div
+                    onClick={handleLogOut}
+                    className="flex items-center justify-end p-2 border-t border-black"
+                  >
+                    <BiLogOut className="text-[2rem] mr-2" />
+                    <span> Log Out</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -184,7 +211,10 @@ function SideNav(props) {
             <div className=" w-full h-[60px] absolute bottom-0 duration-300">
               <div className="w-full h-full relative">
                 <NavLink to="/login">
-                  <div className="flex justify-start items-center w-full h-[60px]  hover:font-bold">
+                  <div
+                    onClick={handleLogOut}
+                    className="flex justify-start items-center w-full h-[60px]  hover:font-bold"
+                  >
                     <div className="flex justify-center items-center w-16 h-full">
                       <BiLogOut className=" text-[40px] cursor-pointer m-2"></BiLogOut>
                     </div>
@@ -192,7 +222,7 @@ function SideNav(props) {
                     <span
                       className={`duration-100 ${!props.open && "scale-0 w-0"}`}
                     >
-                      <button onClick={handleLogOut}> Log Out</button>
+                      <button> Log Out</button>
                     </span>
                   </div>
                 </NavLink>

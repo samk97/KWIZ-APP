@@ -1,6 +1,6 @@
 function QuestionArea(props) {
   const question = props.question;
-  const index =props.index;
+  const index = props.index;
   const op_a = props.op_a;
   const op_b = props.op_b;
   const op_c = props.op_c;
@@ -11,7 +11,7 @@ function QuestionArea(props) {
     <>
       <div class="mb-12">
         {/* Questions Div */}
-        <div className="flex flex-col justify-center items-center bg-green-200 border-x-2 border-t-2 border-gray-500 rounded-tl-xl rounded-tr-xl mx-3 px-7 py-4">
+        <div className="flex flex-col justify-center items-center bg-green-200 border-x-2 border-t-2 border-gray-500 rounded-tl-xl rounded-tr-xl sm:mx-3 px-3 sm:px-7 py-4">
           <div className="text-lg font-bold leading-loose rounded-md px-4">
             <p>Question {index}</p>
           </div>
@@ -19,7 +19,7 @@ function QuestionArea(props) {
           <p>{question}</p>
         </div>
         {/* options div */}
-        <div className="bg-lime-100 border-x-2 border-gray-500  mr-3 ml-3 p-7">
+        <div className="bg-lime-100 border-x-2 border-gray-500 sm:mx-3 px-3 py-3 sm:p-7">
           {/* Option A */}
           <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
             <div className="flex">
@@ -62,7 +62,7 @@ function QuestionArea(props) {
         </div>
 
         {/* Correct ans & Explaination */}
-        <div className="flex flex-col justify-center items-center bg-amber-50 border-x-2 border-b-2 border-gray-500 rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 px-7 py-4">
+        <div className="flex flex-col justify-center items-center bg-amber-50 border-x-2 border-b-2 border-gray-500 rounded-bl-xl rounded-br-xl sm:mx-3 mb-3 px-3 sm:px-7 py-4">
           {/* Correct Ans */}
           <div className="flex justify-center w-full h-16 m-2">
             <div className="shadow-lg shadow-slate-600 border-2 border-slate-600 border-dashed flex items-center pl-4 rounded-lg min-w-[200px] w-2/6 h-16">
