@@ -90,7 +90,7 @@ const check2 = (title, aa, rt) => {
   return false;
 };
 
-const StudentAttempQuiz = (props) => {
+const HistoryStudent = (props) => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
   const [flag, setFlag] = useState(true);
@@ -121,17 +121,13 @@ const StudentAttempQuiz = (props) => {
   }, []);
 
   const handleClick = (id, title, startTime, runTime) => {
-    if (check(title, startTime, runTime) == false) {
-      alert("Closed");
-      return;
-    } else if (check2(title, startTime, runTime)) {
-      alert("Quiz will start at" + startTime);
-      return;
-    }
-    alert("Quiz active");
-    navigate("/quiz/" + id);
+    localStorage.setItem("quiz-history-start", startTime);
+    localStorage.setItem("quiz-history-title", title);
+    localStorage.setItem("quiz-runtime", runTime);
+    localStorage.setItem("quiz-runtime", runTime);
+    navigate(`/quiz-detail/${id}`);
 
-    console.log(id, title);
+    console.log(id);
   };
 
   console.log(`datatype : ${typeof data}`);
@@ -178,7 +174,7 @@ const StudentAttempQuiz = (props) => {
 
               const x = startTime;
 
-              if(check(title,startTime,runTime))return (
+              if(!check(title, startTime, runTime))return (
                 <div className="w-full sm:w-fit" key={_id}>
                   <div
                     className="bg-blue-200 sm:w-60 sm:h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
@@ -189,7 +185,7 @@ const StudentAttempQuiz = (props) => {
                     <div className="mb-2">
                       <p className="text-xl italic">{title}</p>
                     </div>
-                      <button className="text-blue-500 font-bold">Open</button>
+                      <button className="text-red-500">Closed</button>
                     <div className="text-sm">
                       <p>
                         Created : <span>{createdAt.substring(0, 10)}</span>{" "}
@@ -220,4 +216,4 @@ const StudentAttempQuiz = (props) => {
   );
 };
 
-export default StudentAttempQuiz;
+export default HistoryStudent;

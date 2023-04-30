@@ -103,16 +103,16 @@ const AdminHistory = (props) => {
           new Date(a.startTime).toLocaleString("en-GB", {
             timeZone: "Asia/Kolkata",
           }) <
-          new Date(b.startTime).toLocaleString("en-GB", {
-            timeZone: "Asia/Kolkata",
-          })
+            new Date(b.startTime).toLocaleString("en-GB", {
+              timeZone: "Asia/Kolkata",
+            })
             ? 1
             : -1
         );
         setData(res.data);
         setFlag(false);
 
-        return () => {};
+        return () => { };
       })
       .catch(function (err) {
         console.log(err);
@@ -135,7 +135,7 @@ const AdminHistory = (props) => {
       .then(function (res) {
         localStorage.setItem("preview", JSON.stringify(res.data));
         navigate("/preview-quiz");
-        return () => {};
+        return () => { };
       })
       .catch(function (err) {
         console.log(err);
@@ -145,9 +145,8 @@ const AdminHistory = (props) => {
     <>
       <div className="flex mt-10 sm:mt-0">
         <div
-          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
-            props.open ? "sm:ml-72" : "sm:ml-16"
-          } duration-200`}
+          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${props.open ? "sm:ml-72" : "sm:ml-16"
+            } duration-200`}
         >
           {/* Heading */}
           <div className="w-full bg-red-200 p-2">
@@ -209,10 +208,17 @@ const AdminHistory = (props) => {
                       </p>
                     </div>
                   </div>
-                  <button onClick={(e) => handleDownload(_id, title)}>
-                    {" "}
-                    Download
-                  </button>
+                  <div className="text-sm">
+                    <button
+                    onClick={(e) => handleDownload(_id, title)}
+                     class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex ">
+                      
+                      <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
+                      {" "}
+                    </button>
+                    
+                  </div>
+
                 </div>
               );
             })}

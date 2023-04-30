@@ -17,7 +17,7 @@ function StudentQuiz() {
 
   const email = state.user.email;
   var result = { email: email, answer: [] };
-  const [flag,setFlag] = useState(true);
+  const [flag, setFlag] = useState(true);
 
   const startTime = localStorage.getItem("quiz-history-start");
   const title = localStorage.getItem("quiz-history-title");
@@ -30,7 +30,7 @@ function StudentQuiz() {
       .then(function (res) {
         setData(res.data);
         console.log(res.data);
-        
+
         return () => { };
       })
       .catch(function (err) {
@@ -38,9 +38,10 @@ function StudentQuiz() {
         alert(err.response.data.message);
         navigate("/dashboard");
       });
-      setFlag(false);
+    setFlag(false);
   }, []);
 
+  
 
 
 
@@ -70,8 +71,8 @@ function StudentQuiz() {
             </p>
           </div>
 
-          {flag &&  <ReactLoading type="balls" color="#0000FF" 
-        height={100} width={50} />}
+          {flag && <ReactLoading type="balls" color="#0000FF"
+            height={100} width={50} />}
 
         </div>
 
@@ -87,6 +88,18 @@ function StudentQuiz() {
               <legend className="text-center text-2xl text-purple-950 font-extrabold border-2 bg-yellow-400 border-gray-700 rounded-2xl p-3">
                 <h1>LEADERBOARD</h1>
               </legend>
+
+              {/* if no tiles to show */}
+              {data.length === 0 ? (
+                <div className="w-full flex justify-center h-screen">
+                <div className="w-fit h-fit opacity-20 text-2xl font-bold mt-10">
+                  <span>No Quizzes Available</span>
+                </div>
+              </div>
+              ) : (
+                ""
+              )}
+
               {/* Ranking part */}
 
               <div className="w-[90%] sm:w-[70%] flex flex-col">
