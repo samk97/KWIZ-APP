@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import LoginPage from "./main_modules/LoginPage";
 import SignupPage from "./main_modules/SignupPage";
@@ -40,6 +40,7 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/forgot_password" element={<ForgotPassword />} />
       <Route path="/profile" element={<AdminProfile />} />
+      <Route path="preview-quiz" element={<PreviewPage2 />} />
       {/* <Route path="/preview" element={<PreviewPage />} /> */}
       {/* Admin */}
       <Route
@@ -54,8 +55,6 @@ function App() {
         <Route path="create_quiz" element={<AdminCreateQuiz open={open} />} />
         <Route path="history" element={<AdminHistory open={open} />} />
         <Route path="preview" element={<PreviewPage open={open} />} />
-      
-        
       </Route>
 
       {/* Student */}
@@ -84,13 +83,12 @@ function App() {
       </Route>
 
       <Route path="/quiz/:id" element={<StudentQuiz />}></Route>
-      <Route   path="quiz-detail/:id"
-          element={<QuizDetails open={open} />}
-        ></Route>
-      
+      <Route
+        path="quiz-detail/:id"
+        element={<QuizDetails open={open} />}
+      ></Route>
+
       <Route path="/student_profile" element={<StudentProfile />}></Route>
-      <Route path="preview-quiz" element={<PreviewPage2/>} />
-        
     </Routes>
   );
 }

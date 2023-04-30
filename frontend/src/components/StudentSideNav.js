@@ -15,8 +15,7 @@ function StudentSideNav(props) {
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
   var email = "";
-  if(state &&  state.user )
-  email = state.user.email;
+  if (state && state.user) email = state.user.email;
 
   useEffect(() => {
     if (state && state.user) {
@@ -113,10 +112,11 @@ function StudentSideNav(props) {
               props.open ? "w-72" : "w-16"
             } duration-200`}
           >
+            {/* Sidenav top section */}
             <div
               className={`relative w-full p-2 ${
                 props.open ? "h-32" : "h-12"
-              } bg-emerald-800 duration-200`}
+              } bg-emerald-800 duration-200 mb-3`}
             >
               <div
                 className={`absolute left-3 top-5 w-[90%] ${

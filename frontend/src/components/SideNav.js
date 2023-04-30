@@ -1,13 +1,14 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
-import { FaListAlt } from "react-icons/fa";
-import { FaPenSquare } from "react-icons/fa";
-import { MdQuiz } from "react-icons/md";
-import { FaHistory } from "react-icons/fa";
+// import { FaListAlt } from "react-icons/fa";
+import { BsPencil } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
+import { SlQuestion, SlLogout } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
+import { CiViewList } from "react-icons/ci";
+import { VscHistory } from "react-icons/vsc";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -18,8 +19,7 @@ function SideNav(props) {
   const state = useSelector((state) => ({ ...state }));
   console.log(state);
   var userName = "";
-  if(state &&  state.user )
-  userName = state.user.email;
+  if (state && state.user) userName = state.user.email;
 
   useEffect(() => {
     if (state && state.user) {
@@ -50,28 +50,28 @@ function SideNav(props) {
             {/* option 1 */}
             <NavLink to="/admin/questions">
               <div className="flex justify-center items-center h-full w-10">
-                <FaListAlt className="text-[1.3rem]" />
+                <CiViewList className="text-[1.3rem]" />
               </div>
             </NavLink>
 
             {/* option 2 */}
             <NavLink to="/admin/create_questions">
               <div className="flex justify-center items-center h-full w-10">
-                <FaPenSquare className="text-[1.3rem]" />
+                <BsPencil className="text-[1.3rem]" />
               </div>
             </NavLink>
 
             {/* option 3 */}
             <NavLink to="/admin/create_quiz">
               <div className="flex justify-center items-center h-full w-10">
-                <MdQuiz className="text-[1.3rem]" />
+                <SlQuestion className="text-[1.3rem]" />
               </div>
             </NavLink>
 
             {/* option 4 */}
             <NavLink to="/admin/history">
               <div className="flex justify-center items-center h-full w-10">
-                <FaHistory className="text-[1.3rem]" />
+                <VscHistory className="text-[1.3rem]" />
               </div>
             </NavLink>
           </div>
@@ -104,7 +104,7 @@ function SideNav(props) {
                     onClick={handleLogOut}
                     className="flex items-center justify-end p-2 border-t border-black"
                   >
-                    <BiLogOut className="text-[2rem] mr-2" />
+                    <SlLogout className="text-[2rem] mr-2" />
                     <span> Log Out</span>
                   </div>
                 </div>
@@ -117,21 +117,22 @@ function SideNav(props) {
         <div className="fixed top-0 left-0">
           {/* Sidenav */}
           <div
-            className={`hidden sm:flex  flex-col justify-start relative border-r border-gray-700 bg-gray-200 h-screen ${
+            className={`hidden sm:flex  flex-col justify-start relative border-r border-gray-700 bg-gradient-to-r from-teal-400 to-green-200 h-screen ${
               props.open ? "w-72" : "w-16"
             } duration-200`}
           >
+            {/* Sidenav top section */}
             <div
               className={`relative w-full ${
                 props.open ? "h-32" : "h-12"
-              } bg-emerald-800 duration-200`}
+              } bg-gradient-to-r from-emerald-800 to-green-600 duration-200 mb-3`}
             >
               <div
                 className={`absolute left-3 top-5 ${
                   props.open ? "" : "scale-0"
                 } duration-100`}
               >
-                <BsPersonCircle className="rounded-full text-6xl text-blue-300"></BsPersonCircle>
+                <BsPersonCircle className="rounded-full text-6xl text-rose-400"></BsPersonCircle>
                 <div>
                   <span className="text-sm text-gray-200 break-words">
                     {userName}
@@ -152,9 +153,9 @@ function SideNav(props) {
             <div className="relative flex flex-col justify-center w-full">
               {/* Sidenav option 1 */}
               <NavLink to="/admin/questions">
-                <div className="flex justify-start items-center w-full hover:font-bold">
-                  <div className="flex justify-center items-center w-16">
-                    <FaListAlt className="text-[46px] cursor-pointer"></FaListAlt>
+                <div className="flex justify-start items-center w-full hover:font-bold group p-1">
+                  <div className="flex justify-center items-center group-hover:scale-[1.1] w-16 h-full">
+                    <CiViewList className="text-[2.7rem] cursor-pointer" />
                   </div>
 
                   <span
@@ -167,9 +168,9 @@ function SideNav(props) {
 
               {/* Sidenav Option 2 */}
               <NavLink to="/admin/create_questions">
-                <div className="flex justify-start items-center w-full hover:font-bold">
-                  <div className="flex justify-center items-center w-16 h-full">
-                    <FaPenSquare className="text-[50px] cursor-pointer"></FaPenSquare>
+                <div className="flex justify-start items-center w-full hover:font-bold group p-1">
+                  <div className="flex justify-center items-center group-hover:scale-[1.1] w-16 h-full">
+                    <BsPencil className="text-[2.5rem] cursor-pointer" />
                   </div>
 
                   <span
@@ -182,9 +183,9 @@ function SideNav(props) {
 
               {/* Sidenav Option 3 */}
               <NavLink to="/admin/create_quiz">
-                <div className="flex justify-start items-center w-full hover:font-bold">
-                  <div className="flex justify-center items-center w-16 h-full">
-                    <MdQuiz className="rounded-xl text-[50px] cursor-pointer"></MdQuiz>
+                <div className="flex justify-start items-center w-full hover:font-bold group p-1">
+                  <div className="flex justify-center items-center group-hover:scale-[1.1] w-16 h-full">
+                    <SlQuestion className="rounded-xl text-[2.8rem] cursor-pointer" />
                   </div>
 
                   <span
@@ -197,9 +198,9 @@ function SideNav(props) {
 
               {/* Sidenav Option 4 */}
               <NavLink to="/admin/history">
-                <div className="flex justify-start items-center w-full hover:font-bold">
-                  <div className="flex justify-center items-center w-16 h-full">
-                    <FaHistory className=" text-[40px] cursor-pointer m-2"></FaHistory>
+                <div className="flex justify-start items-center w-full hover:font-bold group p-1">
+                  <div className="flex justify-center items-center group-hover:scale-[1.1] w-16 h-full">
+                    <VscHistory className=" text-[2.8rem] cursor-pointer" />
                   </div>
 
                   <span
@@ -211,20 +212,19 @@ function SideNav(props) {
               </NavLink>
             </div>
 
-            <div className=" w-full h-[60px] absolute bottom-0 duration-300"   onClick={handleLogOut}>
+            <div className=" w-full h-[60px] absolute bottom-0 duration-300">
               <div className="w-full h-full relative">
                 <NavLink to="/login">
                   <div
                     onClick={handleLogOut}
-                    className="flex justify-start items-center w-full h-[60px]  hover:font-bold"
+                    className="flex justify-start items-center w-full h-[60px] hover:font-bold group"
                   >
-                    <div className="flex justify-center items-center w-16 h-full">
-                      <BiLogOut className=" text-[40px] cursor-pointer m-2"></BiLogOut>
+                    <div className="flex justify-center items-center group-hover:scale-[1.1] w-16 h-full">
+                      <SlLogout className=" text-[2.3rem] cursor-pointer m-2"></SlLogout>
                     </div>
 
                     <span
                       className={`duration-100 ${!props.open && "scale-0 w-0"}`}
-                    
                     >
                       <button> Log Out</button>
                     </span>
