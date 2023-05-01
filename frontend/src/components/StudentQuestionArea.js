@@ -6,6 +6,8 @@ function StudentQuestionArea(props) {
   const [data, setData] = useState([]);
   const url = process.env.REACT_APP_URL;
 
+  console.log(data);
+
   useEffect(() => {
     axios
       .post(url + "/get-question-by-id", { id: props.id })
@@ -48,7 +50,7 @@ function StudentQuestionArea(props) {
               {/* Option a */}
               <div class="flex items-center pl-4 border-2 border-gray-700 rounded-lg hover:border-green-700 hover:bg-green-100 mb-3">
                 <input
-                  id={data.op_a}
+                  id={data.op_a + data._id}
                   type="radio"
                   value="1"
                   onClick={handleClick}
@@ -57,7 +59,7 @@ function StudentQuestionArea(props) {
                 />
                 <label
                   onClick={handleClick}
-                  htmlFor={data.op_a}
+                  htmlFor={data.op_a + data._id}
                   class=" w-full py-4 ml-2 text-sm font-medium text-gray-900 p-2"
                 >
                   {data.op_a}
@@ -67,7 +69,7 @@ function StudentQuestionArea(props) {
               {/* Option b */}
               <div class="flex items-center pl-4 border-2 border-gray-700 rounded-lg hover:border-green-700 hover:bg-green-100 mb-3">
                 <input
-                  id={data.op_b}
+                  id={data.op_b + data._id}
                   type="radio"
                   value="2"
                   onClick={handleClick}
@@ -76,7 +78,7 @@ function StudentQuestionArea(props) {
                 />
                 <label
                   onClick={handleClick}
-                  htmlFor={data.op_b}
+                  htmlFor={data.op_b + data._id}
                   class="w-full py-4 ml-2 text-sm font-medium text-gray-900 p-2"
                 >
                   {data.op_b}
@@ -86,7 +88,7 @@ function StudentQuestionArea(props) {
               {/* Option c */}
               <div class="flex items-center pl-4 border-2 border-gray-700 rounded-lg hover:border-green-700 hover:bg-green-100 mb-3">
                 <input
-                  id={data.op_c}
+                  id={data.op_c + data._id}
                   type="radio"
                   value="3"
                   name={props.id}
@@ -95,7 +97,7 @@ function StudentQuestionArea(props) {
                 />
                 <label
                   onClick={handleClick}
-                  htmlFor={data.op_c}
+                  htmlFor={data.op_c + data._id}
                   class="w-full py-4 ml-2 text-sm font-medium text-gray-900 p-2"
                 >
                   {data.op_c}
@@ -105,7 +107,7 @@ function StudentQuestionArea(props) {
               {/* Option d */}
               <div class="flex items-center pl-4 border-2 border-gray-700 rounded-lg hover:border-green-700 hover:bg-green-100 mb-3">
                 <input
-                  id={data.op_d}
+                  id={data.op_d + data._id}
                   type="radio"
                   value="4"
                   name={props.id}
@@ -114,7 +116,7 @@ function StudentQuestionArea(props) {
                 />
                 <label
                   onClick={handleClick}
-                  htmlFor={data.op_d}
+                  htmlFor={data.op_d + data._id}
                   class="w-full py-4 ml-2 text-sm font-medium text-gray-900 p-2"
                 >
                   {data.op_d}

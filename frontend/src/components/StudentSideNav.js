@@ -70,7 +70,7 @@ function StudentSideNav(props) {
                 className={`flex justify-end ${
                   props.open
                     ? "hidden"
-                    : "absolute top-0 left-0 w-screen bg-indigo-950 z-20 text-gray-400"
+                    : "absolute top-0 left-0 w-screen bg-blue-950 z-20 text-gray-400"
                 }`}
               >
                 <GiCancel

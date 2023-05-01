@@ -7,18 +7,19 @@ import { IoIosEye } from "react-icons/io";
 
 import ReactLoading from "react-loading";
 
-function AdminQuizDetails(props) {
+function QuizDetails(props) {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const url = process.env.REACT_APP_URL;
   var score = 0;
+
+  console.log("In Quiz Details");
 
   let navigate = useNavigate();
   const state = useSelector((state) => ({ ...state }));
 
   const email = state.user.email;
   var result = { email: email, answer: [] };
-  const [flag, setFlag] = useState(true);
   const [flag, setFlag] = useState(true);
 
   const startTime = localStorage.getItem("quiz-history-start");
@@ -31,14 +32,14 @@ function AdminQuizDetails(props) {
       .post(url + "/get-leaderboard-by-id", { id: id })
       .then(function (res) {
         setData(res.data);
-        console.log(res.data);
+        console.log("NN", res.data);
 
         return () => {};
       })
       .catch(function (err) {
-        console.log(err);
+        console.log("mm", err);
         alert(err.response.data.message);
-        navigate("/dashboard");
+        // navigate("/dashboard");
       });
     setFlag(false);
     setFlag(false);
@@ -63,9 +64,7 @@ function AdminQuizDetails(props) {
     <>
       <div className="flex mt-10 sm:mt-0">
         <div
-          className={`bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
-            props.open ? "sm:ml-72" : "sm:ml-16"
-          } duration-200`}
+          className={`bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 w-full h-vh min-h-screen overlflow-y-scroll p-5 duration-200`}
         >
           {/* Heading */}
           <div className="flex justify-center w-full bg-blue-950 p-2 mb-3">
@@ -132,12 +131,12 @@ function AdminQuizDetails(props) {
               <div className="w-full sm:w-[90%] md:w-[70%] flex flex-col">
                 {/* Single rank + name tab */}
                 {data.length === 0 ? (
-                  <div className="w-full flex justify-center h-screen">
-                    <div className="w-fit h-fit opacity-20 text-2xl font-bold mt-10">
-                      <span>Leaderboard Unavailable</span>
-                    </div>
+                  // <div className="w-full flex justify-center h-screen">
+                  <div className="flex justify-center w-full h-fit opacity-20 text-2xl font-bold my-10">
+                    <span>Leaderboard Unavailable</span>
                   </div>
                 ) : (
+                  // </div>
                   ""
                 )}
                 {data &&
@@ -248,4 +247,4 @@ function AdminQuizDetails(props) {
   );
 }
 
-export default AdminQuizDetails;
+export default QuizDetails;

@@ -153,7 +153,7 @@ const StudentAttempQuiz = (props) => {
           {/* if no tiles to show */}
           {data.length === 0 ? (
             // <div className="w-full flex justify-center h-screen">
-            <div className="w-fit h-fit opacity-20 text-2xl font-bold ">
+            <div className="flex justify-center w-full h-fit opacity-20 text-2xl font-bold ">
               <span>No Quizzes Available</span>
             </div>
           ) : (

@@ -125,7 +125,7 @@ const AdminHistory = (props) => {
     localStorage.setItem("quiz-history-title", title);
     localStorage.setItem("quiz-runtime", runTime);
     localStorage.setItem("quiz-runtime", runTime);
-    navigate(`/admin/quiz-detail/${id}`);
+    navigate(`/quiz-detail/${id}`);
 
     console.log(id);
   };
@@ -216,7 +216,7 @@ const AdminHistory = (props) => {
                       </p>
                     </div>
                   </div>
-                  <div className="text-sm">
+                  {/* <div className="text-sm">
                     <button
                       onClick={(e) => handleDownload(_id, title)}
                       class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex "
@@ -229,7 +229,7 @@ const AdminHistory = (props) => {
                         <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
                       </svg>{" "}
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               );
             })}
