@@ -19,6 +19,7 @@ function AdminQuizDetails(props) {
   const email = state.user.email;
   var result = { email: email, answer: [] };
   const [flag, setFlag] = useState(true);
+  const [flag, setFlag] = useState(true);
 
   const startTime = localStorage.getItem("quiz-history-start");
   const title = localStorage.getItem("quiz-history-title");
@@ -39,6 +40,7 @@ function AdminQuizDetails(props) {
         alert(err.response.data.message);
         navigate("/dashboard");
       });
+    setFlag(false);
     setFlag(false);
   }, []);
 

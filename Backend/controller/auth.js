@@ -105,18 +105,11 @@ exports.forgotPassword = async (req,res)=>{
 
         if(result == null) res.status(400).json({message:"User Not Exists"});
         else if(err) res.status(400).json({message:err.message});
-        else if(result.login != "email") res.status(400).json({message:"User Not Logged in by email"});
         else{
         User.findOneAndUpdate({email},{$set:{password:password}},function (err, results){
-         
             if(err) res.status(400).json({message:err.message});
             else res.status(200).json({message:"Password Change Successfully"});
-          
          });
         }
-
     })
- 
-  
-
 }
