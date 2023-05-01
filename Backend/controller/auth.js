@@ -113,3 +113,22 @@ exports.forgotPassword = async (req,res)=>{
         }
     })
 }
+
+
+exports.getUser = async (req,res)=>{
+
+   
+    var x = []
+    User.find({},function(err,result){
+             for(var a = 0;a < result.length;a++){
+                x.push(result[a].email);
+             }     
+             x.sort((a,b)=>{
+                if(a.subs > b) return 1;
+                if(b > a) return -1;
+                return 0;
+             })
+
+             res.status(200).json(x);
+   })
+}

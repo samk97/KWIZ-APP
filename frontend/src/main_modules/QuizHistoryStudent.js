@@ -148,11 +148,11 @@ const HistoryStudent = (props) => {
 
           {/* if no tiles to show */}
           {data.length === 0 ? (
-            <div className="w-full flex justify-center h-screen">
+            // <div className="w-full flex justify-center h-screen">
               <div className="w-fit h-fit opacity-20 text-2xl font-bold mt-10">
                 <span>No Quizzes Available</span>
               </div>
-            </div>
+            // </div>
           ) : (
             ""
           )}

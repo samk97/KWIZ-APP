@@ -8,7 +8,7 @@ function PreviewPage2(props) {
 
     const generatePdf = () => {
         try {
-            const report = new JsPDF('landscape', 'pt', [795.28, 1241.89]);
+            const report = new JsPDF('landscape', 'pt', [795.28, 1841.89]);
 
             report.html(document.querySelector('#report'), {
 
@@ -26,7 +26,7 @@ function PreviewPage2(props) {
 
     return (
         <>
-            <div className="flex" id="report" >
+            <div className="flex"  >
                 <div
                     className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${props.open ? "ml-72" : "ml-16"
                         } duration-200`}
@@ -56,6 +56,8 @@ function PreviewPage2(props) {
                             Download As Pdf
                         </label>
                     </div>
+
+                    <div id='report'>
                     {Qdata && Qdata.map((post, index) => {
                         const { question, op_a, op_b, op_c, op_d, ans, exp } = post;
                         return (
@@ -141,7 +143,7 @@ function PreviewPage2(props) {
                             </>
                         );
                     })}
-
+</div>
 
 
                 </div>

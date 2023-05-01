@@ -25,22 +25,31 @@ function ResetPassword(){
     navigate("/signup");
   };
 
+  // function Reset({location}) {
+  //   let params = new URLSearchParams(location.search);
+  
+  //   return <Child name={params.get("filter")} />;
+  // }
+
   const Reset = async (e) => {
     e.preventDefault();
-    const location=useLocation();
-    const queryParams= new URLSearchParams(location.search);
-    const oobCode= queryParams.get("oobCode");
-    console.log(queryParams);
     console.log("fhth");
-    confirmPasswordReset(auth,oobCode,password)
-      .then(() => {
-        alert("Password reset success!!");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+    // const location=useLocation();
+    // console.log(useLocation().search);
+    const queryParams= new URLSearchParams(useLocation().search);
+    const oobCode= queryParams.get("oobCode");
+    console.log(oobCode);
+
+
+    // confirmPasswordReset(auth,oobCode,password)
+    //   .then(() => {
+    //     alert("Password reset success!!");
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // ..
+    //   });
   };
 
 
