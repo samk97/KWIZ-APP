@@ -59,8 +59,8 @@ function StudentLeaderBoard(props) {
               <div className="w-full sm:w-[90%] md:w-[70%] flex flex-col">
                 {/* Single rank + name tab */}
                 {data.length === 0 ? (
-                  <div className="w-full flex justify-center h-screen">
-                    <div className="w-fit h-fit opacity-20 text-2xl font-bold mt-10">
+                  <div className="w-full flex justify-center">
+                    <div className="w-fit h-fit opacity-20 text-2xl font-bold my-10">
                       <span>Leaderboard Unavailable</span>
                     </div>
                   </div>
