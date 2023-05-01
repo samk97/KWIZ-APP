@@ -45,8 +45,8 @@ function StudentLeaderBoard(props) {
             />
           )}
 
-          {/* Leaderboard heading div */}
           <div className="w-full my-3">
+            {/* Leaderboard heading div */}
             <div className="flex justify-center">
               <div className="text-center text-2xl text-purple-950 font-extrabold border-2 bg-yellow-400 border-gray-700 rounded-2xl min-w-fit w-[50%] p-3">
                 <h1>LEADERBOARD</h1>

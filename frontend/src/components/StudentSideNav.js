@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FiChevronLeft, FiEdit2 } from "react-icons/fi";
 import { GiRank3, GiCancel, GiHamburgerMenu } from "react-icons/gi";
-import { BiLogOut } from "react-icons/bi";
+import { SlLogout } from "react-icons/sl";
 import { BsPersonCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +46,7 @@ function StudentSideNav(props) {
     <>
       <nav>
         {/* Top Nav for mobile devices */}
-        <div className="sm:hidden z-10 flex fixed top-0 bg-green-300 w-full h-10">
+        <div className="sm:hidden z-10 flex fixed top-0 bg-gradient-to-b from-green-300 to-emerald-700 w-full h-10">
           <div className="h-full w-1/6"></div>
           <div className="flex justify-center h-full w-4/6">
             <NavLink to="/dashboard/attempt_quiz">
@@ -90,7 +90,7 @@ function StudentSideNav(props) {
                     onClick={handleLogOut}
                     className="flex items-center justify-end p-2 border-t border-black"
                   >
-                    <BiLogOut className="text-[2rem] mr-2" />
+                    <SlLogout className="text-[2rem] mr-2" />
                     <span> Log Out</span>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ function StudentSideNav(props) {
         <div className="fixed top-0 left-0 h-screen">
           {/* StudentSideNav */}
           <div
-            className={`hidden sm:flex  flex-col justify-start relative border-r border-gray-700 bg-gray-200 h-screen ${
+            className={`hidden sm:flex  flex-col justify-start relative border-r border-gray-700 bg-gradient-to-r from-teal-400 to-green-200 h-screen ${
               props.open ? "w-72" : "w-16"
             } duration-200`}
           >
@@ -116,14 +116,14 @@ function StudentSideNav(props) {
             <div
               className={`relative w-full p-2 ${
                 props.open ? "h-32" : "h-12"
-              } bg-emerald-800 duration-200 mb-3`}
+              } bg-gradient-to-r from-emerald-800 to-green-600 duration-200 mb-3`}
             >
               <div
                 className={`absolute left-3 top-5 w-[90%] ${
                   props.open ? "" : "scale-0"
                 } duration-100`}
               >
-                <BsPersonCircle className="rounded-full text-6xl text-blue-300" />
+                <BsPersonCircle className="rounded-full text-6xl" />
                 <div className="w-full">
                   <p className="text-sm text-gray-200 break-words">{email}</p>
                 </div>
@@ -171,15 +171,18 @@ function StudentSideNav(props) {
             <div className=" w-full h-[60px] absolute bottom-0 duration-300">
               <div className="w-full h-full relative">
                 <NavLink to="/login">
-                  <div className="flex justify-start items-center w-full h-[60px]  hover:font-bold group">
+                  <div
+                    onClick={handleLogOut}
+                    className="flex justify-start items-center w-full h-[60px]  hover:font-bold group"
+                  >
                     <div className="flex justify-center items-center group-hover:scale-[1.1] duration-200 w-16 h-full">
-                      <BiLogOut className=" text-[40px] cursor-pointer m-2" />
+                      <SlLogout className=" text-[2rem] cursor-pointer m-2" />
                     </div>
 
                     <span
                       className={`duration-100 ${!props.open && "scale-0 w-0"}`}
                     >
-                      <button onClick={handleLogOut}> Log Out</button>
+                      <button> Log Out</button>
                     </span>
                   </div>
                 </NavLink>

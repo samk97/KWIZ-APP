@@ -11,8 +11,7 @@ import "react-clock/dist/Clock.css";
 import ReactLoading from "react-loading";
 
 const check = (title, aa, rt) => {
-
-  const date = new Date().toLocaleString("en-GB",{timeZone: 'Asia/Kolkata'});
+  const date = new Date().toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });
 
   const a = aa;
 
@@ -24,7 +23,7 @@ const check = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  console.log(year,month,dt,hour,minute);
+  console.log(year, month, dt, hour, minute);
 
   var year2 = a.substring(0, 4);
   var month2 = a.substring(5, 7);
@@ -32,29 +31,28 @@ const check = (title, aa, rt) => {
   var hour2 = a.substring(11, 13);
   var minute2 = a.substring(14, 17);
 
-  console.log(year2,month2,dt2,hour2,minute2);
+  console.log(year2, month2, dt2, hour2, minute2);
 
-  if(year2 < year) return true;
-  if(year2 > year) return false;
+  if (year2 < year) return true;
+  if (year2 > year) return false;
 
-  if(month2 < month) return true;
-  if(month2 > month) return false;
+  if (month2 < month) return true;
+  if (month2 > month) return false;
 
+  if (dt2 < dt) return true;
+  if (dt2 > dt) return false;
 
-  if(dt2 < dt) return true;
-  if(dt2 > dt) return false;
+  if (hour2 < hour) return true;
+  if (hour2 > hour) return false;
 
-  if(hour2 < hour) return true;
-  if(hour2 > hour) return false;
-
-  if(minute2 < minute) return true;
+  if (minute2 < minute) return true;
   return false;
 };
 function AdminCreateQuiz(props) {
   const [value, setValue] = useState(0);
   const [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState();
-  const [flag,setFlag] = useState(false);
+  const [flag, setFlag] = useState(false);
   const navigate = useNavigate();
   const url = process.env.REACT_APP_URL;
 
@@ -62,20 +60,17 @@ function AdminCreateQuiz(props) {
     setFlag(true);
     e.preventDefault();
 
-    if(value == 0 || time == 0){
+    if (value == 0 || time == 0) {
       alert("Select all options");
       setFlag(false);
       return;
     }
 
-
-    if(startTime == null || check("",startTime,2)) {
+    if (startTime == null || check("", startTime, 2)) {
       alert("Quiz time must be in future");
       setFlag(false);
       return;
     }
-
-
 
     await axios
       .post(url + "/create-random-quiz", {
@@ -90,26 +85,30 @@ function AdminCreateQuiz(props) {
         localStorage.setItem("time", startTime);
         localStorage.setItem("runTime", time);
         navigate("/admin/preview");
-      
       });
-      
   };
 
   return (
     <>
       <div className="flex mt-10 sm:mt-0">
         <div
-          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+          className={`bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
             props.open ? "sm:ml-72" : "sm:ml-16"
           } duration-200`}
         >
           {/* Heading */}
-          <div className="w-full bg-red-200 p-2 mb-3">
-            <h1 className="text-xl font-bold text-gray-800">Create Quiz</h1>
+          <div className="flex justify-center w-full bg-blue-950 p-2 mb-3">
+            <h1 className="text-xl font-bold text-white">Create Quiz</h1>
           </div>
 
-          {flag &&  <ReactLoading type="balls" color="#0000FF" 
-        height={100} width={50} />}
+          {flag && (
+            <ReactLoading
+              type="balls"
+              color="#0000FF"
+              height={100}
+              width={50}
+            />
+          )}
 
           <div className="w-full rounded-xl border-2 border-gray-500 p-4">
             <form>

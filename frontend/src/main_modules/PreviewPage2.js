@@ -1,149 +1,263 @@
-
-import JsPDF from 'jspdf';
+import JsPDF from "jspdf";
+import { MdFileDownload } from "react-icons/md";
 function PreviewPage2(props) {
+  const data = JSON.parse(localStorage.getItem("preview"));
+  const Qdata = data.question;
+  console.log(data);
 
-    const data = JSON.parse(localStorage.getItem("preview"));
-    const Qdata = data.question;
-    console.log(data);
+  const generatePdf = () => {
+    try {
+      const report = new JsPDF("landscape", "pt", [795.28, 1241.89]);
 
-    const generatePdf = () => {
-        try{
-        const report = new JsPDF('landscape', 'pt', [795.28,1241.89]);
-        
-        report.html(document.querySelector('#report'),{
-        
-        }).then(() => {
-            report.save(data.title);
-        });
+      report.html(document.querySelector("#report"), {}).then(() => {
+        report.save(data.title);
+      });
+    } catch (err) {
+      console.log(err);
     }
-        catch(err){
-            console.log(err);
-        }
-        console.log("aa")
-    }
+    console.log("aa");
+  };
 
+  return (
+    // commented ----- Style changed ------- Pdf Download Not working ------ Previous code retained
+    // Check *********
 
+    // <>
+    //   <div className="flex mt-10 sm:mt-0">
+    //     <div
+    //       className={`bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 w-full h-vh min-h-screen overlflow-y-scroll p-5 `}
+    //     >
+    //       {/* Heading */}
+    //       <div className="flex justify-center w-full bg-blue-950 p-2 mb-3">
+    //         <h1 className="text-xl font-bold text-white">Preview</h1>
+    //       </div>
 
-    return (
-        <>
-            <div className="flex" id = "report" >
-                <div
-                    className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${props.open ? "ml-72" : "ml-16"
-                        } duration-200`}
-                >
-                    {/* Heading */}
-                    <div className="w-full bg-red-200 p-2 mb-3">
-                        <h1 className="text-xl font-bold text-gray-800">Preview</h1>
+    //       {/* Title */}
+    //       <div className="m-2">
+    //         <p className="text-xl font-bold">
+    //           Title: <span>{data.title}</span>
+    //         </p>
+    //       </div>
+
+    //       {/* Download Button */}
+    //       <div className="m-2">
+    //         <label
+    //           onClick={generatePdf}
+    //           className="rounded-md border-2 border-gray-700 px-1 bg-green-500 hover:bg-green-600 hover:border-blue-700"
+    //         >
+    //           <MdFileDownload className="inline text-[1.5rem] mr-2" />
+    //           <span>Download as PDF</span>
+    //         </label>
+    //       </div>
+
+    //       <div className="w-full">
+    //         {Qdata &&
+    //           Qdata.map((post, index) => {
+    //             const { question, op_a, op_b, op_c, op_d, ans, exp } = post;
+
+    //             return (
+    //               <>
+    //                 <div class="mb-12">
+    //                   {/* Questions Div */}
+    //                   <div className="flex flex-col justify-center items-center bg-green-200  border-x-2 border-t-2 border-gray-500 rounded-tl-xl rounded-tr-xl sm:mx-3 px-3 sm:px-7 py-4">
+    //                     <div className="text-lg font-bold leading-loose rounded-md px-4">
+    //                       <p>Question {index + 1}</p>
+    //                     </div>
+
+    //                     <p>{question}</p>
+    //                   </div>
+    //                   {/* options div */}
+    //                   <div className="bg-lime-100 border-x-2 border-gray-500 sm:mx-3 px-3 py-3 sm:p-7">
+    //                     {/* Option A */}
+    //                     <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
+    //                       <div className="flex">
+    //                         <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
+    //                           <span className="font-bold">A</span>
+    //                         </div>
+    //                         <div className="m-3 w-full">{op_a}</div>
+    //                       </div>
+    //                     </div>
+
+    //                     {/* Option B */}
+    //                     <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
+    //                       <div className="flex">
+    //                         <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
+    //                           <span className="font-bold">B</span>
+    //                         </div>
+    //                         <div className="m-3 w-full">{op_b}</div>
+    //                       </div>
+    //                     </div>
+
+    //                     {/* Option C */}
+    //                     <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
+    //                       <div className="flex">
+    //                         <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
+    //                           <span className="font-bold">C</span>
+    //                         </div>
+    //                         <div className="m-3 w-full">{op_c}</div>
+    //                       </div>
+    //                     </div>
+
+    //                     {/* Option D */}
+    //                     <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
+    //                       <div className="flex">
+    //                         <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
+    //                           <span className="font-bold">D</span>
+    //                         </div>
+    //                         <div className="m-3 w-full">{op_d}</div>
+    //                       </div>
+    //                     </div>
+    //                   </div>
+
+    //                   {/* Correct ans & Explaination */}
+    //                   <div className="flex flex-col justify-center items-center bg-amber-50 border-x-2 border-b-2 border-gray-500 rounded-bl-xl rounded-br-xl sm:mx-3 mb-3 px-3 sm:px-7 py-4">
+    //                     {/* Correct Ans */}
+    //                     <div className="flex justify-center w-full h-16 m-2">
+    //                       <div className="shadow-lg shadow-slate-600 border-2 border-slate-600 border-dashed flex items-center pl-4 rounded-lg min-w-[200px] w-2/6 h-16">
+    //                         <div className="flex justify-end  w-3/6 pr-3 font-bold">
+    //                           <span>Correct Ans :</span>
+    //                         </div>
+    //                         <div className="flex justify-start w-3/6 pl-1 font-bold">
+    //                           <span className="pl-2">{ans}</span>
+    //                         </div>
+    //                       </div>
+    //                     </div>
+
+    //                     {/* Explaination */}
+
+    //                     <div className="shadow-lg shadow-slate-600 border-2 border-slate-600 border-dashed flex flex-col items-start p-3 rounded-lg w-full h-auto m-2">
+    //                       <div className="m-1">
+    //                         <span className="font-bold">Explaination :</span>
+    //                       </div>
+    //                       <div className="m-1">
+    //                         <span className="p-2">{exp}</span>
+    //                       </div>
+    //                     </div>
+    //                   </div>
+    //                 </div>
+    //               </>
+    //             );
+    //           })}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </>
+
+    <>
+      <div className="flex" id="report">
+        <div
+          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+            props.open ? "ml-72" : "ml-16"
+          } duration-200`}
+        >
+          {/* Heading */}
+          <div onClick={generatePdf} className="w-full bg-red-200 p-2 mb-3">
+            <h1 className="text-xl font-bold text-gray-800">Preview</h1>
+          </div>
+          <div className="w-full">
+            <label for="title" class="block m-2 text-slate-700 font-bold">
+              Quiz Title = {data.title}
+            </label>
+          </div>
+
+          <div className="w-full" onClick={generatePdf}>
+            <label for="title" class="block m-2 text-slate-700 font-bold">
+              Download As Pdf
+            </label>
+          </div>
+          {Qdata &&
+            Qdata.map((post, index) => {
+              const { question, op_a, op_b, op_c, op_d, ans, exp } = post;
+              return (
+                <>
+                  <div class="mb-12">
+                    {/* Questions Div */}
+                    <div className="flex flex-col justify-center items-center bg-green-200 border-x-2 border-t-2 border-gray-500 rounded-tl-xl rounded-tr-xl mx-3 px-7 py-4">
+                      <div className="text-lg font-bold leading-loose rounded-md px-4">
+                        <p>Question {index + 1}</p>
+                      </div>
+
+                      <p>{question}</p>
                     </div>
-                    <div className="w-full">
-                        <label for="title" class="block m-2 text-slate-700 font-bold">
-                            Quiz Title  =  {data.title}
-                        </label>
+                    {/* options div */}
+                    <div className="bg-lime-100 border-x-2 border-gray-500  mr-3 ml-3 p-7">
+                      {/* Option A */}
+                      <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
+                        <div className="flex">
+                          <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
+                            <span className="font-bold">A</span>
+                          </div>
+                          <div className="m-3 w-full">{op_a}</div>
+                        </div>
+                      </div>
 
+                      {/* Option B */}
+                      <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
+                        <div className="flex">
+                          <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
+                            <span className="font-bold">B</span>
+                          </div>
+                          <div className="m-3 w-full">{op_b}</div>
+                        </div>
+                      </div>
+
+                      {/* Option C */}
+                      <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
+                        <div className="flex">
+                          <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
+                            <span className="font-bold">C</span>
+                          </div>
+                          <div className="m-3 w-full">{op_c}</div>
+                        </div>
+                      </div>
+
+                      {/* Option D */}
+                      <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
+                        <div className="flex">
+                          <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
+                            <span className="font-bold">D</span>
+                          </div>
+                          <div className="m-3 w-full">{op_d}</div>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="w-full"  onClick={generatePdf}>
-                        <label for="title" class="block m-2 text-slate-700 font-bold">
-                            Download As Pdf
-                        </label>
-
+                    {/* Correct ans & Explaination */}
+                    <div className="flex flex-col justify-center items-center bg-amber-50 border-x-2 border-b-2 border-gray-500 rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 px-7 py-4">
+                      {" "}
+                      {/* Correct Ans */}
+                      <div className="flex justify-center w-full h-16 m-2">
+                        <div className="shadow-lg shadow-slate-600 border-2 border-slate-600 border-dashed flex items-center pl-4 rounded-lg min-w-[200px] w-2/6 h-16">
+                          <div className="flex justify-end  w-3/6 pr-3 font-bold">
+                            <span>Correct Ans :</span>
+                          </div>
+                          <div className="flex justify-start w-3/6 pl-1 font-bold">
+                            <span className="pl-2">{ans}</span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Explaination */}
+                      <div className="shadow-lg shadow-slate-600 border-2 border-slate-600 border-dashed flex flex-col items-start p-3 rounded-lg w-full h-auto m-2">
+                        <div className="m-1">
+                          <span className="font-bold">Explaination :</span>
+                        </div>
+                        <div className="m-1">
+                          <span className="p-2">{exp}</span>
+                        </div>
+                      </div>
                     </div>
-                    {Qdata && Qdata.map((post, index) => {
-                        const { question, op_a, op_b, op_c, op_d, ans, exp } = post;
-                        return (
-                            <>
-                                <div class="mb-12">
-                                    {/* Questions Div */}
-                                    <div className="flex flex-col justify-center items-center bg-green-200 border-x-2 border-t-2 border-gray-500 rounded-tl-xl rounded-tr-xl mx-3 px-7 py-4">
-                                        <div className="text-lg font-bold leading-loose rounded-md px-4">
-                                            <p>Question {index + 1}</p>
-                                        </div>
+                  </div>
+                </>
+              );
+            })}
+        </div>
+      </div>
 
-                                        <p>{question}</p>
-                                    </div>
-                                    {/* options div */}
-                                    <div className="bg-lime-100 border-x-2 border-gray-500  mr-3 ml-3 p-7">
-                                        {/* Option A */}
-                                        <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
-                                            <div className="flex">
-                                                <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
-                                                    <span className="font-bold">A</span>
-                                                </div>
-                                                <div className="m-3 w-full">{op_a}</div>
-                                            </div>
-                                        </div>
-
-                                        {/* Option B */}
-                                        <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
-                                            <div className="flex">
-                                                <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
-                                                    <span className="font-bold">B</span>
-                                                </div>
-                                                <div className="m-3 w-full">{op_b}</div>
-                                            </div>
-                                        </div>
-
-                                        {/* Option C */}
-                                        <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
-                                            <div className="flex">
-                                                <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
-                                                    <span className="font-bold">C</span>
-                                                </div>
-                                                <div className="m-3 w-full">{op_c}</div>
-                                            </div>
-                                        </div>
-
-                                        {/* Option D */}
-                                        <div className="flex items-center pl-4 border-2 border-gray-700 rounded-lg mb-3">
-                                            <div className="flex">
-                                                <div className="flex justify-center items-center border-r-2 border-gray-700 w-[40px] p-3">
-                                                    <span className="font-bold">D</span>
-                                                </div>
-                                                <div className="m-3 w-full">{op_d}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Correct ans & Explaination */}
-                                    <div className="flex flex-col justify-center items-center bg-amber-50 border-x-2 border-b-2 border-gray-500 rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 px-7 py-4">
-                                        {/* Correct Ans */}
-                                        <div className="flex justify-center w-full h-16 m-2">
-                                            <div className="shadow-lg shadow-slate-600 border-2 border-slate-600 border-dashed flex items-center pl-4 rounded-lg min-w-[200px] w-2/6 h-16">
-                                                <div className="flex justify-end  w-3/6 pr-3 font-bold">
-                                                    <span>Correct Ans :</span>
-                                                </div>
-                                                <div className="flex justify-start w-3/6 pl-1 font-bold">
-                                                    <span className="pl-2">{ans}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Explaination */}
-
-                                        <div className="shadow-lg shadow-slate-600 border-2 border-slate-600 border-dashed flex flex-col items-start p-3 rounded-lg w-full h-auto m-2">
-                                            <div className="m-1">
-                                                <span className="font-bold">Explaination :</span>
-                                            </div>
-                                            <div className="m-1">
-                                                <span className="p-2">{exp}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        );
-                    })}
-
-
-
-                </div>
-            </div>
-
-            {/* <div className="flex"></div>
+      {/* <div className="flex"></div>
       <input type="text" onChange={(e) => setTitle(e.target.value)} />
       <button onClick={handleClick}>Save</button> */}
-        </>
-    );
+    </>
+  );
 }
 
 export default PreviewPage2;

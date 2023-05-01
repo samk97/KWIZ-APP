@@ -45,7 +45,7 @@ function SideNav(props) {
     <>
       <nav>
         {/* Top Nav for mobile devices */}
-        <div className="sm:hidden z-10 flex fixed top-0 bg-green-300 w-full h-10">
+        <div className="sm:hidden z-10 flex fixed top-0 bg-gradient-to-b from-green-300 to-emerald-700 w-full h-10">
           <div className="flex h-full w-5/6">
             {/* option 1 */}
             <NavLink to="/admin/questions">
@@ -132,7 +132,7 @@ function SideNav(props) {
                   props.open ? "" : "scale-0"
                 } duration-100`}
               >
-                <BsPersonCircle className="rounded-full text-6xl text-rose-400"></BsPersonCircle>
+                <BsPersonCircle className="rounded-full text-6xl"></BsPersonCircle>
                 <div>
                   <span className="text-sm text-gray-200 break-words">
                     {userName}

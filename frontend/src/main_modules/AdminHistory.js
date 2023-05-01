@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { FiDownload } from "react-icons/fi";
 
 const check = (title, aa, rt) => {
   const date = new Date().toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });
@@ -124,7 +125,7 @@ const AdminHistory = (props) => {
     localStorage.setItem("quiz-history-title", title);
     localStorage.setItem("quiz-runtime", runTime);
     localStorage.setItem("quiz-runtime", runTime);
-    navigate(`/quiz-detail/${id}`);
+    navigate(`/admin/quiz-detail/${id}`);
 
     console.log(id);
   };
@@ -145,13 +146,13 @@ const AdminHistory = (props) => {
     <>
       <div className="flex mt-10 sm:mt-0">
         <div
-          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+          className={`bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
             props.open ? "sm:ml-72" : "sm:ml-16"
           } duration-200`}
         >
           {/* Heading */}
-          <div className="w-full bg-red-200 p-2">
-            <h1 className="text-xl font-bold text-gray-800">Past Quizzes</h1>
+          <div className="flex justify-center w-full bg-blue-950 p-2 mb-3">
+            <h1 className="text-xl font-bold text-white">Past Quizzes</h1>
           </div>
           {/* Tiles Container */}
           <div className="flex flex-wrap justify-start my-4 gap-5">
@@ -175,7 +176,7 @@ const AdminHistory = (props) => {
               return (
                 <div className="w-full sm:w-fit" key={_id}>
                   <div
-                    className="bg-blue-200 sm:w-60 sm:h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
+                    className="relative bg-cyan-500 sm:w-60 sm:h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
                     onClick={() => {
                       handleClick(_id, title, startTime, runTime);
                     }}
@@ -184,9 +185,9 @@ const AdminHistory = (props) => {
                       <p className="text-xl italic">{title}</p>
                     </div>
                     {check(title, startTime, runTime) ? (
-                      <button className="text-blue-500 font-bold">Open</button>
+                      <button className="text-blue-700 font-bold">Open</button>
                     ) : (
-                      <button className="text-red-500">Closed</button>
+                      <button className="text-red-600">Closed</button>
                     )}
 
                     <div className="text-sm">
@@ -209,10 +210,12 @@ const AdminHistory = (props) => {
                       </p>
                     </div>
                   </div>
-                  <button onClick={(e) => handleDownload(_id, title)}>
+
+                  {/* Download button moved inside tile click */}
+                  {/* <button onClick={(e) => handleDownload(_id, title)}>
                     {" "}
                     Download
-                  </button>
+                  </button> */}
                 </div>
               );
             })}
