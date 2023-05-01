@@ -14,7 +14,6 @@ function QuestionForm() {
   const UploadQuestion = async (e) => {
     e.preventDefault();
     let items = { question, op_a, op_b, op_c, op_d, ans, exp };
-    console.log(items);
     const url = process.env.REACT_APP_URL;
 
     const res = await fetch(url + "/upload-question", {
@@ -33,7 +32,7 @@ function QuestionForm() {
     });
     if (res.status === 200) {
       const data = await res.json();
-      console.log(data);
+      
       alert("Successsfully uploaded !!");
     }
     if (res.status === 403) {
@@ -44,7 +43,7 @@ function QuestionForm() {
   // Reset
   function resetForm(e) {
     e.preventDefault();
-    console.log("Reset Clicked");
+    
     setQuestion("");
     setOp_a("");
     setOp_b("");
@@ -189,10 +188,10 @@ function QuestionForm() {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               >
                 <option value="default">Select correct option</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
+                <option value="1">A</option>
+                <option value="2">B</option>
+                <option value="3">C</option>
+                <option value="4">D</option>
               </select>
             </div>
 

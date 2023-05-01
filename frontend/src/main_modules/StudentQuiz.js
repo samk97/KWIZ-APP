@@ -27,14 +27,14 @@ function StudentQuiz() {
         return () => {};
       })
       .catch(function (err) {
-        console.log(err);
+        
         alert(err.response.data.message);
         navigate("/dashboard");
       });
   }, []);
 
   const callBack = (message) => {
-    console.log(message);
+    
 
     const found = result.answer.some((el) => el.q == message.q);
     if (found) {
@@ -43,15 +43,13 @@ function StudentQuiz() {
     } else {
       result.answer.push(message);
     }
-    console.log(result);
+    
   };
 
   const handleSubmit = (e) => {
     setFlag(true);
     e.preventDefault();
 
-    console.log(result);
-    console.log(data.questions);
     var score = 0;
 
     for (var i = 0; i < result.answer.length; i++) {
@@ -62,19 +60,19 @@ function StudentQuiz() {
     axios
       .post(url + "/get-submission", { result, id: id })
       .then(function (res) {
-        console.log(res);
+        
         alert("Submitted Successfully");
         setFlag(false);
         navigate("/dashboard");
       })
       .catch(function (err) {
-        console.log(err);
+        
         alert("Already Submitted or Some internal failure");
         navigate("/dashboard");
       });
   };
 
-  console.log(data);
+  
 
   return (
     <>

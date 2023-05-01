@@ -15,7 +15,7 @@ const check = (title, aa, rt) => {
 
   const a = aa;
 
-  console.log(date, a);
+  
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -23,7 +23,7 @@ const check = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  console.log(year, month, dt, hour, minute);
+
 
   var year2 = a.substring(0, 4);
   var month2 = a.substring(5, 7);
@@ -31,7 +31,7 @@ const check = (title, aa, rt) => {
   var hour2 = a.substring(11, 13);
   var minute2 = a.substring(14, 17);
 
-  console.log(year2, month2, dt2, hour2, minute2);
+  
 
   if (year2 < year) return true;
   if (year2 > year) return false;
@@ -78,9 +78,9 @@ function AdminCreateQuiz(props) {
         time: time,
       })
       .then(function (res) {
-        // console.log(res.data);
+
         const x = JSON.stringify(res.data);
-        console.log(startTime);
+        
         localStorage.setItem("quiz", x);
         localStorage.setItem("time", startTime);
         localStorage.setItem("runTime", time);

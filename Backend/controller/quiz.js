@@ -156,6 +156,12 @@ exports.fetchLeaderBoardById = async (req, res) => {
     }
   }
 
+  leaderboard.sort((a,b)=>{
+    if(a.score > b.score) return -1;
+    if(b.score > a.score) return 1;
+    return 0;
+ })
+
   
   
   res.status(200).json(leaderboard);

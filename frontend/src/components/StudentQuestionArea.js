@@ -6,7 +6,6 @@ function StudentQuestionArea(props) {
   const [data, setData] = useState([]);
   const url = process.env.REACT_APP_URL;
 
-  console.log(data);
 
   useEffect(() => {
     axios
@@ -15,7 +14,7 @@ function StudentQuestionArea(props) {
         setData(res.data[0]);
       })
       .catch(function (err) {
-        console.log(err);
+        
       });
   }, []);
 

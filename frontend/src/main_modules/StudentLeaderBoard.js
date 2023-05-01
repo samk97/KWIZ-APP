@@ -12,14 +12,14 @@ function StudentLeaderBoard(props) {
       .post(url + "/get-leaderboard", {})
       .then(function (res) {
         res.data.sort((a, b) => (Number(a.score) < Number(b.score) ? 1 : -1));
-        console.log(res.data);
+       
         setData(res.data);
         setFlag(false);
 
         return () => {};
       })
       .catch(function (err) {
-        console.log(err);
+        alert(err.response.data.message);
         setFlag(false);
       });
   }, []);

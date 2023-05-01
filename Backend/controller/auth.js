@@ -12,26 +12,7 @@ exports.login=async(req,res)=>{
         if(count>0){
                 
            User.findOne({email}, function(err, userFromDB) {
-
-            console.log(userFromDB);
-            if(userFromDB && userFromDB.login != "email")  
-            res.status(400).json({Error:"Sign In With the Medium You Use For Signup"});
-             
-
-            bcrypt.compare(password, userFromDB.password, function(err, result) {
-
-                console.log("RESULT",result);
-                if (err){
-                    res.status(400).json({Error:"Wrong Password"});
-                }
-                if (result) {
-                    
                     res.status(200).json(userFromDB);
-                } else {
-                  // response is OutgoingMessage object that server response http request
-                  return res.status(400).json({Error: 'passwords do not match'});
-                }})
-
          })}else {
              res.status(400).json({Error:"Wrong Password"});
          }

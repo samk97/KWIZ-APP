@@ -27,7 +27,7 @@ function StudentSideNav(props) {
 
   const handleLogOut = (e) => {
     e.preventDefault();
-    console.log("aa");
+
     localStorage.clear();
     props.onOpen();
 
@@ -40,7 +40,7 @@ function StudentSideNav(props) {
   };
 
   const regNo = email.substring(email.indexOf(".") + 1, email.lastIndexOf("@"));
-  console.log(`reg : ${regNo}`);
+  
 
   return (
     <>

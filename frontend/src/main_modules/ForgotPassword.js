@@ -19,9 +19,10 @@ function ForgetPassword() {
   const [password, setPassword] = useState("");
   let dispatch = useDispatch();
   const url = process.env.REACT_APP_URL;
+  const fp = process.env.REACT_APP_FPURL;
 
   const state = useSelector((state) => ({ ...state }));
-  console.log(process.env.REACT_APP_URL, "URL");
+  
 
   const goToSignUp = () => {
     navigate("/signup");
@@ -30,13 +31,14 @@ function ForgetPassword() {
   const Sendlink = async (e) => {
     e.preventDefault();
     setFlag(true);
-    sendPasswordResetEmail(auth, email,{url:'http://localhost:3000/login'})
+    sendPasswordResetEmail(auth, email,{url:`${fp}+'/login'`})
       .then(() => {
         alert("Password reset email send !!")
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        alert(errorMessage);
         // ..
       });
 
@@ -58,7 +60,14 @@ function ForgetPassword() {
               inputClassName="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               inputPlaceholder="Enter e-mail"
             ></InputField>
-
+              {flag && (
+                  <ReactLoading
+                    type="balls"
+                    color="#0000FF"
+                    height={100}
+                    width={50}
+                  />
+                )}
             {/* submit button */}
             <Button
               ButtonType="submit"

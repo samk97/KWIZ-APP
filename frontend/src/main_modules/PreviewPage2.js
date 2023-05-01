@@ -2,7 +2,7 @@ import JsPDF from "jspdf";
 function PreviewPage2(props) {
   const data = JSON.parse(localStorage.getItem("preview"));
   const Qdata = data.question;
-  console.log(data);
+  
 
   const generatePdf = () => {
     try {
@@ -12,14 +12,13 @@ function PreviewPage2(props) {
         report.save(data.title);
       });
     } catch (err) {
-      console.log(err);
+      alert(err.response.data.message);
     }
-    console.log("aa");
   };
 
   return (
     <>
-      <div className="flex" id="report">
+      <div className="flex" >
         <div
           className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
             props.open ? "ml-72" : "ml-16"
@@ -34,6 +33,7 @@ function PreviewPage2(props) {
               Quiz Title = {data.title}
             </label>
           </div>
+          <div className="mb-2">
           <button
             onClick={generatePdf}
             class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
@@ -47,12 +47,9 @@ function PreviewPage2(props) {
             </svg>
             <label for="title">Download As Pdf</label>
           </button>
-
-          <div className="w-full" onClick={generatePdf}>
-            <label for="title" class="block m-2 text-slate-700 font-bold">
-              Download As Pdf
-            </label>
           </div>
+          
+
           <div id ="report">
           {Qdata &&
             Qdata.map((post, index) => {

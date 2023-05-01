@@ -22,7 +22,7 @@ function LoginPage() {
   const url = process.env.REACT_APP_URL;
 
   const state = useSelector((state) => ({ ...state }));
-  console.log(process.env.REACT_APP_URL, "URL");
+  
 
   useEffect(() => {
     if (state && state.user) {
@@ -47,7 +47,7 @@ function LoginPage() {
         password
       );
       const user = userCredential.user;
-      console.log(user.emailVerified);
+      
 
       if (user.emailVerified) {
         const res = await fetch(url + "/login", {
@@ -55,15 +55,15 @@ function LoginPage() {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            email: email,
+            email: email.toLocaleLowerCase(),
             password: password,
           },
         });
         if (res.status === 200) {
           const data = await res.json();
-          // console.log(data);
+
           const payload = {
-            email: email,
+            email: data.email,
             role: data.role,
           };
           // navigate("/")
@@ -74,7 +74,7 @@ function LoginPage() {
           });
           localStorage.setItem("user", JSON.stringify(payload));
 
-          if (data.role === "student") {
+          if (data.role === "student" || data.role == null) {
             navigate("/dashboard");
           } else if (data.role === "teacher") {
             navigate("/admin/questions");
@@ -122,7 +122,7 @@ function LoginPage() {
 
             {/* Forgot Password */}
             <div className="px-3">
-              <Link to="/forgot_password">
+              <Link to="/forgot-password">
                 <span className="text-xs sm:text-sm text-blue-500 cursor-pointer">
                   Forgot Password ?
                 </span>

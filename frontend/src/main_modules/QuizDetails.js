@@ -13,7 +13,6 @@ function QuizDetails(props) {
   const url = process.env.REACT_APP_URL;
   var score = 0;
 
-  console.log("In Quiz Details");
 
   let navigate = useNavigate();
   const state = useSelector((state) => ({ ...state }));
@@ -31,21 +30,23 @@ function QuizDetails(props) {
     axios
       .post(url + "/get-leaderboard-by-id", { id: id })
       .then(function (res) {
-        setData(res.data);
-        console.log("NN", res.data);
+        
+       setData(res.data);
+       var obj = [...this.state.data];
+       obj.sort((a,b) => !(a.score - b.score));
+
+       setData(obj);
 
         return () => {};
       })
       .catch(function (err) {
-        console.log("mm", err);
         alert(err.response.data.message);
         // navigate("/dashboard");
       });
     setFlag(false);
-    setFlag(false);
   }, []);
 
-  console.log(data);
+  
 
   const handleDownload = (id, title) => {
     axios
@@ -56,7 +57,7 @@ function QuizDetails(props) {
         return () => {};
       })
       .catch(function (err) {
-        console.log(err);
+        alert(err.response.data.message);
       });
   };
 

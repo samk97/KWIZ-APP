@@ -23,7 +23,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [flag, setFlag] = useState(false);
   const state = useSelector((state) => ({ ...state }));
-  console.log(state);
+  
   const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const SignupPage = () => {
     e.preventDefault();
     
     let items = { email, name, password };
-    console.log(items);
+    
     if (email.indexOf("@mnnit.ac.in") < 0) {
       alert("use only MNNIT Email !!!");
       return;
@@ -55,7 +55,7 @@ const SignupPage = () => {
       );
 
       const user = userCredential.user;
-      console.log(user);
+      
       sendEmailVerification(auth.currentUser).then(() => {
         alert("Email verification link send !!");
       });
@@ -65,13 +65,13 @@ const SignupPage = () => {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            email: email,
+            email: email.toLowerCase(),
             password: password,
           },
         });
         if (res.status === 200) {
           const data = await res.json();
-          console.log(data);
+
           navigate("/login");
         }
         if (res.status === 403) {

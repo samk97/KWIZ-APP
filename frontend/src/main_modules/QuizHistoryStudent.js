@@ -9,7 +9,7 @@ const check = (title, aa, rt) => {
 
   const a = aa;
 
-  console.log(date, a);
+  
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -17,7 +17,7 @@ const check = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  console.log(year, month, dt, hour, minute);
+  
 
   var year2 = a.substring(0, 4);
   var month2 = a.substring(5, 7);
@@ -25,7 +25,7 @@ const check = (title, aa, rt) => {
   var hour2 = a.substring(11, 13);
   var minute2 = a.substring(14, 17);
 
-  console.log(year2, month2, dt2, hour2, minute2);
+  
 
   if (year2 < year) return false;
   if (year > year2) return true;
@@ -43,10 +43,10 @@ const check = (title, aa, rt) => {
       minute2 = Number(minute2);
       minute = Number(minute);
       rt = Number(rt);
-      console.log(minute2, minute);
+      
 
       if (minute2 > minute) return true;
-      console.log(minute2, rt, minute);
+      
       if (minute2 + rt >= minute) return true;
     }
   }
@@ -57,7 +57,7 @@ const check2 = (title, aa, rt) => {
   const date = new Date().toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });
   const a = aa;
 
-  console.log(title, date, a);
+  
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -65,8 +65,7 @@ const check2 = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-  console.log(year, month, dt, hour, minute);
-
+  
   var year2 = a.substring(0, 4);
   var month2 = a.substring(5, 7);
   var dt2 = a.substring(8, 10);
@@ -95,7 +94,7 @@ const HistoryStudent = (props) => {
   const [data, setData] = useState([]);
   const [flag, setFlag] = useState(true);
   const url = process.env.REACT_APP_URL;
-  console.log("Quiz History Student is Quiz Histors");
+  
   useEffect(() => {
     axios
       .post(url + "/get-all-quiz", {})
@@ -116,7 +115,7 @@ const HistoryStudent = (props) => {
         return () => {};
       })
       .catch(function (err) {
-        console.log(err);
+        alert(err.response.data.message);
         setFlag(false);
       });
   }, []);
@@ -128,12 +127,10 @@ const HistoryStudent = (props) => {
     localStorage.setItem("quiz-runtime", runTime);
     navigate(`/quiz-detail/${id}`);
 
-    console.log(id);
+    
   };
 
-  console.log(`datatype : ${typeof data}`);
-  console.log(data);
-  console.log(data.length);
+  
   return (
     <>
       <div className="flex mt-10 sm:mt-0">

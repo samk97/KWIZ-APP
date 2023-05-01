@@ -10,10 +10,8 @@ function PreviewPage(props) {
   const runTime = localStorage.getItem("runTime");
   const [title, setTitle] = useState("");
   const [flag, setFlag] = useState(false);
-  console.log(startTime);
-  // console.log(data + runTime + startTime);
   var Qdata = JSON.parse(data);
-  console.log(Qdata);
+  
 
   const handleClick = async (e) => {
     setFlag(true);
@@ -34,7 +32,7 @@ function PreviewPage(props) {
       questions.push(l[i]._id.toString());
     }
 
-    console.log(questions);
+    
 
     await axios
       .post(url + "/save-quiz", {

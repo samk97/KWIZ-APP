@@ -17,7 +17,6 @@ function SideNav(props) {
   let dispatch = useDispatch();
 
   const state = useSelector((state) => ({ ...state }));
-  console.log(state);
   var userName = "";
   if (state && state.user) userName = state.user.email;
 
