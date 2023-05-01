@@ -28,13 +28,13 @@ function StudentLeaderBoard(props) {
     <>
       <div className="flex mt-10 sm:mt-0">
         <div
-          className={`bg-gray-100 w-screen h-vh min-h-screen overlflow-y-scroll p-5 ${
+          className={`bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 w-screen h-vh min-h-screen overlflow-y-scroll p-5 ${
             props.open ? "sm:ml-72" : "sm:ml-16"
           } duration-200`}
         >
           {/* Heading */}
-          <div className="bg-red-200 p-2">
-            <h1 className="text-xl font-bold text-gray-800">Rankings</h1>
+          <div className="flex justify-center w-full bg-blue-950 p-2 mb-3">
+            <h1 className="text-xl font-bold text-white">Rankings</h1>
           </div>
           {flag && (
             <ReactLoading
@@ -45,8 +45,8 @@ function StudentLeaderBoard(props) {
             />
           )}
 
-          {/* Leaderboard heading div */}
           <div className="w-full my-3">
+            {/* Leaderboard heading div */}
             <div className="flex justify-center">
               <div className="text-center text-2xl text-purple-950 font-extrabold border-2 bg-yellow-400 border-gray-700 rounded-2xl min-w-fit w-[50%] p-3">
                 <h1>LEADERBOARD</h1>
@@ -59,8 +59,8 @@ function StudentLeaderBoard(props) {
               <div className="w-full sm:w-[90%] md:w-[70%] flex flex-col">
                 {/* Single rank + name tab */}
                 {data.length === 0 ? (
-                  <div className="w-full flex justify-center h-screen">
-                    <div className="w-fit h-fit opacity-20 text-2xl font-bold mt-10">
+                  <div className="w-full flex justify-center">
+                    <div className="w-fit h-fit opacity-20 text-2xl font-bold my-10">
                       <span>Leaderboard Unavailable</span>
                     </div>
                   </div>

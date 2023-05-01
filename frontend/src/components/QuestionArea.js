@@ -11,7 +11,7 @@ function QuestionArea(props) {
     <>
       <div class="mb-12">
         {/* Questions Div */}
-        <div className="flex flex-col justify-center items-center bg-green-200 border-x-2 border-t-2 border-gray-500 rounded-tl-xl rounded-tr-xl sm:mx-3 px-3 sm:px-7 py-4">
+        <div className="flex flex-col justify-center items-center bg-green-200  border-x-2 border-t-2 border-gray-500 rounded-tl-xl rounded-tr-xl sm:mx-3 px-3 sm:px-7 py-4">
           <div className="text-lg font-bold leading-loose rounded-md px-4">
             <p>Question {index}</p>
           </div>

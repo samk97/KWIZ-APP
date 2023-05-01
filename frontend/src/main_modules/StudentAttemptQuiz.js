@@ -141,23 +141,23 @@ const StudentAttempQuiz = (props) => {
     <>
       <div className="flex mt-10 sm:mt-0">
         <div
-          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+          className={`bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
             props.open ? "sm:ml-72" : "sm:ml-16"
           } duration-200`}
         >
           {/* Heading */}
-          <div className="w-full bg-red-200 p-2">
-            <h1 className="text-xl font-bold text-gray-800">Quizzes</h1>
+          <div className="flex justify-center w-full bg-blue-950 p-2 mb-3">
+            <h1 className="text-xl font-bold text-white">Quizzes</h1>
           </div>
 
           {/* if no tiles to show */}
           {data.length === 0 ? (
             // <div className="w-full flex justify-center h-screen">
-              <div className="w-fit h-fit opacity-20 text-2xl font-bold ">
-                <span>No Quizzes Available</span>
-              </div>
-            // </div>
+            <div className="flex justify-center w-full h-fit opacity-20 text-2xl font-bold ">
+              <span>No Quizzes Available</span>
+            </div>
           ) : (
+            // </div>
             ""
           )}
 
@@ -178,40 +178,53 @@ const StudentAttempQuiz = (props) => {
 
               const x = startTime;
 
-              if(check(title,startTime,runTime))return (
-                <div className="w-full sm:w-fit" key={_id}>
-                  <div
-                    className="bg-blue-200 sm:w-60 sm:h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
-                    onClick={() => {
-                      handleClick(_id, title, startTime, runTime);
-                    }}
-                  >
-                    <div className="mb-2">
-                      <p className="text-xl italic">{title}</p>
-                    </div>
-                      <button className="text-blue-500 font-bold">Open</button>
-                    <div className="text-sm">
-                      <p>
-                        Created : <span>{createdAt.substring(0, 10)}</span>{" "}
-                        <span className="italic">
-                          ({createdAt.substring(11, 19)})
-                        </span>
-                      </p>
-                      <p>
-                        Total Questions: <span>{questions.length}</span>
-                      </p>
-                      <p>
-                        Time Alloted: <span>{runTime} min</span>
-                      </p>
+              if (check(title, startTime, runTime))
+                return (
+                  <div className="w-full sm:w-fit" key={_id}>
+                    <div
+                      className="relative bg-gray-100 sm:w-60 sm:h-60 p-4 shadow-xl shadow-slate-700 rounded-md hover:cursor-pointer hover:ring ring-offset-2 hover:bg-cyan-200 ring-red-400"
+                      onClick={() => {
+                        handleClick(_id, title, startTime, runTime);
+                      }}
+                    >
+                      <div className="mb-2">
+                        <p className="text-xl italic">{title}</p>
+                      </div>
+                      {check(title, startTime, runTime) ? (
+                        <>
+                          <button className="text-blue-700 font-bold">
+                            Open
+                          </button>
+                          <span className="animate-ping bg-blue-600 absolute top-1 right-1 h-4 w-4 rounded-full"></span>
+                          <span className="bg-blue-600 absolute top-1 right-1 h-4 w-4 rounded-full border-white"></span>
+                        </>
+                      ) : (
+                        <button className="text-red-600">Closed</button>
+                      )}
+                      <div className="text-sm">
+                        <p>
+                          Created : <span>{createdAt.substring(0, 10)}</span>{" "}
+                          <span className="italic">
+                            ({createdAt.substring(11, 19)})
+                          </span>
+                        </p>
+                        <p>
+                          Total Questions: <span>{questions.length}</span>
+                        </p>
+                        <p>
+                          Time Alloted: <span>{runTime} min</span>
+                        </p>
 
-                      <p>
-                        Start Time: <span>{x.substring(0, 10)} </span>{" "}
-                        <span className="italic">({x.substring(11, 17)}) </span>
-                      </p>
+                        <p>
+                          Start Time: <span>{x.substring(0, 10)} </span>{" "}
+                          <span className="italic">
+                            ({x.substring(11, 17)}){" "}
+                          </span>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
+                );
             })}
           </div>
         </div>

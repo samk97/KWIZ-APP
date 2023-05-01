@@ -41,8 +41,18 @@ function QuestionForm() {
     }
   };
 
-  const form = useForm();
-  const { reset } = form;
+  // Reset
+  function resetForm(e) {
+    e.preventDefault();
+    console.log("Reset Clicked");
+    setQuestion("");
+    setOp_a("");
+    setOp_b("");
+    setOp_c("");
+    setOp_d("");
+    setAns("");
+    setExp("");
+  }
 
   return (
     <>
@@ -60,6 +70,7 @@ function QuestionForm() {
               </label>
 
               <textarea
+                defaultValue={""}
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 className="w-full p-3 h-28"
@@ -74,84 +85,90 @@ function QuestionForm() {
           <div className="border-x-2 border-b-2 border-gray-500 bg-lime-100 rounded-bl-xl rounded-br-xl mb-3 sm:mx-3 p-3">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="question"
+              htmlFor="options"
             >
               Options
             </label>
 
-            {/* Option A */}
-            <div className="flex border-2 border-gray-700 rounded-lg mb-3 min-h-[20px]">
-              {/* option label */}
-              <div className="flex justify-center items-center w-[5%] border-r-2 border-gray-700">
-                A
+            <div id="options">
+              {/* Option A */}
+              <div className="flex border-2 border-gray-700 rounded-lg mb-3 min-h-[20px]">
+                {/* option label */}
+                <div className="flex justify-center items-center w-[5%] border-r-2 border-gray-700">
+                  A
+                </div>
+                {/* Option text */}
+                <div className="flex w-[95%]">
+                  <textarea
+                    defaultValue={""}
+                    value={op_a}
+                    onChange={(e) => setOp_a(e.target.value)}
+                    className="w-full p-3"
+                    id="question"
+                    name="question"
+                    placeholder="Type option A here"
+                  ></textarea>
+                </div>
               </div>
-              {/* Option text */}
-              <div className="flex w-[95%]">
-                <textarea
-                  value={op_a}
-                  onChange={(e) => setOp_a(e.target.value)}
-                  className="w-full p-3"
-                  id="question"
-                  name="question"
-                  placeholder="Type option A here"
-                ></textarea>
-              </div>
-            </div>
 
-            {/* Option B */}
-            <div className="flex border-2 border-gray-700 rounded-lg mb-3 min-h-[20px]">
-              {/* option label */}
-              <div className="flex justify-center items-center w-[5%] border-r-2 border-gray-700">
-                B
+              {/* Option B */}
+              <div className="flex border-2 border-gray-700 rounded-lg mb-3 min-h-[20px]">
+                {/* option label */}
+                <div className="flex justify-center items-center w-[5%] border-r-2 border-gray-700">
+                  B
+                </div>
+                {/* Option text */}
+                <div className="flex w-[95%]">
+                  <textarea
+                    defaultValue={""}
+                    value={op_b}
+                    onChange={(e) => setOp_b(e.target.value)}
+                    className="w-full p-3"
+                    id="question"
+                    name="question"
+                    placeholder="Type option B here"
+                  ></textarea>
+                </div>
               </div>
-              {/* Option text */}
-              <div className="flex w-[95%]">
-                <textarea
-                  value={op_b}
-                  onChange={(e) => setOp_b(e.target.value)}
-                  className="w-full p-3"
-                  id="question"
-                  name="question"
-                  placeholder="Type option B here"
-                ></textarea>
-              </div>
-            </div>
 
-            {/* Option C */}
-            <div className="flex border-2 border-gray-700 rounded-lg mb-3 min-h-[20px]">
-              {/* option label */}
-              <div className="flex justify-center items-center w-[5%] border-r-2 border-gray-700">
-                C
+              {/* Option C */}
+              <div className="flex border-2 border-gray-700 rounded-lg mb-3 min-h-[20px]">
+                {/* option label */}
+                <div className="flex justify-center items-center w-[5%] border-r-2 border-gray-700">
+                  C
+                </div>
+                {/* Option text */}
+                <div className="flex w-[95%]">
+                  <textarea
+                    defaultValue={""}
+                    value={op_c}
+                    onChange={(e) => setOp_c(e.target.value)}
+                    className="w-full p-3"
+                    id="question"
+                    name="question"
+                    placeholder="Type option C here"
+                  ></textarea>
+                </div>
               </div>
-              {/* Option text */}
-              <div className="flex w-[95%]">
-                <textarea
-                  value={op_c}
-                  onChange={(e) => setOp_c(e.target.value)}
-                  className="w-full p-3"
-                  id="question"
-                  name="question"
-                  placeholder="Type option C here"
-                ></textarea>
-              </div>
-            </div>
 
-            {/* Option D */}
-            <div className="flex border-2 border-gray-700 rounded-lg mb-3 min-h-[20px]">
-              {/* option label */}
-              <div className="flex justify-center items-center w-[5%] border-r-2 border-gray-700">
-                D
-              </div>
-              {/* Option text */}
-              <div className="flex w-[95%]">
-                <textarea
-                  value={op_d}
-                  onChange={(e) => setOp_d(e.target.value)}
-                  className="w-full p-3"
-                  id="question"
-                  name="question"
-                  placeholder="Type option D here"
-                ></textarea>
+              {/* Option D */}
+              <div className="flex border-2 border-gray-700 rounded-lg mb-3 min-h-[20px]">
+                {/* option label */}
+                <div className="flex justify-center items-center w-[5%] border-r-2 border-gray-700">
+                  D
+                </div>
+                {/* Option text */}
+                <div className="flex w-[95%]">
+                  <textarea
+                    defaultValue={""}
+                    value={op_d}
+                    onChange={(e) => setOp_d(e.target.value)}
+                    className="w-full p-3"
+                    id="question"
+                    name="question"
+                    placeholder="Type option D here"
+                  ></textarea>
+                </div>
               </div>
             </div>
 
@@ -159,13 +176,13 @@ function QuestionForm() {
             <div>
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="question"
+                htmlFor="correctOption"
               >
                 Correct Option
               </label>
 
               <select
-                id="explaination"
+                id="correctOption"
                 value={ans}
                 onChange={(e) => setAns(e.target.value)}
                 defaultValue={"default"}
@@ -183,12 +200,13 @@ function QuestionForm() {
             <div>
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="question"
+                htmlFor="explaination"
               >
                 Explaination
               </label>
 
               <textarea
+                defaultValue={""}
                 value={exp}
                 onChange={(e) => setExp(e.target.value)}
                 className="w-full p-3 h-28"
@@ -207,8 +225,7 @@ function QuestionForm() {
               ></Button>
 
               <Button
-                buttonType="reset"
-                onClick={() => reset()}
+                onClick={resetForm}
                 buttonClassName="min-w-[100px] text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm py-2.5 text-center"
                 buttonLabel="Reset"
               ></Button>

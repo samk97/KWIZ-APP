@@ -95,6 +95,7 @@ const HistoryStudent = (props) => {
   const [data, setData] = useState([]);
   const [flag, setFlag] = useState(true);
   const url = process.env.REACT_APP_URL;
+  console.log("Quiz History Student is Quiz Histors");
   useEffect(() => {
     axios
       .post(url + "/get-all-quiz", {})
@@ -137,22 +138,20 @@ const HistoryStudent = (props) => {
     <>
       <div className="flex mt-10 sm:mt-0">
         <div
-          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+          className={`bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
             props.open ? "sm:ml-72" : "sm:ml-16"
           } duration-200`}
         >
           {/* Heading */}
-          <div className="w-full bg-red-200 p-2">
-            <h1 className="text-xl font-bold text-gray-800">Quizzes</h1>
+          <div className="flex justify-center w-full bg-blue-950 p-2 mb-3">
+            <h1 className="text-xl font-bold text-white">Past Quizzes</h1>
           </div>
 
           {/* if no tiles to show */}
           {data.length === 0 ? (
-            // <div className="w-full flex justify-center h-screen">
-              <div className="w-fit h-fit opacity-20 text-2xl font-bold mt-10">
-                <span>No Quizzes Available</span>
-              </div>
-            // </div>
+            <div className="flex justify-center w-full h-fit opacity-20 text-2xl font-bold ">
+              <span>No Quizzes Available</span>
+            </div>
           ) : (
             ""
           )}
@@ -174,40 +173,43 @@ const HistoryStudent = (props) => {
 
               const x = startTime;
 
-              if(!check(title, startTime, runTime))return (
-                <div className="w-full sm:w-fit" key={_id}>
-                  <div
-                    className="bg-blue-200 sm:w-60 sm:h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
-                    onClick={() => {
-                      handleClick(_id, title, startTime, runTime);
-                    }}
-                  >
-                    <div className="mb-2">
-                      <p className="text-xl italic">{title}</p>
-                    </div>
+              if (!check(title, startTime, runTime))
+                return (
+                  <div className="w-full sm:w-fit" key={_id}>
+                    <div
+                      className="relative bg-gray-100 sm:w-60 sm:h-60 p-4 shadow-xl shadow-slate-700 rounded-md hover:cursor-pointer hover:ring ring-offset-2 hover:bg-cyan-200 ring-red-400"
+                      onClick={() => {
+                        handleClick(_id, title, startTime, runTime);
+                      }}
+                    >
+                      <div className="mb-2">
+                        <p className="text-xl italic">{title}</p>
+                      </div>
                       <button className="text-red-500">Closed</button>
-                    <div className="text-sm">
-                      <p>
-                        Created : <span>{createdAt.substring(0, 10)}</span>{" "}
-                        <span className="italic">
-                          ({createdAt.substring(11, 19)})
-                        </span>
-                      </p>
-                      <p>
-                        Total Questions: <span>{questions.length}</span>
-                      </p>
-                      <p>
-                        Time Alloted: <span>{runTime} min</span>
-                      </p>
+                      <div className="text-sm">
+                        <p>
+                          Created : <span>{createdAt.substring(0, 10)}</span>{" "}
+                          <span className="italic">
+                            ({createdAt.substring(11, 19)})
+                          </span>
+                        </p>
+                        <p>
+                          Total Questions: <span>{questions.length}</span>
+                        </p>
+                        <p>
+                          Time Alloted: <span>{runTime} min</span>
+                        </p>
 
-                      <p>
-                        Start Time: <span>{x.substring(0, 10)} </span>{" "}
-                        <span className="italic">({x.substring(11, 17)}) </span>
-                      </p>
+                        <p>
+                          Start Time: <span>{x.substring(0, 10)} </span>{" "}
+                          <span className="italic">
+                            ({x.substring(11, 17)}){" "}
+                          </span>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
+                );
             })}
           </div>
         </div>

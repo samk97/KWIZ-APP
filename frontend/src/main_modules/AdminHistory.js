@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { FiDownload } from "react-icons/fi";
 
 const check = (title, aa, rt) => {
   const date = new Date().toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });
@@ -103,16 +104,16 @@ const AdminHistory = (props) => {
           new Date(a.startTime).toLocaleString("en-GB", {
             timeZone: "Asia/Kolkata",
           }) <
-            new Date(b.startTime).toLocaleString("en-GB", {
-              timeZone: "Asia/Kolkata",
-            })
+          new Date(b.startTime).toLocaleString("en-GB", {
+            timeZone: "Asia/Kolkata",
+          })
             ? 1
             : -1
         );
         setData(res.data);
         setFlag(false);
 
-        return () => { };
+        return () => {};
       })
       .catch(function (err) {
         console.log(err);
@@ -135,7 +136,7 @@ const AdminHistory = (props) => {
       .then(function (res) {
         localStorage.setItem("preview", JSON.stringify(res.data));
         navigate("/preview-quiz");
-        return () => { };
+        return () => {};
       })
       .catch(function (err) {
         console.log(err);
@@ -145,12 +146,13 @@ const AdminHistory = (props) => {
     <>
       <div className="flex mt-10 sm:mt-0">
         <div
-          className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${props.open ? "sm:ml-72" : "sm:ml-16"
-            } duration-200`}
+          className={`bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${
+            props.open ? "sm:ml-72" : "sm:ml-16"
+          } duration-200`}
         >
           {/* Heading */}
-          <div className="w-full bg-red-200 p-2">
-            <h1 className="text-xl font-bold text-gray-800">Past Quizzes</h1>
+          <div className="flex justify-center w-full bg-blue-950 p-2 mb-3">
+            <h1 className="text-xl font-bold text-white">Past Quizzes</h1>
           </div>
           {/* Tiles Container */}
           <div className="flex flex-wrap justify-start my-4 gap-5">
@@ -174,7 +176,7 @@ const AdminHistory = (props) => {
               return (
                 <div className="w-full sm:w-fit" key={_id}>
                   <div
-                    className="bg-blue-200 sm:w-60 sm:h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
+                    className="relative bg-gray-100 sm:w-60 sm:h-60 p-4 shadow-xl shadow-slate-700 rounded-md hover:cursor-pointer hover:ring ring-offset-2 hover:bg-cyan-200 ring-red-400"
                     onClick={() => {
                       handleClick(_id, title, startTime, runTime);
                     }}
@@ -183,9 +185,15 @@ const AdminHistory = (props) => {
                       <p className="text-xl italic">{title}</p>
                     </div>
                     {check(title, startTime, runTime) ? (
-                      <button className="text-blue-500 font-bold">Open</button>
+                      <>
+                        <button className="text-blue-700 font-bold">
+                          Open
+                        </button>
+                        <span className="animate-ping bg-blue-600 absolute top-1 right-1 h-4 w-4 rounded-full"></span>
+                        <span className="bg-blue-600 absolute top-1 right-1 h-4 w-4 rounded-full border-white"></span>
+                      </>
                     ) : (
-                      <button className="text-red-500">Closed</button>
+                      <button className="text-red-600">Closed</button>
                     )}
 
                     <div className="text-sm">
@@ -208,17 +216,20 @@ const AdminHistory = (props) => {
                       </p>
                     </div>
                   </div>
-                  <div className="text-sm">
+                  {/* <div className="text-sm">
                     <button
-                    onClick={(e) => handleDownload(_id, title)}
-                     class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex ">
-                      
-                      <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
-                      {" "}
+                      onClick={(e) => handleDownload(_id, title)}
+                      class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex "
+                    >
+                      <svg
+                        class="fill-current w-4 h-4 mr-2"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                      </svg>{" "}
                     </button>
-                    
-                  </div>
-
+                  </div> */}
                 </div>
               );
             })}
