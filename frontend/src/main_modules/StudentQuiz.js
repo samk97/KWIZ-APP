@@ -102,26 +102,26 @@ function StudentQuiz() {
         </div>
 
         {/* left info area */}
-        <div class=" hidden md:fixed md:top=0 md:left-0 w-[17rem] md:h-screen md:flex flex-col md:items-center md:bg-gray-200 md:border-r-2 md:border-gray-400">
+        <div class=" hidden md:fixed md:top=0 md:left-0 w-[17rem] md:h-screen md:flex flex-col md:items-center bg-gradient-to-r from-teal-400 to-green-200 md:border-r-2 md:border-gray-400">
           <div className="hidden md:flex md:w-full md:h-auto md:bg-emerald-700 p-2">
             <p class="w-full break-words">{email}</p>
           </div>
 
           {/* Timer Area */}
-          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-200 p-2">
+          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-400 p-2">
             <p class="w-full">
               Start Time:{" "}
               <sapn>{new Date(data.startTime).toLocaleString()}</sapn>
             </p>
           </div>
 
-          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-200 p-2">
+          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-300 p-2">
             <p class="w-full">
               Run Time: <sapn>{data.runTime + " Minute"}</sapn>
             </p>
           </div>
 
-          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-200 p-2">
+          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-400 p-2">
             <p class="w-full">
               Total Questions:{" "}
               <span>
@@ -132,7 +132,7 @@ function StudentQuiz() {
         </div>
 
         {/* Quiz area */}
-        <div class="md:ml-[17rem] md:w-full h-fit min-h-screen overlflow-y-scroll bg-gray-100 p-3 mt-[6rem] sm:mt-0">
+        <div class="md:ml-[17rem] md:w-full h-fit min-h-screen overlflow-y-scroll bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 p-3 mt-[6rem] sm:mt-0">
           {data &&
             data.questions &&
             data.questions.map((res, num) => {

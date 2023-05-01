@@ -176,7 +176,7 @@ const AdminHistory = (props) => {
               return (
                 <div className="w-full sm:w-fit" key={_id}>
                   <div
-                    className="relative bg-cyan-500 sm:w-60 sm:h-60 p-4 drop-shadow-xl rounded-md hover:cursor-pointer hover:ring ring-offset-2 ring-red-400"
+                    className="relative bg-gray-100 sm:w-60 sm:h-60 p-4 shadow-xl shadow-slate-700 rounded-md hover:cursor-pointer hover:ring ring-offset-2 hover:bg-cyan-200 ring-red-400"
                     onClick={() => {
                       handleClick(_id, title, startTime, runTime);
                     }}
@@ -185,7 +185,13 @@ const AdminHistory = (props) => {
                       <p className="text-xl italic">{title}</p>
                     </div>
                     {check(title, startTime, runTime) ? (
-                      <button className="text-blue-700 font-bold">Open</button>
+                      <>
+                        <button className="text-blue-700 font-bold">
+                          Open
+                        </button>
+                        <span className="animate-ping bg-blue-600 absolute top-1 right-1 h-4 w-4 rounded-full"></span>
+                        <span className="bg-blue-600 absolute top-1 right-1 h-4 w-4 rounded-full border-white"></span>
+                      </>
                     ) : (
                       <button className="text-red-600">Closed</button>
                     )}
