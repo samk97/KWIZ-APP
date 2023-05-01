@@ -20,6 +20,7 @@ import AdminProfile from "./main_modules/AdminProfile";
 import StudentProfile from "./main_modules/StudentProfile";
 import StudentLeaderBoard from "./main_modules/StudentLeaderBoard";
 import QuizHistoryStudent from "./main_modules/QuizHistoryStudent"
+import ResetPassword from "./main_modules/ResetPassword"
 
 function App() {
   const [open, setOpen] = useState(true);
@@ -40,6 +41,7 @@ function App() {
       <Route path="*" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/forgot_password" element={<ForgotPassword />} />
+      <Route path="/reset_password" element={<ResetPassword />} />
       <Route path="/profile" element={<AdminProfile />} />
       {/* <Route path="/preview" element={<PreviewPage />} /> */}
       {/* Admin */}
@@ -75,7 +77,7 @@ function App() {
           element={<StudentLeaderBoard open={open} />}
         />
         <Route
-          path="QuizHistoryStudent"
+          path="quiz-history"
           element={<QuizHistoryStudent open={open} />}
         />
 

@@ -56,7 +56,7 @@ function StudentSideNav(props) {
               </div>
             </NavLink>
 
-            <NavLink to="/dashboard/leaderboard">
+            <NavLink to="/dashboard/quiz-history">
               <div className="flex justify-center items-center h-full w-10">
                 <GiRank3 className="text-[1.3rem]" />
               </div>
@@ -154,7 +154,7 @@ function StudentSideNav(props) {
               </NavLink>
 
               {/* StudentSideNav option 2 */}
-              <NavLink to="/dashboard/QuizHistoryStudent">
+              <NavLink to="/dashboard/quiz-history">
                 <div className="flex justify-start items-center w-full hover:font-bold group">
                   <div className="flex justify-center items-center group-hover:scale-[1.1] duration-200 w-16">
                     <GiRank3 className="text-[3rem]  cursor-pointer" />

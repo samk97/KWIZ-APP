@@ -41,7 +41,6 @@ function StudentQuiz() {
     setFlag(false);
   }, []);
 
-  
 
 
 
@@ -91,11 +90,11 @@ function StudentQuiz() {
 
               {/* if no tiles to show */}
               {data.length === 0 ? (
-                <div className="w-full flex justify-center h-screen">
-                <div className="w-fit h-fit opacity-20 text-2xl font-bold mt-10">
-                  <span>No Quizzes Available</span>
-                </div>
-              </div>
+                // <div className="w-full flex justify-center h-screen">
+                  <div className="w-fit h-fit opacity-20 text-2xl font-bold ">
+                    <span>Not attemted by anyone</span>
+                  </div>
+                // </div>
               ) : (
                 ""
               )}

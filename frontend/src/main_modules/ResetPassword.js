@@ -3,19 +3,17 @@ import MinorSide from "../components/MinorSide";
 import Form from "../components/Form";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../firebase-auth/firebase";
-import { sendPasswordResetEmail } from "firebase/auth";
+import { confirmPasswordReset } from "firebase/auth";
 import ReactLoading from "react-loading";
-function ForgetPassword() {
+function ResetPassword(){
 
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [flag, setFlag] = useState(false);
+ 
   const [password, setPassword] = useState("");
   let dispatch = useDispatch();
   const url = process.env.REACT_APP_URL;
@@ -27,47 +25,60 @@ function ForgetPassword() {
     navigate("/signup");
   };
 
-  const Sendlink = async (e) => {
+  const Reset = async (e) => {
     e.preventDefault();
-    setFlag(true);
-    sendPasswordResetEmail(auth, email,{url:'http://localhost:3000/login'})
+    const location=useLocation();
+    const queryParams= new URLSearchParams(location.search);
+    const oobCode= queryParams.get("oobCode");
+    console.log(queryParams);
+    console.log("fhth");
+    confirmPasswordReset(auth,oobCode,password)
       .then(() => {
-        alert("Password reset email send !!")
+        alert("Password reset success!!");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
       });
-
-    setFlag(false);
   };
+
+
+  
   return (
     <>
       <div className="flex w-full h-screen">
         <MajorSide>
           <Form>
-            {/* ID */}
+            {/* password */}
             <InputField
-              labelHtmlFor="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              labelHtmlFor="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
-              labelPlaceHolder="e-mail"
-              inputType="text"
+              labelPlaceHolder="Password"
+              inputType="password"
               inputClassName="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              inputPlaceholder="Enter e-mail"
+              inputPlaceholder="•••••••••••••"
             ></InputField>
+            {/* password */}
+            {/* <InputField
+              labelHtmlFor="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              labelClassName="block mb-2 text-sm font-medium text-gray-900 dark:text-green"
+              labelPlaceHolder="Confirm Password"
+              inputType="password"
+              inputClassName="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              inputPlaceholder="•••••••••••••"
+            ></InputField> */}
 
-            {/* submit button */}
             <Button
               ButtonType="submit"
-              onClick={Sendlink}
+              onClick={Reset}
               buttonClassName="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm py-2.5 text-center min-w-[4rem] max-w-[6rem] w-4/12 m-2"
-              buttonLabel="Send Link"
+              buttonLabel="submit"
             ></Button>
-
-            
           </Form>
 
           {/* Only For small devices - sign up */}
@@ -94,4 +105,4 @@ function ForgetPassword() {
   );
 }
 
-export default ForgetPassword;
+export default ResetPassword;
