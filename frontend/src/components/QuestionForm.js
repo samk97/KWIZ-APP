@@ -68,7 +68,7 @@ function QuestionForm() {
                 Question
               </label>
 
-              <textarea
+              <input
                 defaultValue={""}
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
@@ -77,7 +77,7 @@ function QuestionForm() {
                 name="question"
                 placeholder="Type your question here"
                 required
-              ></textarea>
+              ></input>
             </div>
           </div>
           {/* Options div */}
@@ -98,7 +98,7 @@ function QuestionForm() {
                 </div>
                 {/* Option text */}
                 <div className="flex w-[95%]">
-                  <textarea
+                  <input
                     defaultValue={""}
                     value={op_a}
                     onChange={(e) => setOp_a(e.target.value)}
@@ -106,7 +106,7 @@ function QuestionForm() {
                     id="question"
                     name="question"
                     placeholder="Type option A here"
-                  ></textarea>
+                  ></input>
                 </div>
               </div>
 
@@ -118,7 +118,7 @@ function QuestionForm() {
                 </div>
                 {/* Option text */}
                 <div className="flex w-[95%]">
-                  <textarea
+                  <input
                     defaultValue={""}
                     value={op_b}
                     onChange={(e) => setOp_b(e.target.value)}
@@ -126,7 +126,7 @@ function QuestionForm() {
                     id="question"
                     name="question"
                     placeholder="Type option B here"
-                  ></textarea>
+                  ></input>
                 </div>
               </div>
 
@@ -138,7 +138,7 @@ function QuestionForm() {
                 </div>
                 {/* Option text */}
                 <div className="flex w-[95%]">
-                  <textarea
+                  <input
                     defaultValue={""}
                     value={op_c}
                     onChange={(e) => setOp_c(e.target.value)}
@@ -146,7 +146,7 @@ function QuestionForm() {
                     id="question"
                     name="question"
                     placeholder="Type option C here"
-                  ></textarea>
+                  ></input>
                 </div>
               </div>
 
@@ -158,7 +158,7 @@ function QuestionForm() {
                 </div>
                 {/* Option text */}
                 <div className="flex w-[95%]">
-                  <textarea
+                  <input
                     defaultValue={""}
                     value={op_d}
                     onChange={(e) => setOp_d(e.target.value)}
@@ -166,7 +166,7 @@ function QuestionForm() {
                     id="question"
                     name="question"
                     placeholder="Type option D here"
-                  ></textarea>
+                  ></input>
                 </div>
               </div>
             </div>

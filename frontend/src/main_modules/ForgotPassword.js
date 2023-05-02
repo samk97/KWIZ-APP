@@ -31,7 +31,7 @@ function ForgetPassword() {
   const Sendlink = async (e) => {
     e.preventDefault();
     setFlag(true);
-    sendPasswordResetEmail(auth, email,{url:`${fp}+'/login'`})
+    sendPasswordResetEmail(auth, email,{url:"https://kwiz-app.vercel.app/login"})
       .then(() => {
         alert("Password reset email send !!")
       })
