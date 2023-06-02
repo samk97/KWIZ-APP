@@ -12,26 +12,7 @@ exports.login=async(req,res)=>{
         if(count>0){
                 
            User.findOne({email}, function(err, userFromDB) {
-
-            console.log(userFromDB);
-            if(userFromDB && userFromDB.login != "email")  
-            res.status(400).json({Error:"Sign In With the Medium You Use For Signup"});
-             
-
-            bcrypt.compare(password, userFromDB.password, function(err, result) {
-
-                console.log("RESULT",result);
-                if (err){
-                    res.status(400).json({Error:"Wrong Password"});
-                }
-                if (result) {
-                    
                     res.status(200).json(userFromDB);
-                } else {
-                  // response is OutgoingMessage object that server response http request
-                  return res.status(400).json({Error: 'passwords do not match'});
-                }})
-
          })}else {
              res.status(400).json({Error:"Wrong Password"});
          }
@@ -105,18 +86,30 @@ exports.forgotPassword = async (req,res)=>{
 
         if(result == null) res.status(400).json({message:"User Not Exists"});
         else if(err) res.status(400).json({message:err.message});
-        else if(result.login != "email") res.status(400).json({message:"User Not Logged in by email"});
         else{
         User.findOneAndUpdate({email},{$set:{password:password}},function (err, results){
-         
             if(err) res.status(400).json({message:err.message});
             else res.status(200).json({message:"Password Change Successfully"});
-          
          });
         }
-
     })
- 
-  
+}
 
+
+exports.getUser = async (req,res)=>{
+
+   
+    var x = []
+    User.find({},function(err,result){
+             for(var a = 0;a < result.length;a++){
+                x.push(result[a].email);
+             }     
+             x.sort((a,b)=>{
+                if(a.subs > b) return 1;
+                if(b > a) return -1;
+                return 0;
+             })
+
+             res.status(200).json(x);
+   })
 }

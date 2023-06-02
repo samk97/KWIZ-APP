@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import LoginPage from "./main_modules/LoginPage";
 import SignupPage from "./main_modules/SignupPage";
@@ -19,6 +19,7 @@ import ForgotPassword from "./main_modules/ForgotPassword";
 import AdminProfile from "./main_modules/AdminProfile";
 import StudentProfile from "./main_modules/StudentProfile";
 import StudentLeaderBoard from "./main_modules/StudentLeaderBoard";
+import QuizHistoryStudent from "./main_modules/QuizHistoryStudent";
 
 function App() {
   const [open, setOpen] = useState(true);
@@ -38,8 +39,9 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="*" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-      <Route path="/forgot_password" element={<ForgotPassword />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/profile" element={<AdminProfile />} />
+      <Route path="preview-quiz" element={<PreviewPage2 />} />
       {/* <Route path="/preview" element={<PreviewPage />} /> */}
       {/* Admin */}
       <Route
@@ -52,12 +54,12 @@ function App() {
           element={<AdminCreateQuestions open={open} />}
         />
         <Route path="create_quiz" element={<AdminCreateQuiz open={open} />} />
-        <Route path="history" element={<AdminHistory open={open} />} />
+        <Route path="history" element={<AdminHistory open={open} />}></Route>
+
         <Route path="preview" element={<PreviewPage open={open} />} />
-      
-        
       </Route>
 
+      <Route path="quiz-detail/:id" element={<QuizDetails open={open} />} />
       {/* Student */}
       <Route
         path="/dashboard"
@@ -73,6 +75,10 @@ function App() {
           path="leaderboard"
           element={<StudentLeaderBoard open={open} />}
         />
+        <Route
+          path="quiz-history"
+          element={<QuizHistoryStudent open={open} />}
+        />
 
         {/* Component pending */}
         <Route
@@ -84,13 +90,12 @@ function App() {
       </Route>
 
       <Route path="/quiz/:id" element={<StudentQuiz />}></Route>
-      <Route   path="quiz-detail/:id"
-          element={<QuizDetails open={open} />}
-        ></Route>
-      
+      {/* <Route
+        path="quiz-detail/:id"
+        element={<QuizDetails open={open} />}
+      ></Route> */}
+
       <Route path="/student_profile" element={<StudentProfile />}></Route>
-      <Route path="preview-quiz" element={<PreviewPage2/>} />
-        
     </Routes>
   );
 }

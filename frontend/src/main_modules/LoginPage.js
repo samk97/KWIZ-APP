@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../firebase-auth/firebase";
-import { signInWithEmailAndPassword, } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import ReactLoading from "react-loading";
 function LoginPage() {
   const formLabel = "Log in";
@@ -16,13 +16,13 @@ function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [flag,setFlag] = useState(false);
+  const [flag, setFlag] = useState(false);
   const [password, setPassword] = useState("");
   let dispatch = useDispatch();
   const url = process.env.REACT_APP_URL;
 
   const state = useSelector((state) => ({ ...state }));
-  console.log(process.env.REACT_APP_URL,"URL");
+  
 
   useEffect(() => {
     if (state && state.user) {
@@ -40,64 +40,62 @@ function LoginPage() {
     // let items = { email, name, password };
     setFlag(true);
 
-    try{
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    console.log(user.emailVerified);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      
 
-    if (user.emailVerified) {
-      const res = await fetch(url + "/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          email: email,
-          password: password,
-        },
-      });
-      if (res.status === 200) {
-        const data = await res.json();
-        // console.log(data);
-        const payload = {
-          email: email,
-          role: data.role,
-        };
-        // navigate("/")
-
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload,
+      if (user.emailVerified) {
+        const res = await fetch(url + "/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            email: email.toLocaleLowerCase(),
+            password: password,
+          },
         });
-        localStorage.setItem("user", JSON.stringify(payload));
+        if (res.status === 200) {
+          const data = await res.json();
 
-        if (data.role === "student") {
-          navigate("/dashboard");
-        } else if (data.role === "teacher") {
-          navigate("/admin/questions");
+          const payload = {
+            email: data.email,
+            role: data.role,
+          };
+          // navigate("/")
+
+          dispatch({
+            type: "LOGGED_IN_USER",
+            payload,
+          });
+          localStorage.setItem("user", JSON.stringify(payload));
+
+          if (data.role === "student" || data.role == null) {
+            navigate("/dashboard");
+          } else if (data.role === "teacher") {
+            navigate("/admin/questions");
+          }
+        } else {
+          alert("Wrong Password");
         }
       } else {
-        alert("Wrong Password");
+        alert("verify your email !!");
       }
-    }
-    else{
-      alert("verify your email !!");
-    }
-  }
-  catch(error){
+    } catch (error) {
       alert(error.message);
-  }
+    }
 
-  setFlag(false);
-
-
+    setFlag(false);
   };
   return (
     <>
       <div className="flex w-full h-screen">
-      
         <MajorSide>
           <Form formLabel={formLabel}>
-          
             {/* ID */}
             <InputField
               labelHtmlFor="email"
@@ -121,19 +119,23 @@ function LoginPage() {
               inputClassName="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               inputPlaceholder="•••••••••••••"
             ></InputField>
-             
 
             {/* Forgot Password */}
             <div className="px-3">
-              <Link to="/forgot_password">
+              <Link to="/forgot-password">
                 <span className="text-xs sm:text-sm text-blue-500 cursor-pointer">
                   Forgot Password ?
                 </span>
-                {flag && <ReactLoading type="balls" color="#0000FF" 
-        height={100} width={50} />}
+                {flag && (
+                  <ReactLoading
+                    type="balls"
+                    color="#0000FF"
+                    height={100}
+                    width={50}
+                  />
+                )}
               </Link>
             </div>
-
 
             {/* submit button */}
             <Button
@@ -143,7 +145,6 @@ function LoginPage() {
               buttonLabel={buttonLabel}
             ></Button>
           </Form>
-         
 
           {/* Only For small devices - sign up */}
           <div className="sm:hidden bg-red-100 absolute right-0 top-0">

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { auth } from "../firebase-auth/firebase";
+import ReactLoading from "react-loading";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -20,8 +21,9 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [flag, setFlag] = useState(false);
   const state = useSelector((state) => ({ ...state }));
-  console.log(state);
+  
   const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
@@ -37,12 +39,14 @@ const SignupPage = () => {
 
   const SignUp = async (e) => {
     e.preventDefault();
+    
     let items = { email, name, password };
-    console.log(items);
+    
     if (email.indexOf("@mnnit.ac.in") < 0) {
       alert("use only MNNIT Email !!!");
       return;
     }
+    setFlag(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -51,7 +55,7 @@ const SignupPage = () => {
       );
 
       const user = userCredential.user;
-      console.log(user);
+      
       sendEmailVerification(auth.currentUser).then(() => {
         alert("Email verification link send !!");
       });
@@ -61,13 +65,13 @@ const SignupPage = () => {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            email: email,
+            email: email.toLowerCase(),
             password: password,
           },
         });
         if (res.status === 200) {
           const data = await res.json();
-          console.log(data);
+
           navigate("/login");
         }
         if (res.status === 403) {
@@ -78,6 +82,8 @@ const SignupPage = () => {
     } catch (error) {
       alert(error.code);
     }
+
+    setFlag(false);
   };
   return (
     <>
@@ -127,6 +133,18 @@ const SignupPage = () => {
               inputClassName="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               inputPlaceholder="•••••••••••••"
             ></InputField>
+            
+            <div className="px-3">
+                {flag && (
+                  <ReactLoading
+                    type="balls"
+                    color="#0000FF"
+                    height={100}
+                    width={50}
+                  />
+                )}
+
+            </div>
 
             {/* submit button */}
             <Button

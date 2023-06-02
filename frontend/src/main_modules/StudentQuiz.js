@@ -8,16 +8,16 @@ import ReactLoading from "react-loading";
 function StudentQuiz() {
   const { id } = useParams();
   const [data, setData] = useState([]);
-  const [flag,setFlag] = useState(true);
+  const [flag, setFlag] = useState(true);
   const url = process.env.REACT_APP_URL;
   var score = 0;
-  
+
   let navigate = useNavigate();
   const state = useSelector((state) => ({ ...state }));
 
   const email = state.user.email;
-  var result = {email:email,answer:[]};
-  
+  var result = { email: email, answer: [] };
+
   useEffect(() => {
     axios
       .post(url + "/get-quiz", { id: id })
@@ -27,97 +27,110 @@ function StudentQuiz() {
         return () => {};
       })
       .catch(function (err) {
-        console.log(err);
+        
         alert(err.response.data.message);
         navigate("/dashboard");
       });
   }, []);
 
-
-  const callBack = (message) =>{
-    console.log(message);
+  const callBack = (message) => {
     
-    const found = result.answer.some(el => el.q == message.q);
-    if(found){
-    const index = result.answer.findIndex((el => el.q == message.q));
-    result.answer[index].op = message.op;
-    }else{
-      result.answer.push(message);
 
+    const found = result.answer.some((el) => el.q == message.q);
+    if (found) {
+      const index = result.answer.findIndex((el) => el.q == message.q);
+      result.answer[index].op = message.op;
+    } else {
+      result.answer.push(message);
     }
-    console.log(result);
-  }
+    
+  };
 
   const handleSubmit = (e) => {
+    setFlag(true);
+    e.preventDefault();
 
-     setFlag(true);
-     e.preventDefault();
-    
-     console.log(result);
-     console.log(data.questions);
-     var score = 0;
+    var score = 0;
 
-     for(var i = 0;i<result.answer.length;i++){
-       if(result.answer[i].ans == result.answer[i].op)
-       score++;
-     }
-     result["score"] = score;
+    for (var i = 0; i < result.answer.length; i++) {
+      if (result.answer[i].ans == result.answer[i].op) score++;
+    }
+    result["score"] = score;
 
-     axios
-      .post(url + "/get-submission", { result ,id:id})
+    axios
+      .post(url + "/get-submission", { result, id: id })
       .then(function (res) {
-        console.log(res);
+        
         alert("Submitted Successfully");
         setFlag(false);
         navigate("/dashboard");
-        
       })
       .catch(function (err) {
-        console.log(err);
+        
         alert("Already Submitted or Some internal failure");
         navigate("/dashboard");
       });
+  };
 
-  }
-
-  console.log(data);
+  
 
   return (
     <>
       {/* Wrapper div */}
       <div class="flex justify-center w-full h-screen">
+        {/* Info area for mobile devices */}
+        <div className="sm:hidden flex flex-col absolute top-0 h-[6rem] bg-yellow-300 w-screen p-2 text-sm">
+          <div>
+            User: <span>{email}</span>
+          </div>
+          <div>
+            <div>
+              Start Time:{" "}
+              <span>{new Date(data.startTime).toLocaleString()}</span>
+            </div>
+            <div>
+              Run Time: <span>{data.runTime + " Minute"}</span>
+            </div>
+          </div>
+
+          <div>
+            Total Questions:{" "}
+            <span>{data && data.questions ? data.questions.length : "0"}</span>
+          </div>
+        </div>
+
         {/* left info area */}
-        <div class=" hidden md:fixed md:top=0 md:left-0 w-[17rem] md:h-screen md:flex flex-col md:items-center md:bg-gray-200 md:border-r-2 md:border-gray-400">
+        <div class=" hidden md:fixed md:top=0 md:left-0 w-[17rem] md:h-screen md:flex flex-col md:items-center bg-gradient-to-r from-teal-400 to-green-200 md:border-r-2 md:border-gray-400">
           <div className="hidden md:flex md:w-full md:h-auto md:bg-emerald-700 p-2">
-            <p class="w-full">{email}</p>
+            <p class="w-full break-words">{email}</p>
           </div>
 
           {/* Timer Area */}
-          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-200 p-2">
+          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-400 p-2">
             <p class="w-full">
               Start Time:{" "}
               <sapn>{new Date(data.startTime).toLocaleString()}</sapn>
             </p>
           </div>
 
-          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-200 p-2">
+          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-300 p-2">
             <p class="w-full">
               Run Time: <sapn>{data.runTime + " Minute"}</sapn>
             </p>
           </div>
 
-          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-200 p-2">
+          <div className="hidden md:flex md:w-full md:h-auto md:bg-blue-400 p-2">
             <p class="w-full">
-              Total:{" "}
+              Total Questions:{" "}
               <span>
-                ={data && data.questions ? data.questions.length : "0"}
+                {data && data.questions ? data.questions.length : "0"}
               </span>
             </p>
           </div>
         </div>
 
         {/* Quiz area */}
-        <div class="md:ml-[17rem] md:w-full h-fit min-h-screen overlflow-y-scroll bg-gray-100 p-3">
+        <div class="md:ml-[17rem] md:w-full h-fit min-h-screen overlflow-y-scroll bg-gradient-to-r from-blue-200 via-cyan-200 to-blue-200 p-3 mt-[6rem] sm:mt-0">
           {data &&
             data.questions &&
             data.questions.map((res, num) => {
@@ -130,8 +143,14 @@ function StudentQuiz() {
               );
             })}
 
-{flag &&  <ReactLoading type="balls" color="#0000FF" 
-        height={100} width={50} />}
+          {flag && (
+            <ReactLoading
+              type="balls"
+              color="#0000FF"
+              height={100}
+              width={50}
+            />
+          )}
 
           <div class="flex justify-center items-center my-10 mx-3 h-10">
             <button

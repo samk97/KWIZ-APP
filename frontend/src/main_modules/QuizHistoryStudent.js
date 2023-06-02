@@ -25,7 +25,7 @@ const check = (title, aa, rt) => {
   var hour2 = a.substring(11, 13);
   var minute2 = a.substring(14, 17);
 
-
+  
 
   if (year2 < year) return false;
   if (year > year2) return true;
@@ -57,6 +57,7 @@ const check2 = (title, aa, rt) => {
   const date = new Date().toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });
   const a = aa;
 
+  
 
   var year = date.substring(6, 10);
   var month = date.substring(3, 5);
@@ -64,7 +65,7 @@ const check2 = (title, aa, rt) => {
   var hour = date.substring(12, 14);
   var minute = date.substring(15, 17);
 
-
+  
   var year2 = a.substring(0, 4);
   var month2 = a.substring(5, 7);
   var dt2 = a.substring(8, 10);
@@ -88,11 +89,12 @@ const check2 = (title, aa, rt) => {
   return false;
 };
 
-const StudentAttempQuiz = (props) => {
+const HistoryStudent = (props) => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
   const [flag, setFlag] = useState(true);
   const url = process.env.REACT_APP_URL;
+  
   useEffect(() => {
     axios
       .post(url + "/get-all-quiz", {})
@@ -119,20 +121,16 @@ const StudentAttempQuiz = (props) => {
   }, []);
 
   const handleClick = (id, title, startTime, runTime) => {
-    if (check(title, startTime, runTime) == false) {
-      alert("Closed");
-      return;
-    } else if (check2(title, startTime, runTime)) {
-      alert("Quiz will start at" + startTime);
-      return;
-    }
-    alert("Quiz active");
-    navigate("/quiz/" + id);
+    localStorage.setItem("quiz-history-start", startTime);
+    localStorage.setItem("quiz-history-title", title);
+    localStorage.setItem("quiz-runtime", runTime);
+    localStorage.setItem("quiz-runtime", runTime);
+    navigate(`/quiz-detail/${id}`);
 
-
+    
   };
 
-
+  
   return (
     <>
       <div className="flex mt-10 sm:mt-0">
@@ -143,17 +141,15 @@ const StudentAttempQuiz = (props) => {
         >
           {/* Heading */}
           <div className="flex justify-center w-full bg-blue-950 p-2 mb-3">
-            <h1 className="text-xl font-bold text-white">Quizzes</h1>
+            <h1 className="text-xl font-bold text-white">Past Quizzes</h1>
           </div>
 
           {/* if no tiles to show */}
           {data.length === 0 ? (
-            // <div className="w-full flex justify-center h-screen">
             <div className="flex justify-center w-full h-fit opacity-20 text-2xl font-bold ">
               <span>No Quizzes Available</span>
             </div>
           ) : (
-            // </div>
             ""
           )}
 
@@ -174,7 +170,7 @@ const StudentAttempQuiz = (props) => {
 
               const x = startTime;
 
-              if (check(title, startTime, runTime))
+              if (!check(title, startTime, runTime))
                 return (
                   <div className="w-full sm:w-fit" key={_id}>
                     <div
@@ -186,17 +182,7 @@ const StudentAttempQuiz = (props) => {
                       <div className="mb-2">
                         <p className="text-xl italic">{title}</p>
                       </div>
-                      {check(title, startTime, runTime) ? (
-                        <>
-                          <button className="text-blue-700 font-bold">
-                            Open
-                          </button>
-                          <span className="animate-ping bg-blue-600 absolute top-1 right-1 h-4 w-4 rounded-full"></span>
-                          <span className="bg-blue-600 absolute top-1 right-1 h-4 w-4 rounded-full border-white"></span>
-                        </>
-                      ) : (
-                        <button className="text-red-600">Closed</button>
-                      )}
+                      <button className="text-red-500">Closed</button>
                       <div className="text-sm">
                         <p>
                           Created : <span>{createdAt.substring(0, 10)}</span>{" "}
@@ -229,4 +215,4 @@ const StudentAttempQuiz = (props) => {
   );
 };
 
-export default StudentAttempQuiz;
+export default HistoryStudent;
