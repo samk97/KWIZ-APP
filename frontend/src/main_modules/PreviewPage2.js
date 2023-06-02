@@ -7,16 +7,16 @@ function PreviewPage2(props) {
     console.log(data);
 
     const generatePdf = () => {
-        try{
-        const report = new JsPDF('landscape', 'pt', [795.28,1241.89]);
-        
-        report.html(document.querySelector('#report'),{
-        
-        }).then(() => {
-            report.save(data.title);
-        });
-    }
-        catch(err){
+        try {
+            const report = new JsPDF('landscape', 'pt', [795.28, 1241.89]);
+
+            report.html(document.querySelector('#report'), {
+
+            }).then(() => {
+                report.save('report.pdf');
+            });
+        }
+        catch (err) {
             console.log(err);
         }
         console.log("aa")
@@ -26,7 +26,7 @@ function PreviewPage2(props) {
 
     return (
         <>
-            <div className="flex" id = "report" >
+            <div className="flex" id="report" >
                 <div
                     className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${props.open ? "ml-72" : "ml-16"
                         } duration-200`}
@@ -42,7 +42,7 @@ function PreviewPage2(props) {
 
                     </div>
 
-                    <div className="w-full"  onClick={generatePdf}>
+                    <div className="w-full" onClick={generatePdf}>
                         <label for="title" class="block m-2 text-slate-700 font-bold">
                             Download As Pdf
                         </label>

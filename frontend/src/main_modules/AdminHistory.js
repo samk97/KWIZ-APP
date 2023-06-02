@@ -207,7 +207,7 @@ const AdminHistory = (props) => {
                       
                     </div>
                   </div>
-                  <button onClick = {(e)=>handleDownload(_id,title)}> Download</button>
+                  <button onClick = {(e)=>handleDownload(_id,title)}> Preview</button>
                 </div>
               );
             })}
