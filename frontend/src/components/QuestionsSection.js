@@ -23,7 +23,7 @@ function QuestionsSection() {
       setFlag(false);
 
       if('caches' in window){
-        caches.match(url).then(function(response){
+        caches.match(curl).then(function(response){
           return response.json();
         }
         )}
