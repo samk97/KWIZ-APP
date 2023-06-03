@@ -14,28 +14,28 @@
   "icons":[
      {
       "src":"maskable.png",
-      "size":"192*192",
+      "size":"192×192",
       "type":"image/png",
       "purpose":"any maskable"
     },
          {
            "src":"logo192.png",
-           "sizes":"192*192",
+           "sizes":"192×192",
            "type":"image/png"
          },
          {
            "src":"logo256.png",
-           "sizes":"256*256",
+           "sizes":"256×256",
            "type":"image/png"
          }
          ,{
           "src":"logo384.png",
-          "sizes":"384*384",
+          "sizes":"384×384",
           "type":"image/png"
         },
         {
           "src":"logo512.png",
-          "sizes":"512*512",
+          "sizes":"512×512",
           "type":"image/png"
         }
     
