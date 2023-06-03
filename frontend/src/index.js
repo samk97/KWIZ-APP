@@ -7,6 +7,8 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension'
 import rootReducer from "./reducers";
+import swDev from './swDev';
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const store = createStore(rootReducer,composeWithDevTools());
 root.render(
@@ -16,6 +18,7 @@ root.render(
     </BrowserRouter>
     </Provider>
 );
+swDev();
 
 
 // If you want to start measuring performance in your app, pass a function
