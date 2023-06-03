@@ -9,11 +9,29 @@ function QuestionsSection() {
   const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
+
+
+    var curl = url + "/get-questions";
+    var ff = false;
     axios
       .post(url + "/get-questions", {})
-      .then((res) => setMyData(res.data));
+      .then((res) => {setMyData(res.data)
+       ff = true;
+      }
+       
+      );
       setFlag(false);
+
+      if('caches' in window){
+        caches.match(url).then(function(response){
+          return response.json();
+        }
+        )}
+
   }, []);
+
+
+
   return (
     <>
 
