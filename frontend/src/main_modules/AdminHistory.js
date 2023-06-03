@@ -213,9 +213,6 @@ const AdminHistory = (props) => {
                       </p>
                     </div>
                   </div>
-<<<<<<< HEAD
-                  <button onClick = {(e)=>handleDownload(_id,title)}> Preview</button>
-=======
                   {/* <div className="text-sm">
                     <button
                       onClick={(e) => handleDownload(_id, title)}
@@ -230,7 +227,6 @@ const AdminHistory = (props) => {
                       </svg>{" "}
                     </button>
                   </div> */}
->>>>>>> c2a3848ddc16e8bbdc12b24bb46793d2930162d9
                 </div>
               );
             })}

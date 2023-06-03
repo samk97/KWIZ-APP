@@ -1,40 +1,5 @@
 import JsPDF from "jspdf";
 function PreviewPage2(props) {
-<<<<<<< HEAD
-
-    const data = JSON.parse(localStorage.getItem("preview"));
-    const Qdata = data.question;
-    console.log(data);
-
-    const generatePdf = () => {
-        try {
-            const report = new JsPDF('landscape', 'pt', [795.28, 1241.89]);
-
-            report.html(document.querySelector('#report'), {
-
-            }).then(() => {
-                report.save('report.pdf');
-            });
-        }
-        catch (err) {
-            console.log(err);
-        }
-        console.log("aa")
-    }
-
-
-
-    return (
-        <>
-            <div className="flex" id="report" >
-                <div
-                    className={`bg-gray-100 w-full h-vh min-h-screen overlflow-y-scroll p-5 ${props.open ? "ml-72" : "ml-16"
-                        } duration-200`}
-                >
-                    {/* Heading */}
-                    <div className="w-full bg-red-200 p-2 mb-3">
-                        <h1 className="text-xl font-bold text-gray-800">Preview</h1>
-=======
   const data = JSON.parse(localStorage.getItem("preview"));
   const Qdata = data.question;
   
@@ -99,7 +64,6 @@ function PreviewPage2(props) {
                       </div>
 
                       <p>{question}</p>
->>>>>>> c2a3848ddc16e8bbdc12b24bb46793d2930162d9
                     </div>
                     {/* options div */}
                     <div className="bg-lime-100 border-x-2 border-gray-500  mr-3 ml-3 p-7">
@@ -144,13 +108,6 @@ function PreviewPage2(props) {
                       </div>
                     </div>
 
-<<<<<<< HEAD
-                    <div className="w-full" onClick={generatePdf}>
-                        <label for="title" class="block m-2 text-slate-700 font-bold">
-                            Download As Pdf
-                        </label>
-
-=======
                     {/* Correct ans & Explaination */}
                     <div className="flex flex-col justify-center items-center bg-amber-50 border-x-2 border-b-2 border-gray-500 rounded-bl-xl rounded-br-xl mb-3 mr-3 ml-3 px-7 py-4">
                       {/* Correct Ans */}
@@ -175,7 +132,6 @@ function PreviewPage2(props) {
                           <span className="p-2">{exp}</span>
                         </div>
                       </div>
->>>>>>> c2a3848ddc16e8bbdc12b24bb46793d2930162d9
                     </div>
                   </div>
                 </>
