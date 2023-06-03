@@ -15,7 +15,8 @@ self.addEventListener('install', function(event) {
           '../src/App.css',
           '../src/index.js',
           '../src/index.css',
-          '../src/main_modules/LoginPage.js'
+          '../src/main_modules/LoginPage.js',
+          'https://kwizj.onrender.com/api/get-questions'
         ]);
       })
   )
