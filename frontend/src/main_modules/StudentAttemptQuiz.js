@@ -113,6 +113,7 @@ const StudentAttempQuiz = (props) => {
         return () => {};
       })
       .catch(function (err) {
+        if(err.response != null)
         alert(err.response.data.message);
         setFlag(false);
       });
