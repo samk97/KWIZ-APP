@@ -22,12 +22,7 @@ function QuestionsSection() {
       );
       setFlag(false);
 
-      if('caches' in window){
-        caches.match(curl).then(function(response){
-          console.log("Cache  waala",response);
-          return response.json();
-        }
-        )}
+     
 
   }, []);
 
