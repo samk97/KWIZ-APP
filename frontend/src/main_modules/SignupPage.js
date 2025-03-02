@@ -42,10 +42,7 @@ const SignupPage = () => {
     
     let items = { email, name, password };
     
-    if (email.indexOf("@mnnit.ac.in") < 0) {
-      alert("use only MNNIT Email !!!");
-      return;
-    }
+   
     setFlag(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(

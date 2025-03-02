@@ -1,3 +1,5 @@
+import React from 'react';
+
 function InputField(props) {
   // for label
   const labelHtmlFor = props.labelHtmlFor;

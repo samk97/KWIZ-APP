@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { FiDownload } from "react-icons/fi";
+import React from 'react';
+
 
 const check = (title, aa, rt) => {
   const date = new Date().toLocaleString("en-GB", { timeZone: "Asia/Kolkata" });

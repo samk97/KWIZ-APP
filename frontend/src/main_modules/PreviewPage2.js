@@ -1,3 +1,5 @@
+import React from 'react';
+
 import JsPDF from "jspdf";
 function PreviewPage2(props) {
   const data = JSON.parse(localStorage.getItem("preview"));

@@ -1,3 +1,4 @@
+import React from 'react';
 function Button(props) {
   const buttonType = props.buttonType;
   const buttonLabel = props.buttonLabel;

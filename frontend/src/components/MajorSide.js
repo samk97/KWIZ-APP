@@ -1,3 +1,4 @@
+import React from 'react';
 import gears_image from "../images/gears.png";
 import hexagon_spread from "../images/hexagon_spread.png";
 

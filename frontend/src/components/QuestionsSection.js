@@ -1,3 +1,4 @@
+import React from 'react';
 import QuestionArea from "./QuestionArea";
 import { useEffect, useState } from "react";
 import axios from "axios";

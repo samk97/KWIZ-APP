@@ -1,3 +1,4 @@
+import React from 'react';
 import profile_pic from "../images/profile_pic.jpg";
 function StudentProfile() {
   return (

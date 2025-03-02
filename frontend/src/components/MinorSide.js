@@ -1,5 +1,7 @@
 import checklist_image from "../images/cheklist-image.png";
 import Button from "./Button";
+import React from 'react';
+
 
 function MinorSide(props) {
   const text1 = props.text1;

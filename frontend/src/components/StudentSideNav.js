@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink, Outlet } from "react-router-dom";
 import { FiChevronLeft, FiEdit2 } from "react-icons/fi";
 import { GiRank3, GiCancel, GiHamburgerMenu } from "react-icons/gi";

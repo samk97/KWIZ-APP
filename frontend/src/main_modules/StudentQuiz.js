@@ -1,3 +1,4 @@
+import React from 'react';
 import StudentQuestionArea from "../components/StudentQuestionArea";
 import axios from "axios";
 import { useSelector } from "react-redux";

@@ -1,3 +1,4 @@
+import React from 'react';
 import QuestionForm from "../components/QuestionForm";
 
 function AdminCreateQuestions(props) {

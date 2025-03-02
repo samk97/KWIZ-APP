@@ -1,3 +1,4 @@
+import React from 'react';
 import QuestionsSection from "../components/QuestionsSection";
 
 function AdminQuestions(props) {

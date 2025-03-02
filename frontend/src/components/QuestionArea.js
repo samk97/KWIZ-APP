@@ -1,3 +1,5 @@
+import React from 'react';
+
 function QuestionArea(props) {
   const question = props.question;
   const index = props.index;
