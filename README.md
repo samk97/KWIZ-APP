@@ -14,11 +14,9 @@ KWIZ-APP is a full-stack web application built with **React** and **Tailwind CSS
 ## Features
 - **User authentication** (signup/login)
 - **Quiz creation and participation**
-- **Blog section** with comments and likes
 - **Role-based access control** (Admin, User)
 - **Responsive UI** using Tailwind CSS
 - **Rich text editor** for blog content
-- **Audit logs** for tracking actions
 
 ---
 
@@ -34,9 +32,7 @@ KWIZ-APP is a full-stack web application built with **React** and **Tailwind CSS
 ### Backend
 - **Node.js** with **Express.js**
 - **MongoDB** with **Mongoose**
-- **Payload CMS** (if applicable)
 - **JWT Authentication**
-- **Audit Logs Implementation**
 
 ---
 
